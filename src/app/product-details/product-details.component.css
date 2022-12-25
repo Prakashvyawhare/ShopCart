@@ -1,0 +1,105 @@
+.img {
+    background-color: #f1f1f1;
+  
+    left: auto;
+    width: 100%;
+  }
+  
+  .detail {
+    /* position: fixed; */
+    right: 0;
+    width: 100%;
+  }
+  
+  .desc {
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: large;
+    max-width: 500px;
+  }
+  .title
+  {
+    white-space: nowrap;
+   overflow: hidden;
+    text-overflow:ellipsis;
+  }
+.rating{   
+  display: flex;
+  justify-content: flex-start;
+  gap: 5px;
+
+
+}
+h5{
+  color: blue;
+}
+i{
+  color: rgb(213, 213, 213);
+  cursor: pointer;
+}
+.active{
+  color: orange;
+}
+.card{
+  width: 50%;
+}
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: cadetblue;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+.card:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+}
+
+
+
+
+
+/* ////////////////// */
+.cardd{
+  width: 50%;
+}
+.cardd button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: cadetblue;
+  text-align: center;
+  cursor: pointer;
+  width: 50%;
+  font-size: 18px;
+}
+
+.cardd button:hover {
+  opacity: 0.7;
+}
+.cardd:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+}
+.price {
+  color: grey;
+  font-size: 22px;
+  text-decoration:line-through;
+  
+}
+.percent{
+  font-size: 15px;
+  color: rgb(77, 183, 77);
+}
+.Dprice{
+  font-size: 25px;
+  color: rgb(77, 183, 77);
+}

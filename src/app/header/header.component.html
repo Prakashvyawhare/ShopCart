@@ -1,0 +1,18 @@
+<div class="na">
+    
+    <!-- <button routerLink="Customer">Customer Details </button> -->
+    <button routerLink="UserDetails">user details</button>
+    <button *ngIf="this.userdetailsservice.ThisUser.length==0"
+     (click)="open()" 
+    
+      >login</button>
+    <button  *ngIf="this.userdetailsservice.ThisUser.length!==0" (click)="logout()" >logout</button>
+    
+    <button (click)="modeldia.Showdialog= false" routerLink="NewUser">New User </button>
+    <h1>ShopCart</h1>
+    <a *ngIf="this.userdetailsservice.ThisUser.length!==0"  class="fa fa-shopping-cart" routerLink ="Order"> Cart</a>
+    <!-- <app-model *ngIf="modeldia.Showdialog"> </app-model>
+    <button (click)="modeldia.Showdialog= true">showdialog</button> -->
+    <!-- <a routerLink="Customer">Customer Details</a> -->
+    
+</div>

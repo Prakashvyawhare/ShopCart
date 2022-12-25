@@ -1,0 +1,70 @@
+<div *ngFor="let item of Carts; let i = index" class="columns">
+    <div class="card">
+        <tr>
+            <td style="width: 30%;">
+                <img [src]="item.images[0]" style="height: 200px; padding: 50px; width: 300px; overflow: hidden;;">
+                <button style="margin-left: 70px;" class="btn-plus" (click)="add(i)">+</button>
+                <span style="padding-left: 30px;padding-right: 30px;padding-top: 10px;padding-bottom: 10px; width: 30px; border: 1px;border-style: solid;height: 30px;">{{item.Qnty}}</span>
+                <button class="btn-plus">-</button><br>
+                
+            </td>
+            <td style="width: 60%;">
+                
+                <h1 class="title">{{item.title}}</h1>
+
+                <!-- below content for descount price -->
+                <span class="DiscountedPrice"> Price : {{item.price*item.Qnty
+                    -item.price*item.descount*0.01*item.Qnty |currency}}</span>
+                <span class="price">{{item.price*item.Qnty|currency}} </span>
+                <span class="percent"> {{item.descount}}%</span>
+
+                save
+                <p class="DiscountedPrice">{{item.price*item.Qnty*item.descount*0.01 |currency}}</p>
+                <p class="desc">{{item.description}}</p>
+            </td>
+            <td style="width: 10%;">
+                <div>
+                <button (click)="RemoveProduct(i)" class="btn-remove">Remove</button>
+            </div>
+                <!-- <p>Quantity : {{item.Qnty}}</p> -->
+                <!-- <button (click)="add(i)">Buy </button> -->
+
+            </td>
+
+        
+            
+        </tr>
+        <!-- <input type="text" [(ngModel)]="count"> -->
+
+        
+    </div>
+
+</div>
+
+<!-- <div>{{sum}} </div> -->
+<table>
+    <tr>
+        <th colspan="2">Price Details</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td>{{eachTotal}}</td>
+    </tr>
+    <tr>
+        <td>Discount</td>
+        <td>{{Discount}}</td>
+    </tr>
+    <tr>
+        <td>Delivery Charges</td>
+        <td>FREE</td>
+    </tr>
+    <tr>
+        <td>Total Amount</td>
+        <td>{{totalAmount}}</td>
+    </tr>
+    <!-- <tr>
+        <td></td>
+        <td></td>
+    </tr> -->
+</table>

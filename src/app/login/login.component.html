@@ -1,0 +1,97 @@
+<div class="container" wid>
+
+
+    <div class="center">
+        <div class="title">Login </div>
+        <form class="form " #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && CurrentUser()"  novalidate>
+
+            <!-- Enter Username -->
+            <div class="form-group "> 
+
+                <label for="email">UserName : </label>
+                <input type="email" name="email" appOldUserLogin class="form-control"
+                    placeholder="Enter your username" #email="ngModel" required email [(ngModel)]="username" />
+
+                <!-- Validation for Email -->
+                <span class="text-danger"
+                    *ngIf="(email.touched || registerForm.submitted)&& email.errors?.['required']">
+                    username required
+                </span>
+
+                <!-- <span class="text-danger" *ngIf="(email.touched || registerForm.submitted)&& email.errors?.['email']">
+                    enter correct email
+                </span> -->
+                <span class="text-danger" *ngIf="(email.touched)&& email.errors?.['olduser']">
+                    UserName not exists
+                </span>
+            </div>
+
+            <!-- Enter password -->
+            <div class="form-group">
+                <label for="password">password :</label>
+                <input type="password" appExistingpassword name="password"  #password="ngModel" class="form-control" placeholder="password"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" required [(ngModel)]="Password">
+                <!-- Validation for password -->
+                <span class="text-danger"
+                    *ngIf="(password.touched || registerForm.submitted) && password.errors?.['required']">Password
+                    required</span>
+                <span class="text-danger"
+                    *ngIf="(password.touched || registerForm.submitted)&& password.errors?.['minlength']"></span>
+                <span class="text-danger"
+                    *ngIf="(password.touched || registerForm.submitted) && password.errors?.['ps']"> wrong password
+                    
+                </span><br>
+
+
+
+                <!-- print random number and operator -->
+                <div class="form-group">
+                    <div>
+                        <span class="float"> <input type="text" name="captch" #captcha="ngModel" class="form-control"
+                            appLoginCaptcha required [(ngModel)]="enterVal"></span> <span>
+                            <h4>{{num1}} + {{num2}} =</h4>
+                        </span>
+
+
+
+                    </div>
+                    <!-- Validation for captcha -->
+                    <span class="text-danger"
+                        *ngIf="(captcha.touched || registerForm.submitted )&& captcha.errors?.['required']">captcha
+                        required
+
+                    </span>
+
+                    <span class="text-danger" *ngIf="captcha.touched && captcha.errors?.['captch']">
+                        captcha Envalide
+                    </span>
+
+
+
+                </div>
+                <br><br>
+
+                <!-- cancel button -->
+                <div class="form-group"> <button style="float: right;"(click)="oncancel()" type="cancel" class="btn btn-cancel" > Cancel
+                    </button></div>
+
+                <!-- login button -->
+                <div class="form-group"> <button style="float: right;" type="submit" class="btn btn-success" > Login
+                    </button>
+                </div>
+                <div> <a routerLink="NewUser">New User?</a></div>
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </form>
+    </div>
+
+</div>

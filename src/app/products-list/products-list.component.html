@@ -1,0 +1,26 @@
+<!-- <div><button  (click)="Products">add</button></div> -->
+<div class=" split up"><span  style="margin-left: 10px;">
+    Search Categories :<select [(ngModel)]="selectedCategory" (change)="FilterByCategory()">
+        <option *ngFor="let c of Categories ">{{c}}</option> 
+
+    </select></span><span>
+
+
+
+      search :<input #search placeholder="Enter Search items"> </span></div>
+
+<div *ngFor="let product of filteredProduct" class="columns " >
+    <div class="card" [routerLink]="['ProductDetails', product.id]">
+        <img [src]="product.images[0]"  style="height: 200px; overflow: hidden;;">
+        <h1 class="title">{{product.title}}</h1>
+        <h2 class="Dprice">Price : {{product.price-product.price*product.discountPercentage*0.01 |currency}}</h2>
+    <h2 class="price">{{product.price|currency}}</h2>
+    <h2 class="percent">{{product.discountPercentage}}% Descount</h2>
+        <p class="desc">{{product.description}}</p>
+        <!-- <button [routerLink]="['Order', product.id]"> add to cart </button>
+        <p><button [routerLink]="['ProductDetails', product.id]">view</button></p> -->
+
+
+
+    </div>
+</div>

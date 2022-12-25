@@ -1,0 +1,98 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 350px;
+    text-align: center;
+    font-family: arial;
+    
+  }
+  .card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+  }
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
+  .price {
+    color: grey;
+    font-size: 22px;
+    text-decoration:line-through;
+    
+  }
+  .percent{
+    font-size: 15px;
+    color: rgb(77, 183, 77);
+  }
+  .Dprice{
+    font-size: 25px;
+    color: rgb(77, 183, 77);
+  }
+  .title
+  {
+    white-space: nowrap;
+   overflow: hidden;
+    text-overflow:ellipsis;
+  }
+
+  .desc
+  {
+    white-space: wrap;
+    
+      text-overflow: ellipsis;
+    height: 100px;
+  }
+
+  .card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: cadetblue;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  .card button:hover {
+    opacity: 0.7;
+  }
+
+  .row
+  {
+    display: table;
+    flex-direction: row;
+    clear: both;
+  }
+
+  .columns {
+    float: left;
+    width: 20%;
+    padding: 8px;
+    overflow: hidden;
+    margin-top: 100px;
+    
+  }
+  .container{
+
+    height: 120px;
+    width: 100p;
+    float: left;
+    
+  
+  }
+  .split{
+    position: fixed;
+    z-index: 51;
+    
+  }
+  .up{
+
+    top: 60px;
+    margin-left: 500px;
+    height: 50px;
+  }
+  
+
+
+   
+  
