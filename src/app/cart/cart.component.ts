@@ -88,16 +88,16 @@ export class CartComponent implements OnInit {
 
 
   }
-  updateprice(){
-    this.eachTotal=0;
-     this.Discount=0
-      for (let index = 0; index < this.Carts.length; index++) {
-         this.eachTotal += this.Carts[index].price*this.Carts[index].Qnty;
-        this.Discount+= this.Carts[index].price*this.Carts[index].Qnty*this.Carts[index].descount*0.01;
+  // updateprice(){
+  //   this.eachTotal=0;
+  //    this.Discount=0
+  //     for (let index = 0; index < this.Carts.length; index++) {
+  //        this.eachTotal += this.Carts[index].price*this.Carts[index].Qnty;
+  //       this.Discount+= this.Carts[index].price*this.Carts[index].Qnty*this.Carts[index].descount*0.01;
 
-      }
-     this.totalAmount =this.eachTotal- this.Discount
-  }
+  //     }
+  //    this.totalAmount =this.eachTotal- this.Discount
+  // }
 
 
   RemoveProduct(i) {
