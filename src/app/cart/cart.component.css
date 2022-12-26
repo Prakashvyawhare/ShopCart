@@ -101,3 +101,13 @@
     outline: 0;
     float: right;
   }
+  table{
+    width: 300px;
+    padding: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+    text-align: left;
+    font-family: arial;
+    max-height: 300px;
+    margin: 10px;
+  }

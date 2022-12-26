@@ -56,7 +56,7 @@ export class ProductsListComponent implements OnInit {
     // clicks.subscribe(Response=>console.log(Response)
     // )
 
-
+ 
   }
 
 }
