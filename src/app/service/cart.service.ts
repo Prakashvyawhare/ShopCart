@@ -8,8 +8,10 @@ import { cartItem } from './cartItem';
 export class  CartService {
   
 MyCart= Array<cartItem>();
-  addProduct(product: any ) {
-   this.MyCart.push(product)
+currentUserCart= Array<cartItem>();
+
+  addProduct(product: cartItem ) {
+   this.MyCart.push(product);
    
   }
 

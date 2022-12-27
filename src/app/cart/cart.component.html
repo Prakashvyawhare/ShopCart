@@ -44,25 +44,26 @@
 
 <!-- <div>{{sum}} </div> -->
 <table class="table">
-    <tr>
-        <th colspan="2">Price Details</th>
-        <th></th>
+    <tr >
+        <th class="title" colspan="2" >Price Details</th>
+        
     </tr>
+    <hr>
     <tr>
         <td>Price</td>
-        <td>{{eachTotal|currency}}</td>
+        <td  class="price">{{eachTotal|currency}}</td>
     </tr>
     <tr>
         <td>Discount</td>
-        <td>{{Discount|currency}}</td>
+        <td class="percent">-{{Discount|currency}}</td>
     </tr>
     <tr>
         <td>Delivery Charges</td>
-        <td>FREE</td>
+        <td class="DiscountedPrice">FREE</td>
     </tr>
     <tr>
         <td>Total Amount</td>
-        <td>{{totalAmount|currency}}</td>
+        <td class="DiscountedPrice">{{totalAmount|currency}}</td>
     </tr>
     <!-- <tr>
         <td></td>

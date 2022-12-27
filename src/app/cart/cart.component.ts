@@ -19,11 +19,15 @@ export class CartComponent implements OnInit {
   // MyCart:any =[];
 
   // productID:any= "";
+  RemoveProduct(i) {
+    this.cart.MyCart.splice(i, 1);
+    this.updateprice();
+  }
   add(i) {
     this.Carts[i].Qnty++;
     this.updateprice();
 
-  }
+  } 
 
   // Qnty:number;
   constructor(
@@ -37,39 +41,16 @@ export class CartComponent implements OnInit {
     //  this.productID = this.route.snapshot.paramMap.get('id');
     // this.cartApiser.getProduct(this.productID).subscribe((data:any)=>{
     //   this.cart.addProduct(data);
+      // });
+    /////////      showing cart items of only current user //    /////////
+    this.Carts = this.cart.MyCart.filter((x) => x.userName == this.getusername.ThisUser[0]);   ///  this "Carts" is a having product of current User ///
+    
 
-    /////////      showing cart items of only current user  /////////
-    this.Carts = this.cart.MyCart.filter((x) => x.userName == this.getusername.ThisUser[0])
-    this.eachTotal = 0;
-    this.Discount = 0
-    for (let index = 0; index < this.Carts.length; index++) {
-      this.eachTotal += this.Carts[index].price * this.Carts[index].Qnty;
-      this.Discount += this.Carts[index].price * this.Carts[index].Qnty * this.Carts[index].descount * 0.01;
-
-    }
-    this.totalAmount = this.eachTotal - this.Discount
+    this.updateprice();
+  
 
 
-    // });
-
-
-
-
-
-  }
-
-  updateQnty() {
-    this.eachTotal = 0;
-    this.Discount = 0
-    for (let index = 0; index < this.Carts.length; index++) {
-      this.eachTotal += this.Carts[index].price * this.Carts[index].Qnty;
-      this.Discount += this.Carts[index].price * this.Carts[index].Qnty * this.Carts[index].descount * 0.01;
-
-
-    }
-    this.totalAmount = this.eachTotal - this.Discount;
-
-  }
+  } 
   updateprice(){
     this.eachTotal=0;
      this.Discount=0
@@ -78,30 +59,15 @@ export class CartComponent implements OnInit {
         this.Discount+= this.Carts[index].price*this.Carts[index].Qnty*this.Carts[index].descount*0.01;
 
       }
-     this.totalAmount =this.eachTotal- this.Discount
+     this.totalAmount =this.eachTotal- this.Discount;
       
        
-   // });
+  
     
 
     
 
 
   }
-  // updateprice(){
-  //   this.eachTotal=0;
-  //    this.Discount=0
-  //     for (let index = 0; index < this.Carts.length; index++) {
-  //        this.eachTotal += this.Carts[index].price*this.Carts[index].Qnty;
-  //       this.Discount+= this.Carts[index].price*this.Carts[index].Qnty*this.Carts[index].descount*0.01;
 
-  //     }
-  //    this.totalAmount =this.eachTotal- this.Discount
-  // }
-
-
-  RemoveProduct(i) {
-    this.cart.MyCart.splice(i, 1);
-
-  }
 }
