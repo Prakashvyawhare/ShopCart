@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../service/cart.service';
+import { UserDetailsService } from '../service/user-details.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(public cart: CartService, public getUsername: UserDetailsService) { }
 
   ngOnInit(): void {
   }
