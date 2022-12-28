@@ -18,6 +18,9 @@ MyCart= Array<cartItem>();
     this.MyCart.splice(indexof,1);
   }
   addQuantity(indexof:number){
+    if(this.MyCart[indexof].Qnty>=5)
+    alert("You can buy only upto 5 units of this product");
+    else
     this.MyCart[indexof].Qnty++;
   }
   removeQuantity(indexof:number){

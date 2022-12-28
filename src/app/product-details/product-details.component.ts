@@ -125,6 +125,9 @@ this.r.rating = this.rate
 
                 ////////    quantity add and remove    ////////
   plusCount(){
+    if(this.count>=5)
+    alert("You can buy only upto 5 units of this product");
+    else
     this.count++
   }
   minusCount(){
