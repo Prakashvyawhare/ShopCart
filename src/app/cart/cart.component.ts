@@ -12,19 +12,24 @@ import { UserDetailsService } from '../service/user-details.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  Carts = new Array<cartItem>()
-  eachTotal: number;
-  Discount: number;
-  totalAmount: number;
+  // Carts = this.cart.getProductbyUserName(this.getusername.ThisUser[0])
+  // eachTotal: number;
+  // Discount: number;
+  // totalAmount: number;
   // MyCart:any =[];
 
   // productID:any= "";
-  RemoveProduct(i) {
-    this.cart.MyCart.splice(i, 1);
+  RemoveProduct(i: number) {
+    this.cart.removeProductFromCart(i);
     this.updateprice();
   }
   add(i) {
-    this.Carts[i].Qnty++;
+    this.cart.addQuantity(i)
+    this.updateprice();
+
+  } 
+  RemoveQuantity(i) {
+    this.cart.removeQuantity(i)
     this.updateprice();
 
   } 
@@ -43,31 +48,23 @@ export class CartComponent implements OnInit {
     //   this.cart.addProduct(data);
       // });
     /////////      showing cart items of only current user //    /////////
-    this.Carts = this.cart.MyCart.filter((x) => x.userName == this.getusername.ThisUser[0]);   ///  this "Carts" is a having product of current User ///
-    
-
-    this.updateprice();
-  
-
-
+    // this.Carts = this.cart.MyCart.filter((x) => x.userName == this.getusername.ThisUser[0]);   ///  this "Carts" is a having product of current User ///
+   
+    this.cart.getProductbyUserName(this.getusername.ThisUser[0])
+      this.updateprice();
   } 
   updateprice(){
-    this.eachTotal=0;
-     this.Discount=0
-      for (let index = 0; index < this.Carts.length; index++) {
-         this.eachTotal += this.Carts[index].price*this.Carts[index].Qnty;
-        this.Discount+= this.Carts[index].price*this.Carts[index].Qnty*this.Carts[index].descount*0.01;
-
+    let eachTotal=0;
+     let Discount=0;
+     let totalAmount =0;
+      for (let index = 0; index < this.cart.getProductbyUserName(this.getusername.ThisUser[0]).length; index++) {
+        eachTotal += this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].price*this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].Qnty;
+        Discount+= this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].price*this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].Qnty*this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].descount*0.01;
+        totalAmount=eachTotal-Discount
       }
-     this.totalAmount =this.eachTotal- this.Discount;
-      
-       
-  
+      return [eachTotal , Discount,totalAmount]
     
 
-    
-
-
-  }
+ }
 
 }

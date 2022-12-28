@@ -1,4 +1,4 @@
-<div *ngFor="let item of Carts; let i = index" class="columns">
+<div *ngFor="let item of this.cart.getProductbyUserName(this.getusername.ThisUser[0]); let i = index" class="columns">
     <div class="card">
         <tr>
             <td style="width: 30%;">
@@ -6,7 +6,7 @@
                 <button style="margin-left: 70px;" class="btn-plus" (click)="add(i)" >+</button>
                 <span
                     style="padding-left: 30px;padding-right: 30px;padding-top: 10px;padding-bottom: 10px; width: 30px; border: 1px;border-style: solid;height: 30px;">{{item.Qnty}}</span>
-                <button class="btn-plus">-</button><br>
+                <button class="btn-plus" (click)="RemoveQuantity(i)" >-</button><br>
 
             </td>
             <td style="width: 60%;">
@@ -51,11 +51,11 @@
     <hr>
     <tr>
         <td>Price</td>
-        <td  class="price">{{eachTotal|currency}}</td>
+        <td  class="price">{{updateprice()[0]|currency}}</td>
     </tr>
     <tr>
         <td>Discount</td>
-        <td class="percent">-{{Discount|currency}}</td>
+        <td class="percent">-{{updateprice()[1]|currency}}</td>
     </tr>
     <tr>
         <td>Delivery Charges</td>
@@ -63,7 +63,7 @@
     </tr>
     <tr>
         <td>Total Amount</td>
-        <td class="DiscountedPrice">{{totalAmount|currency}}</td>
+        <td class="DiscountedPrice">{{updateprice()[2]|currency}}</td>
     </tr>
     <!-- <tr>
         <td></td>
