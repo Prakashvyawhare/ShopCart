@@ -6,9 +6,16 @@ import { cartItem } from './cartItem';
   providedIn: 'root'
 })
 export class  CartService {
-  currentUserCart:Array<cartItem>;
-MyCart= Array<cartItem>();
+  // currentUserCart:Array<cartItem>;
+MyCart=new Array<cartItem>();
 // currentUserCart= Array<cartItem>();
+
+constructor() { }
+getProductbyUserName(username:string){
+  let currentUserCart=this.MyCart.filter((x)=>{
+    return x.userName==username})
+  return currentUserCart;
+}
 
   addProduct(product: cartItem ) {
    this.MyCart.push(product);
@@ -27,12 +34,7 @@ MyCart= Array<cartItem>();
     if(this.MyCart[indexof].Qnty>1)
     this.MyCart[indexof].Qnty--;
   }
-  getProductbyUserName(username:string){
-    this.currentUserCart=this.MyCart.filter((x)=>{
-      return x.userName==username;
-    })
-    return this.currentUserCart;
-  }
+  
 
 
   
@@ -40,5 +42,5 @@ MyCart= Array<cartItem>();
   
 
 
-  constructor() { }
+
 }
