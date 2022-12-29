@@ -71,12 +71,18 @@ export class CartComponent implements OnInit {
     let eachTotal = 0;
     let Discount = 0;
     let totalAmount = 0;
+    let deliveryCharge=0
     for (let index = 0; index < this.cart.getProductbyUserName(this.getusername.ThisUser[0]).length; index++) {
       eachTotal += this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].price * this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].Qnty;
       Discount += this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].price * this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].Qnty * this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].descount * 0.01;
-      totalAmount = eachTotal - Discount
+      totalAmount = eachTotal - Discount;
+
     }
-    return [eachTotal, Discount, totalAmount]
+    if(totalAmount>0 && totalAmount<1000)
+    deliveryCharge =0.99;
+    totalAmount =eachTotal - Discount + deliveryCharge;
+
+    return [eachTotal, Discount, totalAmount, deliveryCharge]
 
 
   }

@@ -59,14 +59,13 @@
     </tr>
     <tr>
         <td>Delivery Charges</td>
-        <td class="DiscountedPrice">FREE</td>
+        <td *ngIf="updateprice()[3]!==0" class="percent">+{{updateprice()[3]|currency}}</td>
+        <td *ngIf="updateprice()[3]==0" class="DiscountedPrice">FREE</td>
     </tr>
+    
     <tr>
         <td>Total Amount</td>
         <td class="DiscountedPrice">{{updateprice()[2]|currency}}</td>
     </tr>
-    <!-- <tr>
-        <td></td>
-        <td></td>
-    </tr> -->
+    
 </table>
