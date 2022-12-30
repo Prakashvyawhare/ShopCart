@@ -15,13 +15,13 @@ export class CartComponent implements OnInit {
   
  
   RemoveProduct(i: number) {
-    let I = this.cart.getProductbyUserName(this.getusername.ThisUser[0])[i].cartItemid;     ///// get "cartitemId" by index of 'currentuser'Array  ////
+    let I = this.cart.getCartItembyUserName(this.getusername.ThisUser[0])[i].cartItemid;     ///// get "cartitemId" by index of 'currentuser'Array  ////
     this.cart.removeProductFromCart(I);
     this.updateprice();       
   }
   add(i)        ///  add  Product Quantity in the cart  ////
   {
-    let I = this.cart.getProductbyUserName(this.getusername.ThisUser[0])[i].cartItemid;     ///// get "cartitemId" by index of 'currentuser'Array  ////
+    let I = this.cart.getCartItembyUserName(this.getusername.ThisUser[0])[i].cartItemid;     ///// get "cartitemId" by index of 'currentuser'Array  ////
     this.cart.addQuantity(I)
     this.updateprice();     ////// update price details whenever qny added  ////
 
@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
   RemoveQuantity(i)          ////      remove or decrease Product Quantity in the cart  ////
   {
 
-    let I = this.cart.getProductbyUserName(this.getusername.ThisUser[0])[i].cartItemid;     ///// get "cartitemId" by index of 'currentuser'Array  ////
+    let I = this.cart.getCartItembyUserName(this.getusername.ThisUser[0])[i].cartItemid;     ///// get "cartitemId" by index of 'currentuser'Array  ////
     this.cart.removeQuantity(I)                                                           //// decrease qnty by 'cartitemId'  ////
 
     this.updateprice();                ////// update price details whenever qny decrease  ////
@@ -59,7 +59,7 @@ export class CartComponent implements OnInit {
 
 
 
-    this.cart.getProductbyUserName(this.getusername.ThisUser[0]);      /////////      showing cart items of only current user //    /////////    
+    this.cart.getCartItembyUserName(this.getusername.ThisUser[0]);      /////////      showing cart items of only current user //    /////////    
 
     this.updateprice();      //// update price initially  //
   }
@@ -71,9 +71,9 @@ export class CartComponent implements OnInit {
     let eachTotal = 0;
     let Discount = 0;
     let totalAmount = 0;
-    for (let index = 0; index < this.cart.getProductbyUserName(this.getusername.ThisUser[0]).length; index++) {
-      eachTotal += this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].price * this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].Qnty;
-      Discount += this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].price * this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].Qnty * this.cart.getProductbyUserName(this.getusername.ThisUser[0])[index].descount * 0.01;
+    for (let index = 0; index < this.cart.getCartItembyUserName(this.getusername.ThisUser[0]).length; index++) {
+      eachTotal += this.cart.getCartItembyUserName(this.getusername.ThisUser[0])[index].price * this.cart.getCartItembyUserName(this.getusername.ThisUser[0])[index].Qnty;
+      Discount += this.cart.getCartItembyUserName(this.getusername.ThisUser[0])[index].price * this.cart.getCartItembyUserName(this.getusername.ThisUser[0])[index].Qnty * this.cart.getCartItembyUserName(this.getusername.ThisUser[0])[index].descount * 0.01;
       totalAmount = eachTotal - Discount
     }
     return [eachTotal, Discount, totalAmount]

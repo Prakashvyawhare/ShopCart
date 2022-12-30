@@ -11,13 +11,13 @@ MyCart=new Array<cartItem>();
 // currentUserCart= Array<cartItem>();
 
 constructor() { }
-getProductbyUserName(username:string){
+getCartItembyUserName(username:string){
   let currentUserCart=this.MyCart.filter((x)=>{
     return x.userName==username})
   return currentUserCart;
 }
 
-  addProduct(product: cartItem ) {
+  addProducttoCart(product: cartItem ) {
    this.MyCart.push(product);
    
   }

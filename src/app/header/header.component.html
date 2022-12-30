@@ -11,7 +11,7 @@
     
     <button (click)="modeldia.Showdialog= false" routerLink="NewUser">New User </button>
     <h1>ShopCart</h1>
-    <a *ngIf="this.userdetailsservice.ThisUser.length!==0"  class="fa fa-shopping-cart" routerLink ="Order"> Cart({{this.cart.getProductbyUserName(this.userdetailsservice.ThisUser[0]).length}})</a>
+    <a *ngIf="this.userdetailsservice.ThisUser.length!==0"  class="fa fa-shopping-cart" routerLink ="Order"> Cart({{this.cart.getCartItembyUserName(this.userdetailsservice.ThisUser[0]).length}})</a>
     <!-- <app-model *ngIf="modeldia.Showdialog"> </app-model>
     <button (click)="modeldia.Showdialog= true">showdialog</button> -->
     <!-- <a routerLink="Customer">Customer Details</a> -->
