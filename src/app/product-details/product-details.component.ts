@@ -145,7 +145,7 @@ this.r.rating = this.rate
   addtocart(){  
     let C=new cartItem(this.r.userName, this.productID, this.product.title,this.product.images,this.product.price,this.count,this.product.description,this.product.discountPercentage)
     // if(!this.cartservice.MyCart)
-    this.cartservice.addProduct(C)
+    this.cartservice.addProducttoCart(C)
     // else
     // this.count ++
     // this.cartservice.MyCart.push(new cartItem
