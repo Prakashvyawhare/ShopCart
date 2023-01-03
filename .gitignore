@@ -126,3 +126,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .angular/cache/
+.angular/cache/13.3.10
