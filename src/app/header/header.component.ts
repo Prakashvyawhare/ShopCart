@@ -14,7 +14,7 @@ import { UserDetailsService } from '../service/user-details.service';
 export class HeaderComponent implements OnInit {
  scount:any;
  
-  constructor(private modalService: NgbModal, public modeldia : ModellogService, public cartservice: CartService,public userdetailsservice: UserDetailsService) { }
+  constructor(private modalService: NgbModal, public modeldia : ModellogService, public cart: CartService,public userdetailsservice: UserDetailsService) { }
 
   open() {
 		const modalRef = this.modalService.open(ModelComponent);}

@@ -125,6 +125,9 @@ this.r.rating = this.rate
 
                 ////////    quantity add and remove    ////////
   plusCount(){
+    if(this.count>=5)
+    alert("You can buy only upto 5 units of this product");
+    else
     this.count++
   }
   minusCount(){
@@ -142,7 +145,7 @@ this.r.rating = this.rate
   addtocart(){  
     let C=new cartItem(this.r.userName, this.productID, this.product.title,this.product.images,this.product.price,this.count,this.product.description,this.product.discountPercentage)
     // if(!this.cartservice.MyCart)
-    this.cartservice.MyCart.push(C)
+    this.cartservice.addProducttoCart(C)
     // else
     // this.count ++
     // this.cartservice.MyCart.push(new cartItem

@@ -31,6 +31,8 @@
     white-space: nowrap;
    overflow: hidden;
     text-overflow:ellipsis;
+    font-size: 25px;
+    color: rgb(69, 105, 135);
   }
 
   .desc
@@ -102,12 +104,16 @@
     float: right;
   }
   table{
-    width: 300px;
-    padding: 50px;
+    width: 350px;
+    /* height: 300px; */
+    /* padding-left: 50px; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 100%;
+    /* max-width: 100%; */
     text-align: left;
     font-family: arial;
     max-height: 300px;
     margin: 10px;
+    float: right;
+    position: fixed;right: 0;
+    /* display: flex; */
   }
