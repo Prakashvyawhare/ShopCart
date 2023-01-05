@@ -117,3 +117,17 @@
     position: fixed;right: 0;
     /* display: flex; */
   }
+  .payment{
+    width: 350px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
+    font-family: arial;
+    max-height: 300px;
+    margin: 10px;
+    float: right;
+    margin-top:300px;
+    padding:10px;
+    position: fixed;
+    right: 0;
+
+  }

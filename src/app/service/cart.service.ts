@@ -21,16 +21,10 @@ getCartItembyUserName(username:string){
 
 addProducttoCart(product: cartItem ) {  ////  if this product not exist in cart then add to cart else add quantity of same product  ///
    
-    let presentItem:any = this.getCartItembyUserName(this.getusername.ThisUser[0]).find(item=>item.productID==product.productID)   ///this item is already exist  ////
-    if(!presentItem)           
     {
     
    this.MyCart.push(product)
    alert("successfully added to the Cart")}
-   
-   else
-   alert("successfully added Quantity of this item")
-   presentItem.Qnty+=product.Qnty
    
   }
 

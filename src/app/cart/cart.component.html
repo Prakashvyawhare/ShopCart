@@ -58,6 +58,10 @@
         <td class="percent">-{{updateprice()[1]|currency}}</td>
     </tr>
     <tr>
+        <td>Bank Offer</td>
+        <td class="percent">-{{updateprice()[4]|currency}}</td>
+    </tr>
+    <tr>
         <td>Delivery Charges</td>
         <td *ngIf="updateprice()[3]!==0" class="percent">+{{updateprice()[3]|currency}}</td>
         <td *ngIf="updateprice()[3]==0" class="DiscountedPrice">FREE</td>
@@ -69,3 +73,11 @@
     </tr>
     
 </table>
+<!-- -----------select payment option for selection of offer -->
+<div class="payment" >
+    <h4>Select Payment Option </h4>
+<div *ngFor="let bank of getbankoffer.offers let i=index">
+    
+    <button (click)="select(i)"> {{bank.bankName}}</button>
+</div>
+</div>

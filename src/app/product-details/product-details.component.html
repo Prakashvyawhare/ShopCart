@@ -21,6 +21,13 @@ display:flex; z-index: 53; align-items: center;">
 <button style="width: 100%;" (click)="addtocart()">Add to <i class="fa fa-cart-plus" aria-hidden="true"></i></button>    
 </div>
 </div>
+<div class="card">
+    <h4>Bank Offers</h4>
+    <div  *ngFor="let bank of getbankoffer.offers let i=index">
+      <i class="fa fa-bookmark" aria-hidden="true"></i>
+      <span>{{bank.offerDesc}}</span>
+    </div>
+  </div>
 <hr>
                                                                 <!-- review edit -->
 <div class="card">
@@ -60,7 +67,4 @@ display:flex; z-index: 53; align-items: center;">
     <button *ngIf="r.userName==this.GetUserName.ThisUser[0]" class="delete-btn" (click)="deleteReview(i)">delete review</button>
     
     
-  </div> 
-
-
-    
+  </div>   

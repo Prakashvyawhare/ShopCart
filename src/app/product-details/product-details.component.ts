@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { error } from 'console';
 import { filter } from 'rxjs';
 import { Review } from '../review/Review';
+import { BankOfferService } from '../service/bank-offer.service';
 import { CartService } from '../service/cart.service';
 import { cartItem } from '../service/cartItem';
 import { ProductDetailsService } from '../service/product-details.service';
@@ -50,14 +51,14 @@ export class ProductDetailsComponent implements OnInit {
   
  
   constructor(private rout : ActivatedRoute,
+    public getbankoffer:BankOfferService,
     private PrductApi : ProductDetailsService, public getReview: ReviewService,public  GetUserName: UserDetailsService, public cartservice:CartService) { }
     
 
     
 
 
-     
-  ngOnInit(): void {
+  ngOnInit(): void {  
     
 
 //////////       get  product id by param routing //
@@ -143,14 +144,16 @@ this.r.rating = this.rate
 
   //                      //////////////   Add to cart              /////////
   addtocart(){  
+   
+    
+    let presentItem:any = this.cartservice.getCartItembyUserName(this.GetUserName.ThisUser[0]).find(item=>item.productID==this.productID)   ///this item is already exist  ////
+    if(!presentItem)          ////if not exist  push else add quantity////
+    {     
     let C=new cartItem(this.r.userName, this.productID, this.product.title,this.product.images,this.product.price,this.count,this.product.description,this.product.discountPercentage)
-    // if(!this.cartservice.MyCart)
-    this.cartservice.addProducttoCart(C)
-    // else
-    // this.count ++
-    // this.cartservice.MyCart.push(new cartItem
-    //   (this.product.title,this.product.images,this.product.price,this.count,this.product.description) );
-    alert("successfully added to the Cart")
+    this.cartservice.addProducttoCart(C)}
+      else{
+   alert("successfully added Quantity of this item")
+    presentItem.Qnty+=this.count;}
     console.log(this.cartservice.MyCart);
     
   }
