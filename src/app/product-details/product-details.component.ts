@@ -20,22 +20,12 @@ export class ProductDetailsComponent implements OnInit {
   result:any
   productID:any
 ////  for star pattern  //
-  star= [1,2,3,4,5];
+  fiveStars= [1,2,3,4,5];
   rate = 0;
-   count=1;
-  // productId:number;
+
+   productQuantity=1;
   silderImages: Array<any> = [];
-  // p:cartItem={
-  //   productID: 0,
-  //   title: '',
-  //   images: undefined,
-  //   price: 0,
-  //   Qnty: 0,
-  //   description: '',
-  //   descount: 0,
-  //   userName: ''
-  // }
-  r:Review={
+  reviewer:Review={
     userName: '',
     rating: 0,
     comment: '',
@@ -43,28 +33,21 @@ export class ProductDetailsComponent implements OnInit {
     ID: 0,
   }
   AddReview(){
-    this.getReview.AddReview(new Review(this.r.userName,this.r.rating,this.r.comment,this.r.productId))
-     this.getReview.ReviewList;    
-    //  return Review.reviewid; 
-     
+    this.reviewService.AddReview(new Review(this.reviewer.userName,this.reviewer.rating,this.reviewer.comment,this.reviewer.productId))
+     this.reviewService.ReviewList;    
   }
-  
- 
   constructor(private rout : ActivatedRoute,
-    public getbankoffer:BankOfferService,
-    private PrductApi : ProductDetailsService, public getReview: ReviewService,public  GetUserName: UserDetailsService, public cartservice:CartService) { }
+    public bankOfferService:BankOfferService,
+    private productDetailsService : ProductDetailsService,
+     public reviewService: ReviewService,
+     public  GetUserName: UserDetailsService, 
+     private cartservice:CartService) { }
     
-
-    
-
-
   ngOnInit(): void {  
-    
-
 //////////       get  product id by param routing //
     this.productID= this.rout.snapshot.paramMap.get('id');
 ////////   obseravable  example   ( get product details by productId ) /////////
-    this.PrductApi.getProduct(this.productID).subscribe((data :any)=>{
+    this.productDetailsService.getProduct(this.productID).subscribe((data :any)=>{
       this.product = data;
       this.getImages();
 
@@ -72,32 +55,17 @@ export class ProductDetailsComponent implements OnInit {
       ////////////  Observable error message  ////////
       
       setTimeout(() => {
-      this.result = "/assets/errorImg.jpg"  
-        // console.log(this.result);
+      this.result = "/assets/errorImg.jpg"  ;
          return this.result;
       }, 3000);
-     
-      
-
     })
-     
-    this.getReview.getReviewbyproductId(this.productID) ;
-
-
+    this.reviewService.getReviewbyproductId(this.productID) ;
     ////////// get product id by param routing //////
-    this.r.productId = this.productID
-  
-    // this.r.comment = this.r.comment
+    this.reviewer.productId = this.productID;
     ////// get username from userdetails service  ////// 
-    this.r.userName = this.GetUserName.ThisUser[0]
-    // this.p.userName = this.GetUserName.ThisUser[0]
+    this.reviewer.userName = this.GetUserName.ThisUser[0];
     //////get rating by click on star  /////////
-this.r.rating = this.rate    
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  this.p.title= this.product
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-     
+this.reviewer.rating = this.rate    
   
   }//// NG ONINIT CLOSE HERE
   getImages() {
@@ -109,53 +77,41 @@ this.r.rating = this.rate
         });
       });
   }
-
-
 ///////// by click on star rating will by update by this function /////////////////////
   updaterating(a:any){
     this.rate=a
-    this.r.rating=a
+    this.reviewer.rating=a
   }
 
   /////////////////  delete review      ///////////////
   deleteReview(i){
     
-    this.getReview.DeleeteReview(i)
+    this.reviewService.DeleeteReview(i)
   }
-
-
                 ////////    quantity add and remove    ////////
   plusCount(){
-    if(this.count>=5)
+    if(this.productQuantity>=5)
     alert("You can buy only upto 5 units of this product");
     else
-    this.count++
+    this.productQuantity++
   }
-  minusCount(){
-    
-    
-    if (this.count>1) {
-      return this.count--
-      
+  minusCount(){ 
+    if (this.productQuantity>1) {
+      return this.productQuantity--;
     }
     else
     return null
   }
-
   //                      //////////////   Add to cart              /////////
-  addtocart(){  
-   
-    
-    let presentItem:any = this.cartservice.getCartItembyUserName(this.GetUserName.ThisUser[0]).find(item=>item.productID==this.productID)   ///this item is already exist  ////
-    if(!presentItem)          ////if not exist  push else add quantity////
+  addtocart(){   
+    let alreadyExistItem:any = this.cartservice.getCartItembyUserName(this.GetUserName.ThisUser[0]).find(item=>item.productID==this.productID)   ///this item is already exist  ////
+    if(!alreadyExistItem)          ////if not exist  push else add quantity////
     {     
-    let C=new cartItem(this.r.userName, this.productID, this.product.title,this.product.images,this.product.price,this.count,this.product.description,this.product.discountPercentage)
+    let C=new cartItem(this.reviewer.userName, this.productID, this.product.title,this.product.images,this.product.price,this.productQuantity,this.product.description,this.product.discountPercentage)
     this.cartservice.addProducttoCart(C)}
       else{
    alert("successfully added Quantity of this item")
-    presentItem.Qnty+=this.count;}
-    console.log(this.cartservice.MyCart);
-    
+    alreadyExistItem.Qnty+=this.productQuantity;}
+    console.log(this.cartservice.MyCart);  
   }
-  
 }

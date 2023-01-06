@@ -2,19 +2,14 @@ export  class Bank {
 
     bankName: string;
     bankId:number;
-    offer:number;
-    offerDesc:string;
-    constructor(bankId:number,bankName:string,offer:number,offerDesc:string){
+    discountValue:number;
+    offerDescription:string;
+    constructor(bankId:number,bankName:string,discountValue:number,offerDescription:string){
         this.bankId= bankId;
         this.bankName=bankName;
-        this.offer=offer;
-        this.offerDesc=offerDesc;
-
-    }
-  getbankDiscount():any {
-    return this.offer;
-
-  }   
+        this.discountValue=discountValue;
+        this.offerDescription=offerDescription;
+    }   
     
 }
 // export class icici extends Bank{
