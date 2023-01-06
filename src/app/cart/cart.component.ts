@@ -53,14 +53,15 @@ export class CartComponent implements OnInit {
     let totalAmount = 0;
     let deliveryCharge=0;
     let currentbankoffer=0;
+    const MINPrice=1000;
     for (let index = 0; index < this.cartService.getCartItembyUserName(this.getusername.ThisUser[0]).length; index++) {
       eachTotal += this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[index].price * this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[index].Qnty;
       discount += this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[index].price * this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[index].Qnty * this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[index].descount * 0.01;
       totalAmount = eachTotal - discount;
     }
-    if(totalAmount>0 && totalAmount<1000){        ////  condition for delivery charges ////
+    if(totalAmount>0 && totalAmount<MINPrice){        ////  condition for delivery charges ////
     deliveryCharge =0.99;}
-    if(eachTotal>1000){                           ////   bank offer is applicable if ---minimum purchaes of 1000-////
+    if(eachTotal>MINPrice){                           ////   bank offer is applicable if ---minimum purchaes of 1000-////
       currentbankoffer=this.getbankoffer.offers[this.selectBankid].discountValue ;}
     totalAmount =eachTotal - discount-currentbankoffer + deliveryCharge;
     return [eachTotal, discount, totalAmount, deliveryCharge,currentbankoffer];
