@@ -72,7 +72,8 @@ const routes: Routes = [
   {
     path: "UserDetails",
     component: UserDetailsComponent
-  }
+  },
+  { path: 'giftCards', loadChildren: () => import('./gift-cards/gift-cards.module').then(m => m.GiftCardsModule) }
 
 ];
 
