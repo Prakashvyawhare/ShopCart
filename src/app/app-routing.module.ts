@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 import { CartComponent } from './cart/cart.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { LoginComponent } from './login/login.component';
@@ -31,11 +32,13 @@ const routes: Routes = [
   },
   {
     path: 'Order',
-    component : CartComponent
+    component : CartComponent,
+    canActivate: [AuthGuard]
   },
   {
     path : 'Products/Order/:id',
-    component : CartComponent
+    component : CartComponent,
+    canActivate: [AuthGuard]
   },
   {
     path : 'Products/ProductDetails/:id',
@@ -71,7 +74,8 @@ const routes: Routes = [
   },
   {
     path: "UserDetails",
-    component: UserDetailsComponent
+    component: UserDetailsComponent,
+    canActivate: [AuthGuard]
   },
   { path: 'giftCards', loadChildren: () => import('./gift-cards/gift-cards.module').then(m => m.GiftCardsModule) }
 
