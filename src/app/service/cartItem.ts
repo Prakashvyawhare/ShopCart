@@ -6,7 +6,7 @@ export class cartItem {
     price:number;
     Qnty: number;
     description:string;
-    // Discount:number;
+  
     descount : number
     cartItemid:number
     static itemid=0;
@@ -38,6 +38,4 @@ export class cartItem {
     getTotalOfDiscountedPrice():any{
       this.price* this.Qnty-this.price*this.descount*0.01*this.Qnty;
     }
-
-
 }
