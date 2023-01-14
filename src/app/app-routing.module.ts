@@ -35,19 +35,19 @@ const routes: Routes = [
     component : CartComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path : 'Products/Order/:id',
-    component : CartComponent,
-    canActivate: [AuthGuard]
-  },
+  // {
+  //   path : 'Products/Order/:id',
+  //   component : CartComponent,
+  //   canActivate: [AuthGuard]
+  // },
   {
     path : 'Products/ProductDetails/:id',
     component : ProductDetailsComponent
   },
-  {
-    path : 'Customer',
-    component: CustomerDetailsComponent
-  },
+  // {
+  //   path : 'Customer',
+  //   component: CustomerDetailsComponent
+  // },
   {
     path: 'NewUser',
     component: NewUserComponent,

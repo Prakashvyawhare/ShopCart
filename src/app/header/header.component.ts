@@ -16,8 +16,8 @@ export class HeaderComponent implements OnInit {
  
   constructor(private modalService: NgbModal, public modeldia : ModellogService, public cart: CartService,public userdetailsservice: UserDetailsService) { }
 
-  open() {
-		const modalRef = this.modalService.open(ModelComponent);}
+  // open() {
+	// 	const modalRef = this.modalService.open(ModelComponent);}
   ngOnInit(): void {
     this.scount = this.userdetailsservice.ThisUser[0]
 

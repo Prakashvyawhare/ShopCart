@@ -20,7 +20,7 @@ throw new Error('Method not implemented.');
 
 
 
-  constructor( private captcha :LoginCaptchaService,public userlist:  UserlistService, public CurrentUsername: UserDetailsService, public activeModal: NgbActiveModal) { }
+  constructor( private captcha :LoginCaptchaService,public userlist:  UserlistService, public CurrentUsername: UserDetailsService) { }
 
   username="";
   Password="";

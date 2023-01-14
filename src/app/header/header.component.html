@@ -3,7 +3,7 @@
     <!-- <button routerLink="Customer">Customer Details </button> -->
     <button routerLink="UserDetails">user details</button>
     <button *ngIf="this.userdetailsservice.ThisUser.length==0"
-     (click)="open()" 
+     routerLink="login"
     
       >login</button>
       
