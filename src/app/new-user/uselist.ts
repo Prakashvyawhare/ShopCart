@@ -1,10 +1,10 @@
 export  class User{
     username :string;
   password: string;
-  static id :number=0;
+  static id :number=1;
   name: string;
   surname:string;
-
+  userId:number;
   Address: string;
   mobile :number;
   DOB: Date;
@@ -18,6 +18,7 @@ this.name = name;
 this.DOB = DOB;
 this.surname = surname;
 this.Address = Address;
+this.userId=User.id;
     User.id ++
   }
 }

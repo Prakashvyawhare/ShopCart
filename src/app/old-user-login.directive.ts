@@ -10,10 +10,10 @@ import { UserlistService } from './service/userlist.service';
 })
 export class OldUserLoginDirective implements Validator {
 
-  constructor( public user: UserlistService) { }
+  constructor( public userlistService: UserlistService) { }
   validate(control: AbstractControl): ValidationErrors | null {
    let UserEnteredName = control.value;
-   let usernameresult = this.user.IsUserExist(control.value )
+   let usernameresult = this.userlistService.IsUserExist(control.value )
    if(!usernameresult)
    return ({"olduser":true})
    else

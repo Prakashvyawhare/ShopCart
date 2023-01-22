@@ -3,7 +3,7 @@ userName : string;
 rating : number;
 comment : string;
 productId: number;
-ID: number ;
+reviewId: number ;
 static reviewid : number=1;
 
  constructor( userName: string, Rating: number, comment: string,
@@ -13,7 +13,7 @@ this.userName = userName;
 this.rating = Rating;
 this.comment = comment;
 this.productId= productId
-this.ID = Review.reviewid;
+this.reviewId = Review.reviewid;
 Review.reviewid ++;
 
 

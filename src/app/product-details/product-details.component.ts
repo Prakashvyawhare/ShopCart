@@ -30,11 +30,13 @@ export class ProductDetailsComponent implements OnInit {
     rating: 0,
     comment: '',
     productId: 0,
-    ID: 0,
+    reviewId: 0,
   }
   AddReview(){
     this.reviewService.AddReview(new Review(this.reviewer.userName,this.reviewer.rating,this.reviewer.comment,this.reviewer.productId))
-     this.reviewService.ReviewList;    
+     this.reviewService.ReviewList;  
+     console.log(this.reviewService.ReviewList);
+       
   }
   constructor(private rout : ActivatedRoute,
     public bankOfferService:BankOfferService,

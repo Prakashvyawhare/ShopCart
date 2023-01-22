@@ -44,7 +44,7 @@ export class NewUserComponent implements OnInit {
    
  this.saveUser.UserNameList.push( new User (this.username,this.Password,this.Name,this.surname,this.Address,this.DOB))
 
-User.id ++
+
 console.log(this.saveUser.UserNameList);
   }
 

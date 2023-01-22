@@ -9,10 +9,10 @@ export class UserDetailsService {
  
 
   constructor() { }
-  isLogin(){           
-    if(this.ThisUser.length==0)
-    return false;
-    else
-    return true;
-  }
+  // isLogin(){           
+  //   if(this.ThisUser.length==0)
+  //   return false;
+  //   else
+  //   return true;
+  // }
 }

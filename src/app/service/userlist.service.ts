@@ -30,7 +30,7 @@ UserNameList =new Array<User>();
  let  c = new User("john@gmail.com","Abc@1234", "john","snow","india",new Date(2000,6,5))
 //  c.username;
 //  c.password;
- User.id ++;
+ 
   this.UserNameList.push(c)
     
     

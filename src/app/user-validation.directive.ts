@@ -13,10 +13,10 @@ import { UserlistService } from './service/userlist.service';
 }) 
 export class UserValidationDirective implements Validator {
 
-  constructor(private UserName:UserlistService) { }
+  constructor(private UserlistService:UserlistService) { }
   validate(control: AbstractControl): ValidationErrors | null {
 let UserEnteredName = control.value;
-let UserNResult = this.UserName.IsUserExist(UserEnteredName);
+let UserNResult = this.UserlistService.IsUserExist(UserEnteredName);
 
 if(UserNResult)
 
