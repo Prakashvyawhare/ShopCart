@@ -25,6 +25,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { ReviewComponent } from './review/review.component';
 import { LoginCaptchaDirective } from './login-captcha.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +49,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ExistingpasswordDirective,
     UserDetailsComponent,
     ReviewComponent,
-    LoginCaptchaDirective
+    LoginCaptchaDirective,
+    
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgImageSliderModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
     NgbModule
     
   ],

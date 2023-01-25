@@ -4,17 +4,18 @@ rating : number;
 comment : string;
 productId: number;
 reviewId: number ;
-static reviewid : number=1;
+static id : number=1;
 
- constructor( userName: string, Rating: number, comment: string,
+ constructor(id:number, userName: string, Rating: number, comment: string,
     productId : number)
  {
 this.userName = userName;
 this.rating = Rating;
 this.comment = comment;
-this.productId= productId
-this.reviewId = Review.reviewid;
-Review.reviewid ++;
+this.productId= productId;
+Review.id ++;
+this.reviewId = id;
+
 
 
  }

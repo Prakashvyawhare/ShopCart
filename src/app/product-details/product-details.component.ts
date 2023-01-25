@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { error } from 'console';
-import { filter } from 'rxjs';
+import { filter, max } from 'rxjs';
 import { Review } from '../review/Review';
 import { BankOfferService } from '../service/bank-offer.service';
 import { CartService } from '../service/cart.service';
@@ -30,11 +30,12 @@ export class ProductDetailsComponent implements OnInit {
     rating: 0,
     comment: '',
     productId: 0,
-    reviewId: 0,
+    reviewId: 0
   }
   AddReview(){
-    this.reviewService.AddReview(new Review(this.reviewer.userName,this.reviewer.rating,this.reviewer.comment,this.reviewer.productId))
+     this.reviewService.AddReview(new Review(this.reviewer.reviewId,this.reviewer.userName,this.reviewer.rating,this.reviewer.comment,this.reviewer.productId))
      this.reviewService.ReviewList;  
+      
      console.log(this.reviewService.ReviewList);
        
   }
@@ -68,7 +69,6 @@ export class ProductDetailsComponent implements OnInit {
     this.reviewer.userName = this.GetUserName.ThisUser[0];
     //////get rating by click on star  /////////
 this.reviewer.rating = this.rate    
-  
   }//// NG ONINIT CLOSE HERE
   getImages() {
     if (this.product.images)
@@ -83,12 +83,21 @@ this.reviewer.rating = this.rate
   updaterating(a:any){
     this.rate=a
     this.reviewer.rating=a
+    this.updateReviewId()
+  }
+  updateReviewId()         ///////get the maximum value of reviewId from the Array + 1 ////
+  {
+    let arr=this.reviewService.ReviewList.map((x:Review)=>x.reviewId);
+    let a =this.reviewer.reviewId=Math.max(...arr)+1;     ////  number[] => number same like tostring()
+    console.log(a);
+    
   }
 
   /////////////////  delete review      ///////////////
   deleteReview(i){
+    var rreviewId=this.reviewService.ReviewList[i].reviewId
+    this.reviewService.DeleeteReview(rreviewId)
     
-    this.reviewService.DeleeteReview(i)
   }
                 ////////    quantity add and remove    ////////
   plusCount(){
