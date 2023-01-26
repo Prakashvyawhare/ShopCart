@@ -134,3 +134,4 @@ dist
 .angular/cache/13.3.10/angular-webpack/d0efd85f99ffc8f4ab3506f0e4df260b2730afbe/0.pack
 .angular/cache/13.3.10/angular-webpack/d0efd85f99ffc8f4ab3506f0e4df260b2730afbe/1.pack
 *.pack
+*.pack
