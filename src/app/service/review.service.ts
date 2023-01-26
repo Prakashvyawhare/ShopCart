@@ -39,11 +39,7 @@ export class ReviewService {
     
 //  }
   getReview(){
-    this.AngularFirestore.collection('reviews').valueChanges().subscribe((data)=>
-    
-    { 
-      this.ReviewList=data})
-    
+    this.AngularFirestore.collection('reviews').valueChanges().subscribe((data)=> {this.ReviewList=data})
   }
 
   // AddReview (Userreview:Review){
@@ -72,7 +68,7 @@ export class ReviewService {
   // DeleeteReview(reviewIndex:number){
   //   this.ReviewList.splice(reviewIndex,1)
   // }
-  DeleeteReview(reviewId:number){
+  DeleeteReview(reviewId:number){    
     this.AngularFirestore.doc('/reviews/' + reviewId).delete()
   }
 } 

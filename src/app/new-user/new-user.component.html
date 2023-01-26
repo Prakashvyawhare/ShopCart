@@ -54,8 +54,7 @@
             <div class="form-group ">
 
                 <label for="DOB">Date of birth : </label>
-                <input type="date" name="DOB" class="form-control" 
-                    [(ngModel)]="DOB" />
+                <input type="date" name="DOB" class="form-control" [(ngModel)]="DOB" />
 
             </div>
             <!-- Enter password -->
@@ -114,13 +113,13 @@
                     </div>
 
                     <!-- login button -->
-                    <div class="form-group"> <button  type="submit" class="btn btn-success"> submit
+                    <div class="form-group"> <button (click)="onsubmit()" type="submit" class="btn btn-success"> submit
                         </button></div>
                     <!-- cancel button -->
-                    <span><button  type="cancel" class="btn btn-cancel"> Cancel
-                        </button></span> 
+                    <span><button type="cancel" class="btn btn-cancel"> Cancel
+                        </button></span>
 
-                        <div>if already have an account, <a routerLink="login">Login</a></div>
+                    <div>if already have an account, <a routerLink="login">Login</a></div>
                 </div>
 
 

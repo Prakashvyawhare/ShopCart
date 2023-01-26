@@ -1,7 +1,6 @@
 export  class User{
     username :string;
-  password: string;
-  static id :number=1;
+  password: string;  
   name: string;
   surname:string;
   userId:number;
@@ -11,14 +10,13 @@ export  class User{
   Bank:string;
 
 
-  constructor(username:string,password: string, name:string,surname:string,Address:string, DOB:Date) {
+  constructor(userId:number,username:string,password: string, name:string,surname:string,Address:string, DOB:Date) {
 this.username = username;
 this.password = password;
 this.name = name;
 this.DOB = DOB;
 this.surname = surname;
 this.Address = Address;
-this.userId=User.id;
-    User.id ++
+this.userId=userId;   
   }
 }

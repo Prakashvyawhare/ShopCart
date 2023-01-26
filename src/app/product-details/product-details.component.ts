@@ -33,6 +33,7 @@ export class ProductDetailsComponent implements OnInit {
     reviewId: 0
   }
   AddReview(){
+    this.updateReviewId()
      this.reviewService.AddReview(new Review(this.reviewer.reviewId,this.reviewer.userName,this.reviewer.rating,this.reviewer.comment,this.reviewer.productId))
      this.reviewService.ReviewList;  
       
@@ -83,12 +84,11 @@ this.reviewer.rating = this.rate
   updaterating(a:any){
     this.rate=a
     this.reviewer.rating=a
-    this.updateReviewId()
   }
   updateReviewId()         ///////get the maximum value of reviewId from the Array + 1 ////
   {
-    let arr=this.reviewService.ReviewList.map((x:Review)=>x.reviewId);
-    let a =this.reviewer.reviewId=Math.max(...arr)+1;     ////  number[] => number same like tostring()
+    let array=this.reviewService.ReviewList.map((x:Review)=>x.reviewId);
+    let a =this.reviewer.reviewId=Math.max(...array)+1;     ////  number[] => number same like tostring()
     console.log(a);
     
   }
