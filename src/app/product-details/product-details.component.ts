@@ -22,7 +22,6 @@ export class ProductDetailsComponent implements OnInit {
 ////  for star pattern  //
   fiveStars= [1,2,3,4,5];
   rate = 0;
-
    productQuantity=1;
   silderImages: Array<any> = [];
   reviewer:Review={
@@ -36,9 +35,7 @@ export class ProductDetailsComponent implements OnInit {
     this.updateReviewId()
      this.reviewService.AddReview(new Review(this.reviewer.reviewId,this.reviewer.userName,this.reviewer.rating,this.reviewer.comment,this.reviewer.productId))
      this.reviewService.ReviewList;  
-      
-     console.log(this.reviewService.ReviewList);
-       
+     console.log(this.reviewService.ReviewList);       
   }
   constructor(private rout : ActivatedRoute,
     public bankOfferService:BankOfferService,
@@ -57,7 +54,6 @@ export class ProductDetailsComponent implements OnInit {
 
     },()=>{
       ////////////  Observable error message  ////////
-      
       setTimeout(() => {
       this.result = "/assets/errorImg.jpg"  ;
          return this.result;
@@ -89,10 +85,8 @@ this.reviewer.rating = this.rate
   {
     let array=this.reviewService.ReviewList.map((x:Review)=>x.reviewId);
     let a =this.reviewer.reviewId=Math.max(...array)+1;     ////  number[] => number same like tostring()
-    console.log(a);
-    
+    console.log(a); 
   }
-
   /////////////////  delete review      ///////////////
   deleteReview(i){
     var rreviewId=this.reviewService.ReviewList[i].reviewId

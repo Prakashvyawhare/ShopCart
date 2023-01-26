@@ -8,8 +8,6 @@ export  class User{
   mobile :number;
   DOB: Date;
   Bank:string;
-
-
   constructor(userId:number,username:string,password: string, name:string,surname:string,Address:string, DOB:Date) {
 this.username = username;
 this.password = password;
