@@ -8,7 +8,7 @@ export class CaptchaService {
  private number2:number;
  private constructor() {
   this.refresh()
-   }
+   } 
    refresh(){
     this.number1= Number.parseInt((Math.random()* Math.random()*100).toString());
     this.number2= Number.parseInt((Math.random()*Math.random()*100). toString());}

@@ -13,7 +13,7 @@ import { UserlistService } from '../service/userlist.service';
 export class UserDetailsComponent implements OnInit {
 
   constructor(private UserDetailsService:UserDetailsService) { }
- customer: User;  
+ customer=this.UserDetailsService.currentUserDetails();  
   
   
  

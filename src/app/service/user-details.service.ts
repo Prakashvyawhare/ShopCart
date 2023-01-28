@@ -7,14 +7,14 @@ import { UserlistService } from './userlist.service';
 })
 export class UserDetailsService {
   ThisUser= Array<string>();
- currentUserName=this.ThisUser[0];
+ currentUserName:string
 
-  constructor( private userlistService:UserlistService) { }
+  constructor( private userlistService:UserlistService) { this.currentUserName=this.ThisUser[0];}
   LoggedinbyUser(){           
    return this.ThisUser.length>0
     
   }
   currentUserDetails(){
-   return this.userlistService.UserNameList.find((x)=>x.username==this.currentUserName)
+   return this.userlistService.UserNameList.find((x)=>x.username==this.ThisUser[0])
   }
 }

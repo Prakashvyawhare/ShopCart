@@ -16,7 +16,7 @@ constructor(public getusername : UserDetailsService, private AngularFirestore:An
  }
 currentUserCarts(){         ////   get cart item added by current user  ////
   let currentUserCart=this.MyCart.filter((x)=>{
-    return x.userName==this.UserDetailsService.currentUserName})
+    return x.userName==this.UserDetailsService.ThisUser[0]})
   return currentUserCart; 
 }
 getCartItemsFromDatabase()  ////  Retrieve CartItems from database  ////

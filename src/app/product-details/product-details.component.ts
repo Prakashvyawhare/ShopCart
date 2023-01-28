@@ -64,7 +64,7 @@ export class ProductDetailsComponent implements OnInit {
     ////////// get product id by param routing //////
     this.reviewer.productId = this.productID;
     ////// get username from userdetails service  ////// 
-    this.reviewer.userName = this.GetUserName.currentUserName;
+    this.reviewer.userName = this.GetUserName.ThisUser[0];
     //////get rating by click on star  /////////
 this.reviewer.rating = this.rate    
   }//// NG ONINIT CLOSE HERE

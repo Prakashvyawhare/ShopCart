@@ -47,8 +47,8 @@
                 <!-- print random number and operator -->
                 <div class="form-group">
                     <div>
-                        <span class="float"> <input type="text" name="captch" #captcha="ngModel" class="form-control"
-                            appLoginCaptcha required [(ngModel)]="enterVal"></span> <span>
+                        <span class="float"> <input type="text" name="captcha" #captcha="ngModel" class="form-control"
+                            appCaptcha required [(ngModel)]="enterVal"></span> <span>
                             <h4>{{num1}} + {{num2}} =</h4>
                         </span>
 
@@ -62,7 +62,7 @@
 
                     </span>
 
-                    <span class="text-danger" *ngIf="captcha.touched && captcha.errors?.['captch']">
+                    <span class="text-danger" *ngIf="captcha.touched && captcha.errors?.['captcha']">
                         captcha Envalide
                     </span>
                 </div>

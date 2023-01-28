@@ -1,6 +1,6 @@
 import { Directive } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
-import { LoginCaptchaService } from './service/login-captcha.service';
+import { CaptchaService } from './service/captcha.service';
 
 @Directive({
   selector: '[appLoginCaptcha]',
@@ -10,15 +10,13 @@ import { LoginCaptchaService } from './service/login-captcha.service';
 })
 export class LoginCaptchaDirective implements Validator {
 
-  constructor( private getCaptcha : LoginCaptchaService) { }
+  constructor( private getCaptcha : CaptchaService) { }
   validate(control: AbstractControl): ValidationErrors | null {
     let enteredNum = control.value;
     let result = this.getCaptcha.getValidValue();
   if(enteredNum !=result)
-  return ({'captch':true})
+  return ({'caaaaptch':true})
   else
   return null
   }
-  
-
 }

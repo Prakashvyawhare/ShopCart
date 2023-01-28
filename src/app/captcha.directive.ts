@@ -10,10 +10,10 @@ import { CaptchaService } from './service/captcha.service';
 })
 export class CaptchaDirective implements Validator{
 
-  constructor(private captchaval: CaptchaService) { }
+  constructor(private CaptchaService: CaptchaService) { }
   validate(control: AbstractControl): ValidationErrors | null {
     let  UserEnterValue = control.value;
- let result = this.captchaval.getValidValue();
+ let result = this.CaptchaService.getValidValue();
  if(UserEnterValue != result)
  return  ({'captcha': true});
  else 

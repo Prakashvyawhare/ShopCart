@@ -26,6 +26,7 @@ export class NewUserComponent implements OnInit {
   constructor(private captcha: CaptchaService, public UserlistService: UserlistService) { }
   ngOnInit(): void {
     // this.Customer= this.getdetails.getUaerbyName(this.username)
+    this.captcha.refresh();         ////   refresh captcha values  ///
     this.num1 = this.captcha.getNumber()[0];
     this.num2 = this.captcha.getNumber()[1];
   }
