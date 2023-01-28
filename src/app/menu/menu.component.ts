@@ -9,7 +9,7 @@ import { UserDetailsService } from '../service/user-details.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(public cart: CartService, public getUsername: UserDetailsService) { }
+  constructor(public CartService: CartService, public getUsername: UserDetailsService) { }
 
   ngOnInit(): void {
   }

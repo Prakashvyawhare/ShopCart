@@ -10,13 +10,13 @@ import { UserDetailsService } from './user-details.service';
 })
 export class  CartService {
 MyCart=new Array<any>();
-constructor(public getusername : UserDetailsService, private AngularFirestore:AngularFirestore) 
+constructor(public getusername : UserDetailsService, private AngularFirestore:AngularFirestore,private UserDetailsService:UserDetailsService) 
 {
   this.getCartItemsFromDatabase();
  }
-getCartItembyUserName(username:string){    ////   get cart item added by specific user  ////
+currentUserCarts(){         ////   get cart item added by current user  ////
   let currentUserCart=this.MyCart.filter((x)=>{
-    return x.userName==username})
+    return x.userName==this.UserDetailsService.currentUserName})
   return currentUserCart; 
 }
 getCartItemsFromDatabase()  ////  Retrieve CartItems from database  ////

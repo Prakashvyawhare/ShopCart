@@ -14,21 +14,21 @@ import { UserDetailsService } from '../service/user-details.service';
 })
 export class CartComponent implements OnInit { 
   RemoveProduct(i: number) {
-    let getCartItemIdbyIndex = this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[i].cartItemid;     ///// get "cartitemId" by index of 'currentuser'Array  ////
+    let getCartItemIdbyIndex = this.cartService.currentUserCarts()[i].cartItemid;     ///// get "cartitemId" by index of 'currentuser'Array  ////
     this.cartService.removeProductFromCart(getCartItemIdbyIndex);
     this.updateprice();       
   }
   addQuantity(i)        ///  add  Product Quantity in the cart  ////
   {
-    let getCartItemIdbyIndex = this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[i].cartItemid;   ///// get "cartitemId" by index of 'currentuser'Array  ////
-    let quantity=this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[i].Qnty+1;    ////  get 'Quanty'of 'currentuser' by index[i] and increse by 1 ////
+    let getCartItemIdbyIndex = this.cartService.currentUserCarts()[i].cartItemid;   ///// get "cartitemId" by index of 'currentuser'Array  ////
+    let quantity=this.cartService.currentUserCarts()[i].Qnty+1;    ////  get 'Quanty'of 'currentuser' by index[i] and increse by 1 ////
     this.cartService.updateQuantity(getCartItemIdbyIndex,quantity)   
     this.updateprice();     ////// update price details whenever qny added  ////
   }
   RemoveQuantity(i)          ////      remove or decrease Product Quantity in the cart  ////
   {
-    let getCartItemIdbyIndex = this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[i].cartItemid;     ///// get "cartitemId" by index[i] of 'currentuser'Array  ////
-    let quantity=this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[i].Qnty-1;                    ////  get 'Quanty'of 'currentuser' by index[i] and decrese by 1 ////
+    let getCartItemIdbyIndex = this.cartService.currentUserCarts()[i].cartItemid;     ///// get "cartitemId" by index[i] of 'currentuser'Array  ////
+    let quantity=this.cartService.currentUserCarts()[i].Qnty-1;                    ////  get 'Quanty'of 'currentuser' by index[i] and decrese by 1 ////
     this.cartService.updateQuantity(getCartItemIdbyIndex,quantity);                                                          
     this.updateprice();                ////// update price details whenever qny decrease  ////
   }
@@ -45,7 +45,7 @@ export class CartComponent implements OnInit {
     public getusername: UserDetailsService
   ) { }
   ngOnInit(): void {
-    this.cartService.getCartItembyUserName(this.getusername.ThisUser[0]);      /////////      showing cart items of only current user //    /////////    
+    this.cartService.currentUserCarts();      /////////      showing cart items of only current user //    /////////    
     this.updateprice();      //// update price initially  //
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,9 +57,9 @@ export class CartComponent implements OnInit {
     let deliveryCharge=0;
     let currentbankoffer=0;
     const MINPrice=1000;
-    for (let index = 0; index < this.cartService.getCartItembyUserName(this.getusername.ThisUser[0]).length; index++) {
-      eachTotal += this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[index].price * this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[index].Qnty;
-      discount += this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[index].price * this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[index].Qnty * this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[index].descount * 0.01;
+    for (let index = 0; index < this.cartService.currentUserCarts().length; index++) {
+      eachTotal += this.cartService.currentUserCarts()[index].price * this.cartService.currentUserCarts()[index].Qnty;
+      discount += this.cartService.currentUserCarts()[index].price * this.cartService.currentUserCarts()[index].Qnty * this.cartService.currentUserCarts()[index].descount * 0.01;
       totalAmount = eachTotal - discount;
     }
     if(totalAmount>0 && totalAmount<MINPrice){        ////  condition for delivery charges ////

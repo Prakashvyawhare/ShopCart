@@ -2,18 +2,12 @@
     
     <!-- <button routerLink="Customer">Customer Details </button> -->
     <button routerLink="UserDetails">user details</button>
-    <button *ngIf="this.userdetailsservice.ThisUser.length==0"
-     routerLink="login"
-    
-      >login</button>
-      
-    <button  *ngIf="this.userdetailsservice.ThisUser.length!==0" (click)="logout()" >logout</button>
-    
-    <button (click)="modeldia.Showdialog= false" routerLink="NewUser">New User </button>
+    <button *ngIf="!this.userdetailsservice.LoggedinbyUser()"routerLink="login">login</button>
+    <button  *ngIf="this.userdetailsservice.LoggedinbyUser()" (click)="logout()" >logout</button> 
+    <button routerLink="NewUser">New User </button>
     <h1>ShopCart</h1>
-    <a *ngIf="this.userdetailsservice.ThisUser.length!==0"  class="fa fa-shopping-cart" routerLink ="Order"> Cart({{this.cart.getCartItembyUserName(this.userdetailsservice.ThisUser[0]).length}})</a>
+    <a *ngIf="this.userdetailsservice.LoggedinbyUser()"  class="fa fa-shopping-cart" routerLink ="Order"> Cart({{this.CartService.currentUserCarts().length}})</a>
     <!-- <app-model *ngIf="modeldia.Showdialog"> </app-model>
     <button (click)="modeldia.Showdialog= true">showdialog</button> -->
     <!-- <a routerLink="Customer">Customer Details</a> -->
-    
 </div>

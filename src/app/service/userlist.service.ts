@@ -45,10 +45,10 @@ userid:number;
    })
    return this.UserNameList[I].password  
     }
-    getDetailsbyusername(user:string):any{      
-      let details = this.UserNameList.find((x)=>(x.username==user));
-      return details;
-    }
+    // getDetailsbyusername(user:string):any{      
+    //   let details = this.UserNameList.find((x)=>(x.username==user));
+    //   return details;
+    // }
 }
 
   

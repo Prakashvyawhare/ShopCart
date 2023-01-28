@@ -64,7 +64,7 @@ export class ProductDetailsComponent implements OnInit {
     ////////// get product id by param routing //////
     this.reviewer.productId = this.productID;
     ////// get username from userdetails service  ////// 
-    this.reviewer.userName = this.GetUserName.ThisUser[0];
+    this.reviewer.userName = this.GetUserName.currentUserName;
     //////get rating by click on star  /////////
 this.reviewer.rating = this.rate    
   }//// NG ONINIT CLOSE HERE
@@ -116,7 +116,7 @@ this.reviewer.rating = this.rate
   }
   //                      //////////////   Add to cart              /////////
   addtocart(){ 
-    let alreadyExistItem:any = this.cartservice.getCartItembyUserName(this.GetUserName.ThisUser[0]).find((item)=>{
+    let alreadyExistItem:any = this.cartservice.currentUserCarts().find((item)=>{
       return item.productID==this.productID})   ///this item is already exist  ////
     if(!alreadyExistItem)          ////if not exist  push ////
     {     

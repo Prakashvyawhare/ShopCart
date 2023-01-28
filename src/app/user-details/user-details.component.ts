@@ -12,15 +12,15 @@ import { UserlistService } from '../service/userlist.service';
 })
 export class UserDetailsComponent implements OnInit {
 
-  constructor(public UserData : UserlistService,public currentUser:UserDetailsService) { }
+  constructor(private UserDetailsService:UserDetailsService) { }
  customer: User;  
-
   
- username=this.currentUser.ThisUser[0]
+  
+ 
   ngOnInit(): void {
-   
-   this.customer= this.UserData.getDetailsbyusername(this.username);
-   console.log(this.customer);
+  this.customer= this.UserDetailsService.currentUserDetails();
+  
+  
    
     
   }

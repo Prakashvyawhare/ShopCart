@@ -57,6 +57,6 @@ display:flex; z-index: 53; align-items: center;">
         </ng-container>
     </div>
     <p>Comment : {{review.comment}}</p>
-    <button *ngIf="review.userName==this.GetUserName.ThisUser[0]" class="delete-btn" (click)="deleteReview(i)">delete
+    <button *ngIf="review.userName==this.GetUserName.currentUserName" class="delete-btn" (click)="deleteReview(i)">delete
         review</button>
 </div>
