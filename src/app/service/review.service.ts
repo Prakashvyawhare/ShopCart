@@ -44,7 +44,7 @@ export class ReviewService {
       productId:Userreview.productId,
       rating:Userreview.rating,
       comment:Userreview.comment,
-      // userName:Userreview.userName
+      userName:Userreview.userName
     })
   }  
   // DeleeteReview(reviewIndex:number){
