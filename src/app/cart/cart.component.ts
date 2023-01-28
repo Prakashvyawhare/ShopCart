@@ -31,6 +31,7 @@ export class CartComponent implements OnInit {
     this.updateprice();                ////// update price details whenever qny decrease  ////
   }
   selectBankid=0 ;
+  emptyCart="/assets/empty_cart.png"
   selectBank(i:number){
    return  this.selectBankid=i;
   }

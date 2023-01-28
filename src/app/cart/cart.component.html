@@ -1,3 +1,9 @@
+<div *ngIf="cartService.getCartItembyUserName(this.getusername.ThisUser[0]).length==0" class="center">
+    <img [src]="emptyCart">
+    <h1>Your cart is empty!</h1>
+    <a routerLink="Products">Buy something</a>
+</div>
+<div  *ngIf="cartService.getCartItembyUserName(this.getusername.ThisUser[0]).length!==0">
 <div *ngFor="let item of this.cartService.getCartItembyUserName(this.getusername.ThisUser[0]); let i = index" class="columns">
     <div class="card">
         <tr>
@@ -62,4 +68,5 @@
     
     <button class="button" (click)="selectBank(i)"> {{bank.bankName}}</button>
 </span>
+</div>
 </div>

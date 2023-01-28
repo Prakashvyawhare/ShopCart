@@ -29,7 +29,13 @@ const routes: Routes = [
   {
     path: 'Observable',
     component: ObservableComponent
+  },{
+    path: 'Order/Products',
+    redirectTo:'Products'
+    
   },
+
+
   {
     path: 'Order',
     component : CartComponent,
