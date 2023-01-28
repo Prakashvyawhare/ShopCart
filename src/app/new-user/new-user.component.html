@@ -1,62 +1,46 @@
 <div class="container" wid>
-
-
     <div class="center">
         <div class="title">New User </div>
         <form class="form " #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onsubmit()" novalidate>
-
             <!-- Enter Username -->
             <div class="form-group ">
-
                 <label for="email">UserName : </label>
                 <input type="email" name="email" appUserValidation class="form-control"
                     placeholder="Enter your username" #email="ngModel" required email [(ngModel)]="username" />
-
                 <!-- Validation for Email -->
                 <span class="text-danger"
                     *ngIf="(email.touched || registerForm.submitted)&& email.errors?.['required']">
                     username required
                 </span>
-
                 <span class="text-danger" *ngIf="(email.touched || registerForm.submitted)&& email.errors?.['email']">
                     enter correct email
                 </span>
                 <span class="text-danger" *ngIf="(email.touched || registerForm.submitted)&& email.errors?.['exit']">
                     UserName already exists
                 </span>
-
             </div>
             <!-- Name -->
             <div class="form-group ">
-
                 <label for="name">Name : </label>
                 <input type="text" name="name" class="form-control" placeholder="Enter your name" required
                     [(ngModel)]="Name" />
-
             </div>
             <!-- surname -->
             <div class="form-group ">
-
                 <label for="surname">Surname: </label>
                 <input type="text" name="surname" class="form-control" placeholder="Enter your surname"
                     [(ngModel)]="surname" />
-
             </div>
             <!-- Address -->
             <div class="form-group ">
-
                 <label for="address">Address : </label>
                 <input type="text" name="address" class="form-control" placeholder="Enter your address"
                     [(ngModel)]="Address" />
-
             </div>
             <!-- Date of birth -->
             <div class="form-group ">
-
                 <label for="DOB">Date of birth : </label>
-                <input type="date" name="DOB" class="form-control" 
-                    [(ngModel)]="DOB" />
-
+                <input type="date" name="DOB" class="form-control" [(ngModel)]="DOB" />
             </div>
             <!-- Enter password -->
             <div class="form-group">
@@ -73,9 +57,7 @@
                     *ngIf="(password.touched || registerForm.submitted) && password.errors?.['pattern']">Please enter
                     strong
                     Password</span><br>
-
                 <!-- confirm password  -->
-
                 <div class="form-group">
                     <label for="Cpassword">Confirm password :</label>
                     <input type="password" name="Cpassword" appDoubliPassword #Cpassword="ngModel" confirm
@@ -87,9 +69,7 @@
                     <span class="text-danger"
                         *ngIf="(Cpassword.touched || registerForm.submitted) && Cpassword.errors?.['confirm']">password
                         not match
-
                     </span><br>
-
                     <!-- print random number as a  captcha  -->
                     <div class="form-group">
                         <div>
@@ -97,40 +77,25 @@
                                     class="form-control" appCaptcha required [(ngModel)]="enterVal"></span> <span>
                                 <h4>{{num1}} + {{num2}} =</h4>
                             </span>
-
-
-
                         </div>
                         <!-- Validation for captcha -->
                         <span class="text-danger"
                             *ngIf="(captcha.touched || registerForm.submitted )&& captcha.errors?.['required']">captcha
                             required
-
                         </span><br>
-
                         <span class="text-danger" *ngIf="captcha.touched && captcha.errors?.['captcha']">
                             captcha Envalide
                         </span>
                     </div>
-
                     <!-- login button -->
-                    <div class="form-group"> <button  type="submit" class="btn btn-success"> submit
+                    <div class="form-group"> <button (click)="onsubmit()" type="submit" class="btn btn-success"> submit
                         </button></div>
                     <!-- cancel button -->
-                    <span><button  type="cancel" class="btn btn-cancel"> Cancel
-                        </button></span> 
-
-                        <div>if already have an account, <a routerLink="login">Login</a></div>
+                    <span><button type="cancel" class="btn btn-cancel"> Cancel
+                        </button></span>
+                    <div>if already have an account, <a routerLink="login">Login</a></div>
                 </div>
-
-
-
-
-
             </div>
-
-
-
         </form>
     </div>
 </div>

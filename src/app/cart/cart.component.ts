@@ -20,14 +20,16 @@ export class CartComponent implements OnInit {
   }
   addQuantity(i)        ///  add  Product Quantity in the cart  ////
   {
-    let getCartItemIdbyIndex = this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[i].cartItemid;     ///// get "cartitemId" by index of 'currentuser'Array  ////
-    this.cartService.addQuantity(getCartItemIdbyIndex)
+    let getCartItemIdbyIndex = this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[i].cartItemid;   ///// get "cartitemId" by index of 'currentuser'Array  ////
+    let quantity=this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[i].Qnty+1;    ////  get 'Quanty'of 'currentuser' by index[i] and increse by 1 ////
+    this.cartService.updateQuantity(getCartItemIdbyIndex,quantity)   
     this.updateprice();     ////// update price details whenever qny added  ////
   }
   RemoveQuantity(i)          ////      remove or decrease Product Quantity in the cart  ////
   {
-    let getCartItemIdbyIndex = this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[i].cartItemid;     ///// get "cartitemId" by index of 'currentuser'Array  ////
-    this.cartService.removeQuantity(getCartItemIdbyIndex)                                                           //// decrease qnty by 'cartitemId'  ////
+    let getCartItemIdbyIndex = this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[i].cartItemid;     ///// get "cartitemId" by index[i] of 'currentuser'Array  ////
+    let quantity=this.cartService.getCartItembyUserName(this.getusername.ThisUser[0])[i].Qnty-1;                    ////  get 'Quanty'of 'currentuser' by index[i] and decrese by 1 ////
+    this.cartService.updateQuantity(getCartItemIdbyIndex,quantity);                                                          
     this.updateprice();                ////// update price details whenever qny decrease  ////
   }
   selectBankid=0 ;

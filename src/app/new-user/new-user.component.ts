@@ -12,40 +12,34 @@ import { User } from './uselist';
   styleUrls: ['./new-user.component.css']
 })
 export class NewUserComponent implements OnInit {
-  Name:string="";
-  surname:string="";
-  Address="";
-  DOB:Date;
+  Name: string = "";
+  surname: string = "";
+  Address = "";
+  DOB: Date;
   username = '';
-  Password: any ="";
-  confPassword:any = ""
-  enterVal:number;
- num1:number;
- num2:number;
-// userList=[{}]
-
-  constructor( private captcha:CaptchaService,public saveUser:UserlistService) { }
-  // Customer: CustomerDetails
-
+  Password: any = "";
+  confPassword: any = ""
+  enterVal: number;
+  num1: number;
+  num2: number;
+  userId: number;
+  constructor(private captcha: CaptchaService, public UserlistService: UserlistService) { }
   ngOnInit(): void {
-
     // this.Customer= this.getdetails.getUaerbyName(this.username)
-   this.num1= this.captcha.getNumber()[0];
-
-   this.num2 = this.captcha.getNumber()[1];
-  //  console.log(this.Customer);
-  //  console.log(this.userList);   
+    this.num1 = this.captcha.getNumber()[0];
+    this.num2 = this.captcha.getNumber()[1];
   }
-
-
-
-
-  onsubmit():void{ 
-   
- this.saveUser.UserNameList.push( new User (this.username,this.Password,this.Name,this.surname,this.Address,this.DOB))
-
-
-console.log(this.saveUser.UserNameList);
+  updateuserid() {    ////  Retrieve last (max) 'userId' from database and increament by 1 for next 'userId'  ////
+    let array = this.UserlistService.UserNameList.map((x: User) => x.userId);
+    this.userId = Math.max(...array) + 1;
+    // this.userId=this.UserlistService.UserNameList.length+1       //// another way to increament 'userId' ////
+    console.log(this.userId);
   }
-
+  onsubmit(): void {
+    this.updateuserid()  ////  'userId' invocation ///    
+    this.UserlistService.addNewUser(new User(this.userId, this.username, this.Password, this.Name, this.surname, this.Address, this.DOB));
+    //  this.UserlistService.UserNameList
+    this.captcha.refresh();         ////   refresh captcha values  ///
+    console.log(this.UserlistService.UserNameList);
+  }
 }

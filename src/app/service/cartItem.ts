@@ -9,8 +9,8 @@ export class cartItem {
   
     descount : number
     cartItemid:number
-    static itemid=0;
-    constructor( username:string,productID:number,title:string,images:any,price:number,Qnty:number,description:string,descount:number)
+    // static itemid=0;
+    constructor( cartItemid:number,username:string,productID:number,title:string,images:any,price:number,Qnty:number,description:string,descount:number)
     {
       this.userName = username;
       this.productID=productID;
@@ -20,8 +20,8 @@ export class cartItem {
       this.Qnty=Qnty ;
       this.description=description;
       this.descount=descount;
-      this.cartItemid=cartItem.itemid
-      cartItem.itemid++;
+      this.cartItemid=cartItemid
+      // cartItem.itemid++;
     }
     getDiscountOf():any{
       this.price*this.descount*0.01;

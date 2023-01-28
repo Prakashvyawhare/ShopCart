@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { error } from 'console';
-import { filter } from 'rxjs';
+import { filter, max } from 'rxjs';
 import { Review } from '../review/Review';
 import { BankOfferService } from '../service/bank-offer.service';
 import { CartService } from '../service/cart.service';
@@ -18,11 +18,11 @@ import { UserDetailsService } from '../service/user-details.service';
 export class ProductDetailsComponent implements OnInit {
   product: any ={};
   result:any
-  productID:any
+  productID:any;
+  cartItemId:number=1;
 ////  for star pattern  //
   fiveStars= [1,2,3,4,5];
   rate = 0;
-
    productQuantity=1;
   silderImages: Array<any> = [];
   reviewer:Review={
@@ -30,13 +30,13 @@ export class ProductDetailsComponent implements OnInit {
     rating: 0,
     comment: '',
     productId: 0,
-    reviewId: 0,
+    reviewId: 0
   }
   AddReview(){
-    this.reviewService.AddReview(new Review(this.reviewer.userName,this.reviewer.rating,this.reviewer.comment,this.reviewer.productId))
+    this.updateReviewId()
+     this.reviewService.AddReview(new Review(this.reviewer.reviewId,this.reviewer.userName,this.reviewer.rating,this.reviewer.comment,this.reviewer.productId))
      this.reviewService.ReviewList;  
-     console.log(this.reviewService.ReviewList);
-       
+     console.log(this.reviewService.ReviewList);       
   }
   constructor(private rout : ActivatedRoute,
     public bankOfferService:BankOfferService,
@@ -55,7 +55,6 @@ export class ProductDetailsComponent implements OnInit {
 
     },()=>{
       ////////////  Observable error message  ////////
-      
       setTimeout(() => {
       this.result = "/assets/errorImg.jpg"  ;
          return this.result;
@@ -68,7 +67,6 @@ export class ProductDetailsComponent implements OnInit {
     this.reviewer.userName = this.GetUserName.ThisUser[0];
     //////get rating by click on star  /////////
 this.reviewer.rating = this.rate    
-  
   }//// NG ONINIT CLOSE HERE
   getImages() {
     if (this.product.images)
@@ -84,11 +82,23 @@ this.reviewer.rating = this.rate
     this.rate=a
     this.reviewer.rating=a
   }
-
+  updateReviewId()         ///////get the maximum value of reviewId from the Array + 1 ////
+  {
+    let array=this.reviewService.ReviewList.map((x:Review)=>x.reviewId);
+    let a =this.reviewer.reviewId=Math.max(...array)+1;     ////  number[] => number same like tostring()
+    console.log(a); 
+  }
   /////////////////  delete review      ///////////////
   deleteReview(i){
+    var rreviewId=this.reviewService.ReviewList[i].reviewId
+    this.reviewService.DeleeteReview(rreviewId)
     
-    this.reviewService.DeleeteReview(i)
+  }
+  updateCartItemId(){     ///////get the maximum value of cartItemId from the Array and increment by + 1 ////
+  let idArr=this.cartservice.MyCart.map((x:cartItem)=>x.cartItemid);
+  let idnum = this.cartItemId = Math.max(...idArr)+1;
+  console.log(idnum);
+  
   }
                 ////////    quantity add and remove    ////////
   plusCount(){
@@ -105,15 +115,19 @@ this.reviewer.rating = this.rate
     return null
   }
   //                      //////////////   Add to cart              /////////
-  addtocart(){   
-    let alreadyExistItem:any = this.cartservice.getCartItembyUserName(this.GetUserName.ThisUser[0]).find(item=>item.productID==this.productID)   ///this item is already exist  ////
-    if(!alreadyExistItem)          ////if not exist  push else add quantity////
+  addtocart(){ 
+    let alreadyExistItem:any = this.cartservice.getCartItembyUserName(this.GetUserName.ThisUser[0]).find((item)=>{
+      return item.productID==this.productID})   ///this item is already exist  ////
+    if(!alreadyExistItem)          ////if not exist  push ////
     {     
-    let C=new cartItem(this.reviewer.userName, this.productID, this.product.title,this.product.images,this.product.price,this.productQuantity,this.product.description,this.product.discountPercentage)
+      this.updateCartItemId() ;
+    let C=new cartItem(this.cartItemId,this.reviewer.userName, this.productID, this.product.title,this.product.images,this.product.price,this.productQuantity,this.product.description,this.product.discountPercentage)
     this.cartservice.addProducttoCart(C)}
       else{
    alert("successfully added Quantity of this item")
-    alreadyExistItem.Qnty+=this.productQuantity;}
+    let increaseQuantity = alreadyExistItem.Qnty+this.productQuantity;     ////  else add selected Quantity ////
+    this.cartservice.updateQuantity(alreadyExistItem.cartItemid,increaseQuantity)    //// update on database ////
+  }
     console.log(this.cartservice.MyCart);  
   }
 }
