@@ -18,7 +18,8 @@ import { UserDetailsService } from '../service/user-details.service';
 export class ProductDetailsComponent implements OnInit {
   product: any ={};
   result:any
-  productID:any
+  productID:any;
+  cartItemId:number=1;
 ////  for star pattern  //
   fiveStars= [1,2,3,4,5];
   rate = 0;
@@ -93,6 +94,12 @@ this.reviewer.rating = this.rate
     this.reviewService.DeleeteReview(rreviewId)
     
   }
+  updateCartItemId(){     ///////get the maximum value of cartItemId from the Array and increment by + 1 ////
+  let idArr=this.cartservice.MyCart.map((x:cartItem)=>x.cartItemid);
+  let idnum = this.cartItemId = Math.max(...idArr)+1;
+  console.log(idnum);
+  
+  }
                 ////////    quantity add and remove    ////////
   plusCount(){
     if(this.productQuantity>=5)
@@ -108,15 +115,19 @@ this.reviewer.rating = this.rate
     return null
   }
   //                      //////////////   Add to cart              /////////
-  addtocart(){   
-    let alreadyExistItem:any = this.cartservice.getCartItembyUserName(this.GetUserName.ThisUser[0]).find(item=>item.productID==this.productID)   ///this item is already exist  ////
-    if(!alreadyExistItem)          ////if not exist  push else add quantity////
+  addtocart(){ 
+    let alreadyExistItem:any = this.cartservice.getCartItembyUserName(this.GetUserName.ThisUser[0]).find((item)=>{
+      return item.productID==this.productID})   ///this item is already exist  ////
+    if(!alreadyExistItem)          ////if not exist  push ////
     {     
-    let C=new cartItem(this.reviewer.userName, this.productID, this.product.title,this.product.images,this.product.price,this.productQuantity,this.product.description,this.product.discountPercentage)
+      this.updateCartItemId() ;
+    let C=new cartItem(this.cartItemId,this.reviewer.userName, this.productID, this.product.title,this.product.images,this.product.price,this.productQuantity,this.product.description,this.product.discountPercentage)
     this.cartservice.addProducttoCart(C)}
       else{
    alert("successfully added Quantity of this item")
-    alreadyExistItem.Qnty+=this.productQuantity;}
+    let increaseQuantity = alreadyExistItem.Qnty+this.productQuantity;     ////  else add selected Quantity ////
+    this.cartservice.updateQuantity(alreadyExistItem.cartItemid,increaseQuantity)    //// update on database ////
+  }
     console.log(this.cartservice.MyCart);  
   }
 }
