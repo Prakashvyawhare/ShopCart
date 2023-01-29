@@ -23,6 +23,7 @@ export class NewUserComponent implements OnInit {
   num1: number;
   num2: number;
   userId: number;
+  signInDine=false;
   constructor(private captcha: CaptchaService, public UserlistService: UserlistService) { }
   ngOnInit(): void {
     // this.Customer= this.getdetails.getUaerbyName(this.username)
@@ -34,13 +35,14 @@ export class NewUserComponent implements OnInit {
     let array = this.UserlistService.UserNameList.map((x: User) => x.userId);
     this.userId = Math.max(...array) + 1;
     // this.userId=this.UserlistService.UserNameList.length+1       //// another way to increament 'userId' ////
-    console.log(this.userId);
   }
   onsubmit(): void {
     this.updateuserid()  ////  'userId' invocation ///    
     this.UserlistService.addNewUser(new User(this.userId, this.username, this.Password, this.Name, this.surname, this.Address, this.DOB));
     //  this.UserlistService.UserNameList
-    this.captcha.refresh();         ////   refresh captcha values  ///
-    console.log(this.UserlistService.UserNameList);
+    this.checkSighin()
+  }
+  checkSighin(){
+    return this.signInDine=true;
   }
 }

@@ -28,9 +28,10 @@ export class CartComponent implements OnInit {
   RemoveQuantity(i)          ////      remove or decrease Product Quantity in the cart  ////
   {
     let getCartItemIdbyIndex = this.cartService.currentUserCarts()[i].cartItemid;     ///// get "cartitemId" by index[i] of 'currentuser'Array  ////
+    if(this.cartService.currentUserCarts()[i].Qnty>1){
     let quantity=this.cartService.currentUserCarts()[i].Qnty-1;                    ////  get 'Quanty'of 'currentuser' by index[i] and decrese by 1 ////
     this.cartService.updateQuantity(getCartItemIdbyIndex,quantity);                                                          
-    this.updateprice();                ////// update price details whenever qny decrease  ////
+    this.updateprice();}                ////// update price details whenever qny decrease  ////
   }
   selectBankid=0 ;
   emptyCart="/assets/empty_cart.png"

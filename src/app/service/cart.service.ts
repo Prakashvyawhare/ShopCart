@@ -1,7 +1,6 @@
-import { isNgTemplate } from '@angular/compiler';
+
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { count } from 'console';
 import { cartItem } from './cartItem';
 import { UserDetailsService } from './user-details.service';
 
@@ -44,14 +43,9 @@ getCartItemsFromDatabase()  ////  Retrieve CartItems from database  ////
         Qnty:product.Qnty,
         description:product.description,
         descount:product.descount
-
       }
     )
-    console.log(this.MyCart);
-    
   }
-
-
   removeProductFromCart(indexof:number){
     // this.MyCart.splice(indexof,1);
     this.AngularFirestore.doc('cartItems/' + indexof).delete()
@@ -63,13 +57,11 @@ getCartItemsFromDatabase()  ////  Retrieve CartItems from database  ////
   //   this.MyCart[indexof].Qnty++;
   // }
   updateQuantity(cartItemId:number,quantity:number){
-    this.AngularFirestore.doc('cartItems/' + cartItemId).update(
-     
+    this.AngularFirestore.doc('cartItems/' + cartItemId).update(  
       {
         Qnty:quantity
       }
     )
-
   }
   removeQuantity(indexof:number){
     if(this.MyCart[indexof].Qnty>1)

@@ -1,4 +1,4 @@
-<div class="container" wid>
+<div class="container" *ngIf="this.signInDine==false" wid>
     <div class="center">
         <div class="title">New User </div>
         <form class="form " #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onsubmit()" novalidate>

@@ -17,4 +17,7 @@ export class UserDetailsService {
   currentUserDetails(){
    return this.userlistService.UserNameList.find((x)=>x.username==this.ThisUser[0])
   }
+  login(userName:string){
+   return this.ThisUser.splice(0,1,userName)
+  }
 }

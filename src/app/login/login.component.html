@@ -1,9 +1,9 @@
-<div class="container" wid>
+<div class="container" *ngIf="!this.UserDetailsService.LoggedinbyUser()">
 
 
     <div class="center">
         <div class="title">Login </div>
-        <form class="form " #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && CurrentUser()"  novalidate>
+        <form class="form " #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onlogin()"  novalidate>
 
             <!-- Enter Username -->
             <div class="form-group "> 

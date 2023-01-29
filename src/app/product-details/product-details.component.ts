@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { error } from 'console';
-import { filter, max } from 'rxjs';
 import { Review } from '../review/Review';
 import { BankOfferService } from '../service/bank-offer.service';
 import { CartService } from '../service/cart.service';
@@ -36,7 +34,6 @@ export class ProductDetailsComponent implements OnInit {
     this.updateReviewId()
      this.reviewService.AddReview(new Review(this.reviewer.reviewId,this.reviewer.userName,this.reviewer.rating,this.reviewer.comment,this.reviewer.productId))
      this.reviewService.ReviewList;  
-     console.log(this.reviewService.ReviewList);       
   }
   constructor(private rout : ActivatedRoute,
     public bankOfferService:BankOfferService,
@@ -85,20 +82,16 @@ this.reviewer.rating = this.rate
   updateReviewId()         ///////get the maximum value of reviewId from the Array + 1 ////
   {
     let array=this.reviewService.ReviewList.map((x:Review)=>x.reviewId);
-    let a =this.reviewer.reviewId=Math.max(...array)+1;     ////  number[] => number same like tostring()
-    console.log(a); 
+    this.reviewer.reviewId=Math.max(...array)+1;     ////  number[] => number same like tostring()
   }
   /////////////////  delete review      ///////////////
   deleteReview(i){
     var rreviewId=this.reviewService.ReviewList[i].reviewId
     this.reviewService.DeleeteReview(rreviewId)
-    
   }
   updateCartItemId(){     ///////get the maximum value of cartItemId from the Array and increment by + 1 ////
   let idArr=this.cartservice.MyCart.map((x:cartItem)=>x.cartItemid);
-  let idnum = this.cartItemId = Math.max(...idArr)+1;
-  console.log(idnum);
-  
+  this.cartItemId = Math.max(...idArr)+1;
   }
                 ////////    quantity add and remove    ////////
   plusCount(){
@@ -128,6 +121,5 @@ this.reviewer.rating = this.rate
     let increaseQuantity = alreadyExistItem.Qnty+this.productQuantity;     ////  else add selected Quantity ////
     this.cartservice.updateQuantity(alreadyExistItem.cartItemid,increaseQuantity)    //// update on database ////
   }
-    console.log(this.cartservice.MyCart);  
   }
 }
