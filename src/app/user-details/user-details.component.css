@@ -3,7 +3,7 @@
     max-width: 400px;
     margin: auto;
     margin-top: 15%;
-    text-align: center;
+    text-align: left;
   }
   .card:hover{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);

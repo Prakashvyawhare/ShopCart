@@ -7,7 +7,7 @@
 
             <!-- Enter Username -->
             <div class="form-group "> 
-
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
                 <label for="email">UserName : </label>
                 <input type="email" name="email" appOldUserLogin class="form-control"
                     placeholder="Enter your username" #email="ngModel" required email [(ngModel)]="username" />
@@ -28,6 +28,7 @@
 
             <!-- Enter password -->
             <div class="form-group">
+                
                 <label for="password">password :</label>
                 <input type="password" appExistingpassword name="password"  #password="ngModel" class="form-control" placeholder="password"
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" required [(ngModel)]="Password">

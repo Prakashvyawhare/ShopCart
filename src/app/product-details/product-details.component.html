@@ -2,7 +2,7 @@
 <img [src]="result" style="width:50%; position: fixed;
 display:flex; z-index: 53; align-items: center;">
 <!-- <p>{{result}}</p> -->
-<div class="cardd">
+<div class="split cardd">
     <!-- slider image  -->
     <div style="width: 100%;  object-fit: scale-down; " class="img">
         <ng-image-slider [images]="silderImages" [infinite]="false" [autoSlide]="1"
@@ -21,42 +21,45 @@ display:flex; z-index: 53; align-items: center;">
                 aria-hidden="true"></i></button>
     </div>
 </div>
-<div class="card">
-    <h4>Bank Offers</h4>
-    <div *ngFor="let bank of bankOfferService.offers let i=index">
-        <i class="fa fa-bookmark" aria-hidden="true"></i>
-        <span>{{bank.offerDescription}}</span>
+<div class="split right">
+    <div class="card">
+        <h4>Bank Offers</h4>
+        <div *ngFor="let bank of bankOfferService.offers let i=index">
+            <i class="fa fa-bookmark" aria-hidden="true"></i>
+            <span>{{bank.offerDescription}}</span>
+        </div>
     </div>
-</div>
-<hr>
-<!-- review edit -->
-<div class="card">
-    <h5>Reviews :</h5>
+    <hr>
+    <!-- review edit -->
+    <div class="card">
+        <h5>Reviews :</h5>
 
-    <label for="name">
-        <i class="fas fa-user-edit    "></i> {{reviewer.userName}} </label>
-    <div class="rating">
-        <!-- five star rating pattern  -->
-        <ng-container *ngFor="let i of fiveStars">
-            <i class="fa-solid fa-star" (click)="updaterating(i)" [ngClass]="{'active':i<=rate}"></i>
-        </ng-container>
+        <label for="name">
+            <i class="fas fa-user-edit    "></i> {{reviewer.userName}} </label>
+        <div class="rating">
+            <!-- five star rating pattern  -->
+            <ng-container *ngFor="let i of fiveStars">
+                <i class="fa-solid fa-star" (click)="updaterating(i)" [ngClass]="{'active':i<=rate}"></i>
+            </ng-container>
+        </div>
+        <div class="form-group">
+            <label for="comment">Comments :</label>
+            <textarea class="form-control" name="comment" rows="3" [(ngModel)]="reviewer.comment"></textarea>
+        </div>
+        <button (click)="AddReview()">add review</button>
     </div>
-    <div class="form-group">
-        <label for="comment">Comments :</label>
-        <textarea class="form-control" name="comment" rows="3" [(ngModel)]="reviewer.comment"></textarea>
+    <!-- show review -->
+    <div *ngFor="let review of reviewService.getReviewbyproductId(this.productID) let i = index" class="card">
+        <h6><i class="fa fa-user-circle"></i>
+            {{review.userName}} </h6>
+        <div class="rating">
+            <ng-container *ngFor="let i of fiveStars">
+                <i class="fa-solid fa-star" [ngClass]="{'active':i<=review.rating}"></i>
+            </ng-container>
+        </div>
+        <p>Comment : {{review.comment}}</p>
+        <button *ngIf="review.userName==this.GetUserName.ThisUser[0]" class="delete-btn"
+            (click)="deleteReview(i)">delete
+            review</button>
     </div>
-    <button (click)="AddReview()">add review</button>
-</div>
-<!-- show review -->
-<div *ngFor="let review of reviewService.getReviewbyproductId(this.productID) let i = index" class="card">
-    <h6><i class="fa fa-user-circle"></i>
-        {{review.userName}} </h6>
-    <div class="rating">
-        <ng-container *ngFor="let i of fiveStars">
-            <i class="fa-solid fa-star" [ngClass]="{'active':i<=review.rating}"></i>
-        </ng-container>
-    </div>
-    <p>Comment : {{review.comment}}</p>
-    <button *ngIf="review.userName==this.GetUserName.ThisUser[0]" class="delete-btn" (click)="deleteReview(i)">delete
-        review</button>
 </div>

@@ -16,7 +16,7 @@ export class ProductsListComponent implements OnInit {
 
   }
 
-  errormsg = "Page not found";
+  errormsg:string;
   constructor(private ProductApi: ProductDetailsService) { }
   Categories: Array<string> = ['All'];
   Products: Array<any> = new Array();
@@ -49,7 +49,8 @@ export class ProductsListComponent implements OnInit {
         }, error: () =>{console.log("Page not found")}
             });
 
-      }, error: () => console.error("error")
+      }, error: () =>{ this.errormsg="Server not responding....,"
+        console.error("error")}
     });
 
     // const clicks = fromEvent(document, 'click');

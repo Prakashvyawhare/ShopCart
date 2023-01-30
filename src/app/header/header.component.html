@@ -5,7 +5,8 @@
     <button *ngIf="!this.userdetailsservice.LoggedinbyUser()"routerLink="login">login</button>
     <button  *ngIf="this.userdetailsservice.LoggedinbyUser()" (click)="logout()" >logout</button> 
     <button routerLink="NewUser">New User </button>
-    <h1>ShopCart</h1>
+    <h1  class="title">ShopCart</h1>
+    
     <a *ngIf="this.userdetailsservice.LoggedinbyUser()"  class="fa fa-shopping-cart" routerLink ="Order"> Cart({{this.CartService.currentUserCarts().length}})</a>
     <!-- <app-model *ngIf="modeldia.Showdialog"> </app-model>
     <button (click)="modeldia.Showdialog= true">showdialog</button> -->
