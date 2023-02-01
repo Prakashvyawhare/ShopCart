@@ -15,6 +15,9 @@ display:flex; z-index: 53; align-items: center;">
         <h2 class="percent">{{product.discountPercentage}}% Descount</h2>
         <p class="desc">{{product.description}}</p>
         <p> Quantity: {{productQuantity}}</p>
+        <div *ngIf="istock<=0" class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Out Of Stock</h4>
+        </div>
         <button style="left: 0px; width: 50%;" (click)="plusCount()">+</button><span>
             <button style="right:0px;" (click)="minusCount()">-</button></span>
         <button style="width: 100%;" (click)="addtocart()">Add to <i class="fa fa-cart-plus"

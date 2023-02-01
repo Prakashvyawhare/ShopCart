@@ -8,19 +8,19 @@ import { UserDetailsService } from './user-details.service';
   providedIn: 'root'
 })
 export class  CartService {
-MyCart=new Array<any>();
+allUserCartItems=new Array<any>();
 constructor(public getusername : UserDetailsService, private AngularFirestore:AngularFirestore,private UserDetailsService:UserDetailsService) 
 {
   this.getCartItemsFromDatabase();
  }
 currentUserCarts(){         ////   get cart item added by current user  ////
-  let currentUserCart=this.MyCart.filter((x)=>{
+  let currentUserCart=this.allUserCartItems.filter((x)=>{
     return x.userName==this.UserDetailsService.ThisUser[0]})
   return currentUserCart; 
 }
 getCartItemsFromDatabase()  ////  Retrieve CartItems from database  ////
 {
-  this.AngularFirestore.collection('cartItems').valueChanges().subscribe((data)=>{this.MyCart=data});
+  this.AngularFirestore.collection('cartItems').valueChanges().subscribe((data)=>{this.allUserCartItems=data});
   
 }
 
@@ -42,7 +42,8 @@ getCartItemsFromDatabase()  ////  Retrieve CartItems from database  ////
         price:product.price,
         Qnty:product.Qnty,
         description:product.description,
-        descount:product.descount
+        descount:product.descount,
+        stock:product.stock
       }
     )
   }
@@ -62,9 +63,18 @@ getCartItemsFromDatabase()  ////  Retrieve CartItems from database  ////
         Qnty:quantity
       }
     )
+    console.log("quantity = "+ quantity);
+  }
+  updatestock(cartItemId:number,stock:number)
+  {
+    this.AngularFirestore.doc('cartItems/' + cartItemId).update({
+      stock:stock
+    })
+    console.log( "stock="+ stock);
+    
   }
   removeQuantity(indexof:number){
-    if(this.MyCart[indexof].Qnty>1)
-    this.MyCart[indexof].Qnty--;
+    if(this.allUserCartItems[indexof].Qnty>1)
+    this.allUserCartItems[indexof].Qnty--;
   }
 }
