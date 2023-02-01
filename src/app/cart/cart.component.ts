@@ -1,6 +1,8 @@
+import { conditionallyCreateMapObjectLiteral } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { from, fromEvent } from 'rxjs';
+import { OrdersService } from '../orders.service';
 import { BankOfferService } from '../service/bank-offer.service';
 import { CartService } from '../service/cart.service';
 import { cartItem } from '../service/cartItem';
@@ -43,7 +45,9 @@ export class CartComponent implements OnInit {
     //  public cartApiser : ProductDetailsService, 
     public getbankoffer: BankOfferService,
     public cartService: CartService,
-    public getusername: UserDetailsService
+    public getusername: UserDetailsService,
+
+    public OrdersService:OrdersService
   ) { }
   ngOnInit(): void {
     this.cartService.currentUserCarts();      /////////      showing cart items of only current user //    /////////    
@@ -69,5 +73,24 @@ export class CartComponent implements OnInit {
       currentbankoffer=this.getbankoffer.offers[this.selectBankid].discountValue ;}
     totalAmount =eachTotal - discount-currentbankoffer + deliveryCharge;
     return [eachTotal, discount, totalAmount, deliveryCharge,currentbankoffer];
+  }
+
+
+
+  placedOrder(){
+  for (let index = 0; index < this.cartService.currentUserCarts().length; index++) {
+    const element = this.cartService.currentUserCarts()[index];
+    let orderItem=this.OrdersService.OrdersList.find((x)=>x.productID==element.productID)
+    if(!orderItem)
+    {
+    this.OrdersService.setStock(element)
+    }
+    else
+    {
+      this.OrdersService.updateStock(orderItem,element.Qnty)
+    }
+  }
+    
+    
   }
 }

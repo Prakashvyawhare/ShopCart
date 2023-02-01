@@ -114,7 +114,7 @@ this.reviewer.rating = this.rate
     if(!alreadyExistItem)          ////if not exist  push ////
     {     
       this.updateCartItemId() ;
-    let C=new cartItem(this.cartItemId,this.reviewer.userName, this.productID, this.product.title,this.product.images,this.product.price,this.productQuantity,this.product.description,this.product.discountPercentage)
+    let C=new cartItem(this.cartItemId,this.reviewer.userName, this.productID, this.product.title,this.product.images,this.product.price,this.productQuantity,this.product.description,this.product.discountPercentage,this.product.stock)
     this.cartservice.addProducttoCart(C)}
       else{
    alert("successfully added Quantity of this item")

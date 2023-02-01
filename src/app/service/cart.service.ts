@@ -42,7 +42,8 @@ getCartItemsFromDatabase()  ////  Retrieve CartItems from database  ////
         price:product.price,
         Qnty:product.Qnty,
         description:product.description,
-        descount:product.descount
+        descount:product.descount,
+        stock:product.stock
       }
     )
   }
