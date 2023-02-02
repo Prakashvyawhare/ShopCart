@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Review } from '../review/Review';
 import { BankOfferService } from '../service/bank-offer.service';
 import { CartService } from '../service/cart.service';
@@ -40,7 +41,9 @@ export class ProductDetailsComponent implements OnInit {
     private productDetailsService : ProductDetailsService,
      public reviewService: ReviewService,
      public  GetUserName: UserDetailsService, 
-     private cartservice:CartService) { }
+     private cartservice:CartService,
+     private toast:ToastrService
+     ) { }
     
   ngOnInit(): void {  
 //////////       get  product id by param routing //
@@ -96,7 +99,7 @@ this.reviewer.rating = this.rate
                 ////////    quantity add and remove    ////////
   plusCount(){
     if(this.productQuantity>=5)
-    alert("You can buy only upto 5 units of this product");
+    this.toast.warning("You can buy only upto 5 units of this product");
     else
     this.productQuantity++
   }
@@ -117,7 +120,7 @@ this.reviewer.rating = this.rate
     let C=new cartItem(this.cartItemId,this.reviewer.userName, this.productID, this.product.title,this.product.images,this.product.price,this.productQuantity,this.product.description,this.product.discountPercentage,this.product.stock)
     this.cartservice.addProducttoCart(C)}
       else{
-   alert("successfully added Quantity of this item")
+   this.toast.success("successfully added Quantity of this item")
     let increaseQuantity = alreadyExistItem.Qnty+this.productQuantity;     ////  else add selected Quantity ////
     this.cartservice.updateQuantity(alreadyExistItem.cartItemid,increaseQuantity)    //// update on database ////
   }

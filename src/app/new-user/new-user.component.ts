@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { threadId } from 'worker_threads';
 import { CaptchaService } from '../service/captcha.service';
 import { CustomerDetails } from '../service/Customer';
@@ -24,7 +25,7 @@ export class NewUserComponent implements OnInit {
   num2: number;
   userId: number;
   signInDine=false;
-  constructor(private captcha: CaptchaService, public UserlistService: UserlistService) { }
+  constructor(private captcha: CaptchaService, public UserlistService: UserlistService,private toast:ToastrService) { }
   ngOnInit(): void {
     // this.Customer= this.getdetails.getUaerbyName(this.username)
     this.captcha.refresh();         ////   refresh captcha values  ///
@@ -43,6 +44,8 @@ export class NewUserComponent implements OnInit {
     this.checkSighin()
   }
   checkSighin(){
+    this.toast.success("Successfully Done","SignUp")
     return this.signInDine=true;
+
   }
 }

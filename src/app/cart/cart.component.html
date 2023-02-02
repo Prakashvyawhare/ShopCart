@@ -60,7 +60,7 @@
         <td>Total Amount</td>
         <td class="DiscountedPrice">{{updateprice()[2]|currency}}</td>
     </tr>
-
+    <button class="buybtn" (click)="placedOrder()">Place Order</button>
 </table>
 <!-- -----------select payment option for selection of bankoffer -->
 <div class="payment" >
@@ -69,6 +69,6 @@
     
     <button class="button" (click)="selectBank(i)"> {{bank.bankName}}</button>
 </span>
-<button (click)="placedOrder()">Order Placed</button>
+
 </div>
 </div>
