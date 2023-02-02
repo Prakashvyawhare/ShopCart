@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ToastrService } from 'ngx-toastr';
 import { cartItem } from './service/cartItem';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { cartItem } from './service/cartItem';
 })
 export class OrdersService {
   stockItemList = Array<any>()
-  constructor(private AngularFirestore: AngularFirestore) { this.updatateOrderList()}
+  constructor(private AngularFirestore: AngularFirestore,private toastr: ToastrService) { this.updatateOrderList()}
   updatateOrderList() {
     this.AngularFirestore.collection('stockItemList').valueChanges().subscribe((data) => {      //// Retrieve stock data from database ///
       this.stockItemList = data
@@ -20,10 +21,10 @@ export class OrdersService {
         productID: currentUserCartItem.productID,
         stock: updatedStock
       })
-      alert("Order Placed Successfully for " + currentUserCartItem.title);
+      this.toastr.success("Order Placed Successfully  " , currentUserCartItem.title);
     }
     else {
-      alert("No Sufficient Stock Available for " + currentUserCartItem.title)
+      this.toastr.warning("No Sufficient Stock Available  " , currentUserCartItem.title)
     }
   }
   updateStock(productInStockList: cartItem, currentUserCartItem: cartItem) {
@@ -32,10 +33,10 @@ export class OrdersService {
       this.AngularFirestore.doc('stockItemList/' + productInStockList.productID).update({   //// update on database ///
         stock: updatedStock
       })
-      alert("Order Placed Successfully for " + currentUserCartItem.title);
+      this.toastr.success("Order Placed Successfully " , currentUserCartItem.title);
     }
     else {
-      alert("No Sufficient Stock Available for " + currentUserCartItem.title)
+      this.toastr.warning("No Sufficient Stock Available " , currentUserCartItem.title)
     }
   }
 }
