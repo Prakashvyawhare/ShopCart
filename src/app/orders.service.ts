@@ -6,28 +6,36 @@ import { cartItem } from './service/cartItem';
   providedIn: 'root'
 })
 export class OrdersService {
-  OrdersList= Array<any>()
+  stockItemList = Array<any>()
   constructor(private AngularFirestore: AngularFirestore) { this.updatateOrderList()}
-
-  updatateOrderList(){
-    this.AngularFirestore.collection('Orders').valueChanges().subscribe((data)=>{
-      this.OrdersList=data
+  updatateOrderList() {
+    this.AngularFirestore.collection('stockItemList').valueChanges().subscribe((data) => {      //// Retrieve stock data from database ///
+      this.stockItemList = data
     })
   }
-  setStock(product:cartItem){
-    let upstock=product.stock-product.Qnty
-    this.AngularFirestore.collection('Orders').doc(product.productID.toString()).set({
-      productID:product.productID,
-      stock:upstock
-    })
+  setStock(currentUserCartItem: cartItem) {
+    let updatedStock = currentUserCartItem.stock - currentUserCartItem.Qnty;    /// minus selected quantity from stock ////
+    if (updatedStock >= 0) {
+      this.AngularFirestore.collection('stockItemList').doc(currentUserCartItem.productID.toString()).set({     //// update on database ///
+        productID: currentUserCartItem.productID,
+        stock: updatedStock
+      })
+      alert("Order Placed Successfully for " + currentUserCartItem.title);
+    }
+    else {
+      alert("No Sufficient Stock Available for " + currentUserCartItem.title)
+    }
   }
-  updateStock(Product:cartItem,quantity:number)
-  {
-    let upstock = Product.stock-quantity
-    this.AngularFirestore.doc('Orders/'+ Product.productID).update({
-      stock:upstock
-    })
+  updateStock(productInStockList: cartItem, currentUserCartItem: cartItem) {
+    let updatedStock = productInStockList.stock - currentUserCartItem.Qnty;    /// minus selected quantity from stock ////
+    if (updatedStock >= 0) {
+      this.AngularFirestore.doc('stockItemList/' + productInStockList.productID).update({   //// update on database ///
+        stock: updatedStock
+      })
+      alert("Order Placed Successfully for " + currentUserCartItem.title);
+    }
+    else {
+      alert("No Sufficient Stock Available for " + currentUserCartItem.title)
+    }
   }
- 
-
 }
