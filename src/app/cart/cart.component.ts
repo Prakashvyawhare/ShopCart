@@ -80,14 +80,15 @@ export class CartComponent implements OnInit {
   placedOrder() 
   {
     for (let index = 0; index < this.cartService.currentUserCarts().length; index++) {       //// forloop for to check item one by one ///
-      const currentUserCartItem = this.cartService.currentUserCarts()[index];                         
-      let productInStockList = this.OrdersService.stockItemList.find((x) => x.productID == currentUserCartItem.productID);   //// check item added in stockList //
-      if (productInStockList) {
-        this.OrdersService.updateStock(productInStockList, currentUserCartItem)   //// if already in stockList then update stock ///
-      }
-      else {
-        this.OrdersService.setStock(currentUserCartItem);  //// else add in stocklist and then update stock ////
-      }
+      const currentUserCartItem = this.cartService.currentUserCarts()[index];   
+      this.OrdersService.buyNow(currentUserCartItem);                      
+      // let productInStockList = this.OrdersService.stockItemList.find((x) => x.productID == currentUserCartItem.productID);   //// check item added in stockList //
+      // if (productInStockList) {
+      //   this.OrdersService.updateStock(productInStockList, currentUserCartItem)   //// if already in stockList then update stock ///
+      // }
+      // else {
+      //   this.OrdersService.setStock(currentUserCartItem);  //// else add in stocklist and then update stock ////
+      // }
     }
   }
 }

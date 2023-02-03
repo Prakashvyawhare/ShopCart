@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { OrdersService } from '../orders.service';
 import { Review } from '../review/Review';
 import { BankOfferService } from '../service/bank-offer.service';
 import { CartService } from '../service/cart.service';
@@ -42,7 +43,8 @@ export class ProductDetailsComponent implements OnInit {
      public reviewService: ReviewService,
      public  GetUserName: UserDetailsService, 
      private cartservice:CartService,
-     private toast:ToastrService
+     private toast:ToastrService,
+     private OrdersService:OrdersService
      ) { }
     
   ngOnInit(): void {  
@@ -89,7 +91,7 @@ this.reviewer.rating = this.rate
   }
   /////////////////  delete review      ///////////////
   deleteReview(i){
-    var rreviewId=this.reviewService.ReviewList[i].reviewId
+    let rreviewId=this.reviewService.ReviewList[i].reviewId
     this.reviewService.DeleeteReview(rreviewId)
   }
   updateCartItemId(){     ///////get the maximum value of cartItemId from the Array and increment by + 1 ////
@@ -124,5 +126,9 @@ this.reviewer.rating = this.rate
     let increaseQuantity = alreadyExistItem.Qnty+this.productQuantity;     ////  else add selected Quantity ////
     this.cartservice.updateQuantity(alreadyExistItem.cartItemid,increaseQuantity)    //// update on database ////
   }
+  }
+  buyNow(){
+    let Item=new cartItem(this.cartItemId,this.reviewer.userName, this.productID, this.product.title,this.product.images,this.product.price,this.productQuantity,this.product.description,this.product.discountPercentage,this.product.stock)
+    this.OrdersService.buyNow(Item)    
   }
 }

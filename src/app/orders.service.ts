@@ -60,5 +60,15 @@ export class OrdersService {
       }
     )
   }
+  buyNow(currentUserCartItem:cartItem)
+  {
+    let productInStockList = this.stockItemList.find((x) => x.productID == currentUserCartItem.productID);   //// check item added in stockList //
+    if (productInStockList) {
+      this.updateStock(productInStockList, currentUserCartItem)   //// if already in stockList then update stock ///
+    }
+    else {
+      this.setStock(currentUserCartItem);  //// else add in stocklist and then update stock ////
+    }
+  }
   
 }
