@@ -4,6 +4,7 @@ import { AuthGuard } from './auth.guard';
 import { CartComponent } from './cart/cart.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { LoginComponent } from './login/login.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { ObservableComponent } from './observable/observable.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
@@ -30,15 +31,20 @@ const routes: Routes = [
     path: 'Observable',
     component: ObservableComponent
   },{
-    path: 'Order/Products',
+    path: 'carts/Products',
     redirectTo:'Products'
     
   },
 
 
   {
-    path: 'Order',
+    path: 'carts',
     component : CartComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'Orders',
+    component:MyOrdersComponent,
     canActivate: [AuthGuard]
   },
   // {

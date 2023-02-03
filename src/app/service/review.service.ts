@@ -51,6 +51,6 @@ export class ReviewService {
   //   this.ReviewList.splice(reviewIndex,1)
   // }
   DeleeteReview(reviewId:number){    
-    this.AngularFirestore.doc('/reviews/' + reviewId).delete()
+    this.AngularFirestore.doc('reviews/' + reviewId).delete()
   }
 } 

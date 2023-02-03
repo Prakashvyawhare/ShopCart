@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductDetailsService } from '../service/product-details.service';
 import { debounce, debounceTime, find, from, fromEvent, Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
  
 @Component({
   selector: 'app-products-list',
@@ -17,7 +18,8 @@ export class ProductsListComponent implements OnInit {
   }
 
   errormsg:string;
-  constructor(private ProductApi: ProductDetailsService) { }
+  constructor(private ProductApi: ProductDetailsService,
+    private toastr:ToastrService) { }
   Categories: Array<string> = ['All'];
   Products: Array<any> = new Array();
   filteredProduct: Array<any> = new Array();

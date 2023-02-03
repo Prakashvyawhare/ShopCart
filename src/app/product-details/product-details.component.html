@@ -19,6 +19,7 @@ display:flex; z-index: 53; align-items: center;">
             <button style="right:0px;" (click)="minusCount()">-</button></span>
         <button style="width: 100%;" (click)="addtocart()">Add to <i class="fa fa-cart-plus"
                 aria-hidden="true"></i></button>
+        <button style="width: 100%;" (click)="buyNow()">Buy Now</button>
     </div>
 </div>
 <div class="split right">
@@ -35,7 +36,7 @@ display:flex; z-index: 53; align-items: center;">
         <h5>Reviews :</h5>
 
         <label for="name">
-            <i class="fas fa-user-edit    "></i> {{reviewer.userName}} </label>
+            <i class="fas fa-user-edit"></i> {{reviewer.userName}} </label>
         <div class="rating">
             <!-- five star rating pattern  -->
             <ng-container *ngFor="let i of fiveStars">

@@ -42,13 +42,14 @@ getCartItemsFromDatabase()  ////  Retrieve CartItems from database  ////
         price:product.price,
         Qnty:product.Qnty,
         description:product.description,
-        descount:product.descount
+        descount:product.descount,
+        stock:product.stock
       }
     )
   }
-  removeProductFromCart(indexof:number){
+  removeProductFromCart(cartItemId:number){
     // this.MyCart.splice(indexof,1);
-    this.AngularFirestore.doc('cartItems/' + indexof).delete()
+    this.AngularFirestore.doc('cartItems/' + cartItemId).delete()
   }
   // addQuantity(indexof:number){      
   //   if(this.MyCart[indexof].Qnty>=5)

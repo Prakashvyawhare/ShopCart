@@ -1,7 +1,7 @@
 <div class="sidebar">
     <a routerLink ="Products">Products</a>
-   
-    <a class="fa fa-shopping-cart" routerLink ="Order"> Cart ( {{this.CartService.currentUserCarts().length}} )</a>
+    <a class="fa fa-shopping-cart" routerLink ="carts"> Cart ( {{this.CartService.currentUserCarts().length}} )</a>
+    <a class="fa fa-shopping-cart" routerLink ="Orders"> Orders ( {{this.OrderListService.currentUserOrderList().length}} )</a>
     <a routerLink="Promise">Promise</a>
     <a routerLink="Observable">Observable</a>
     <a routerLink="giftCards">giftCards</a>
