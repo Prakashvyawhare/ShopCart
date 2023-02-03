@@ -1,0 +1,54 @@
+<div>
+<input type="search" name="" id="">
+<i class="fa fa-search" aria-hidden="true"></i>
+</div>
+
+<div *ngFor="let item of this.OrderListService.currentUserOrderList()" class="columns">
+    <div class="card">
+        <tr>
+            <td style="width: 30%;">
+                <img [src]="item.images[0]" style="height: 200px; padding-right: 50px;padding-left: 50px; padding-top: 50px; width: auto; overflow: hidden;;">
+                <!-- <button style="margin-left: 70px;" class="btn-plus" (click)="addQuantity(i)" >+</button> -->
+                <!-- <span
+                    style="padding-left: 30px;padding-right: 30px;padding-top: 10px;padding-bottom: 10px; width: 30px; border: 1px;border-style: solid;height: 30px;" >{{item.Qnty}}
+                </span> -->
+                <!-- <button class="btn-plus" (click)="RemoveQuantity(i)" >-</button><br> -->
+            </td>
+            <td style="width: 60%;">
+
+                <p class="title">{{item.title}}</p>
+                <!-- below content for descount price -->
+                <span class="DiscountedPrice"> Price : {{item.price*item.Qnty
+                    -item.price*item.descount*0.01*item.Qnty |currency}}</span>
+                <!-- <span class="price">{{item.price*item.Qnty|currency}} </span> -->
+                <!-- <span class="percent"> {{item.descount}}%</span> -->
+                <!-- <p class="DiscountedPrice">Save {{item.price*item.Qnty*item.descount*0.01 |currency}}</p> -->
+                <p class="desc">{{item.description}}</p>
+                <h6>Quantity : {{item.Qnty}}</h6>
+            </td>
+            <td style="width: 10%;">
+                <div>
+                    <button class="btn-remove">Remove</button>
+                </div>
+            </td>
+        </tr>
+    </div>
+</div>
+
+<table class="table">
+    <tr >
+        <th class="title" colspan="2" >My Orders</th>        
+    </tr> <hr>
+    <tr>
+        <td>Name :</td>
+        <td >{{customer.name}} {{customer.surname}}</td>
+    </tr>
+    <tr>
+        <td>Email :</td>
+        <td >{{customer.username}}</td>
+    </tr>
+    <tr>
+        <td>Address:</td>
+        <td >{{customer.Address}}</td>
+    </tr>
+</table>

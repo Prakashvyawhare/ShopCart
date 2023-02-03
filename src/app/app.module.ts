@@ -30,6 +30,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +53,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserDetailsComponent,
     ReviewComponent,
     LoginCaptchaDirective,
+    MyOrdersComponent,
     
   ],
   imports: [

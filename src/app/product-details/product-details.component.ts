@@ -120,9 +120,11 @@ this.reviewer.rating = this.rate
     {     
       this.updateCartItemId() ;
     let C=new cartItem(this.cartItemId,this.reviewer.userName, this.productID, this.product.title,this.product.images,this.product.price,this.productQuantity,this.product.description,this.product.discountPercentage,this.product.stock)
-    this.cartservice.addProducttoCart(C)}
+    this.cartservice.addProducttoCart(C);
+    this.toast.success("Added to th Cart", "Successful")
+  }
       else{
-   this.toast.success("successfully added Quantity of this item")
+   this.toast.success("Added Quantity of this item","Successful")
     let increaseQuantity = alreadyExistItem.Qnty+this.productQuantity;     ////  else add selected Quantity ////
     this.cartservice.updateQuantity(alreadyExistItem.cartItemid,increaseQuantity)    //// update on database ////
   }
