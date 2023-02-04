@@ -1,5 +1,6 @@
 
 <div class="card">
+  <h4 *ngIf="customer.seller==true" > seller</h4>
     <!-- <img src="img.jpg" alt="John" style="width:100%"> -->
     <h5>Name: {{customer.name}} {{customer.surname}}</h5>
     <p class="title">Date of Birth : {{customer.DOB}}</p>

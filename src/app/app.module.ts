@@ -31,6 +31,7 @@ import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { UpdateStockComponent } from './update-stock/update-stock.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     ReviewComponent,
     LoginCaptchaDirective,
     MyOrdersComponent,
+    UpdateStockComponent,
     
   ],
   imports: [

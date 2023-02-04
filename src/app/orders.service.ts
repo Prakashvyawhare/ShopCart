@@ -44,7 +44,7 @@ export class OrdersService {
       this.toastr.warning("No Sufficient Stock Available " , currentUserCartItem.title)
     }
   }
-  updateMyOrderList(myCartItem:cartItem,stock:number){
+  updateMyOrderList(myCartItem:cartItem,stock:number){     //// add item in My orderList ////
     this.AngularFirestore.collection('myOrders').doc(myCartItem.cartItemid.toString()).set(
       {
         cartItemid:myCartItem.cartItemid,
@@ -67,8 +67,38 @@ export class OrdersService {
       this.updateStock(productInStockList, currentUserCartItem)   //// if already in stockList then update stock ///
     }
     else {
-      this.setStock(currentUserCartItem);  //// else add in stocklist and then update stock ////
+      this. setStock(currentUserCartItem);  //// else add in stocklist and then update stock ////
     }
   }
   
+  addNewStock(product,newStock:number){
+    let stoc:number=product.stock
+    let totalStock= stoc + newStock;
+    this.AngularFirestore.collection('stockItemList').doc(product.id.toString()).set(
+      {
+        productID:product.id,
+        stock:totalStock
+      }
+    )
+  }
+  addStock(productInStockList,newStock:number){
+    let stoc:number=productInStockList.stock
+    let totalStock:number = stoc + newStock;
+    this.AngularFirestore.doc('stockItemList/'+ productInStockList.productID).update(
+      {
+        stock:totalStock
+      }
+    )
+  }
+  addStockBySeller(product,newStock:number){
+    let productInStockList = this.stockItemList.find((x) => x.productID == product.id);   //// check item added in stockList //
+    if(productInStockList){
+      this.addStock(productInStockList,newStock);
+    }
+    else
+    {
+      this.addNewStock(product,newStock)
+    }
+    this.toastr.success("Stock Added","Successful")
+  }
 }

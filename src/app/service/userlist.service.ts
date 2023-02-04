@@ -27,7 +27,8 @@ userid:number;
       surname:userdetails.surname,
       password:userdetails.password,
       Address:userdetails.Address,
-      DOB:userdetails.DOB
+      DOB:userdetails.DOB,
+      seller:userdetails.seller
     })
   }
    IsUserExist(username:string){    ////  check validation for existance user  ////

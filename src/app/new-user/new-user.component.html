@@ -1,4 +1,4 @@
-<div class="container" *ngIf="this.signInDine==false" wid>
+<div class="container" *ngIf="this.signInDone==false" wid>
     <div class="center">
         <div class="title">New User </div>
         <form class="form " #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onsubmit()" novalidate>
@@ -42,6 +42,7 @@
                 <label for="DOB">Date of birth : </label>
                 <input type="date" name="DOB" class="form-control" [(ngModel)]="DOB" />
             </div>
+           
             <!-- Enter password -->
             <div class="form-group">
                 <label for="password">password :</label>
@@ -56,7 +57,7 @@
                 <span class="text-danger"
                     *ngIf="(password.touched || registerForm.submitted) && password.errors?.['pattern']">Please enter
                     strong
-                    Password</span><br>
+                    Password</span>
                 <!-- confirm password  -->
                 <div class="form-group">
                     <label for="Cpassword">Confirm password :</label>
@@ -69,7 +70,11 @@
                     <span class="text-danger"
                         *ngIf="(Cpassword.touched || registerForm.submitted) && Cpassword.errors?.['confirm']">password
                         not match
-                    </span><br>
+                    </span>
+                    <div class="form-group">
+                        <input type="checkbox" name="s" id="" (change)="selectSeller()">
+                        <label for="seller">Register as a Seller</label>
+                    </div>
                     <!-- print random number as a  captcha  -->
                     <div class="form-group">
                         <div>

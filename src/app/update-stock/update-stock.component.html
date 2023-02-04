@@ -1,0 +1,23 @@
+<div>
+<table>
+    <tr>
+        <th>ProductID</th>
+        <th>Stock</th>
+    </tr>
+    <tr *ngFor="let data of this.OrdersService.stockItemList; let i=index">
+        <td>{{data.productID}}</td>
+        <td>{{data.stock}}</td>
+    </tr>
+</table>
+</div> 
+<div>
+    <div class="form-group">
+      <label for="productID">Product Id</label>
+      <input type="text" name="productID" id="" class="form-control" placeholder="" [(ngModel)]="productID" >
+    </div>
+    <div class="form-group">
+        <label for="stock">Stock</label>
+        <input type="number" name="productID" id="" class="form-control" placeholder="" [(ngModel)]="stock" >
+      </div>
+      <button (click)="uploadStock()">Add</button>
+</div>
