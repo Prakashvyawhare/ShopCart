@@ -43,7 +43,7 @@ export class ProductsListComponent implements OnInit {
         from(this.Categories).subscribe(() => {
           this.selectedCategory = this.Categories[0];
           this.FilterByCategory();
-
+ 
         });
         fromEvent(this.searchBox.nativeElement,'input').pipe(debounceTime(300)).subscribe({next: (res:any)=>{
           this.filteredProduct= this.Products.filter(x=> x.title.includes(res.target.value)&&(x.category==this.selectedCategory||this.selectedCategory=='All'));

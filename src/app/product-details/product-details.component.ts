@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { OrdersService } from '../orders.service';
+import {stockListService } from '../stockList.service';
 import { Review } from '../review/Review';
 import { BankOfferService } from '../service/bank-offer.service';
 import { CartService } from '../service/cart.service';
@@ -44,7 +44,7 @@ export class ProductDetailsComponent implements OnInit {
      public  GetUserName: UserDetailsService, 
      private cartservice:CartService,
      private toast:ToastrService,
-     private OrdersService:OrdersService
+     private stockListService:stockListService
      ) { }
     
   ngOnInit(): void {  
@@ -131,6 +131,6 @@ this.reviewer.rating = this.rate
   }
   buyNow(){
     let Item=new cartItem(this.cartItemId,this.reviewer.userName, this.productID, this.product.title,this.product.images,this.product.price,this.productQuantity,this.product.description,this.product.discountPercentage,this.product.stock)
-    this.OrdersService.buyNow(Item)    
+    this.stockListService.buyNow(Item)    
   }
 }

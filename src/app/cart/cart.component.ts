@@ -2,7 +2,7 @@ import { conditionallyCreateMapObjectLiteral } from '@angular/compiler/src/rende
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { from, fromEvent } from 'rxjs';
-import { OrdersService } from '../orders.service';
+import { stockListService } from '../stockList.service';
 import { BankOfferService } from '../service/bank-offer.service';
 import { CartService } from '../service/cart.service';
 import { cartItem } from '../service/cartItem';
@@ -48,7 +48,7 @@ export class CartComponent implements OnInit {
     public cartService: CartService,
     public getusername: UserDetailsService,
 
-    public OrdersService: OrdersService
+    public stockListService: stockListService
   ) { }
   ngOnInit(): void {
     this.cartService.currentUserCarts();      /////////      showing cart items of only current user //    /////////    
@@ -81,7 +81,7 @@ export class CartComponent implements OnInit {
   {
     for (let index = 0; index < this.cartService.currentUserCarts().length; index++) {       //// forloop for to check item one by one ///
       const currentUserCartItem = this.cartService.currentUserCarts()[index];   
-      this.OrdersService.buyNow(currentUserCartItem);                      
+      this.stockListService.buyNow(currentUserCartItem);                      
       // let productInStockList = this.OrdersService.stockItemList.find((x) => x.productID == currentUserCartItem.productID);   //// check item added in stockList //
       // if (productInStockList) {
       //   this.OrdersService.updateStock(productInStockList, currentUserCartItem)   //// if already in stockList then update stock ///

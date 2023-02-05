@@ -7,7 +7,7 @@ import { cartItem } from './service/cartItem';
 @Injectable({
   providedIn: 'root'
 })
-export class OrdersService {
+export class stockListService {
   stockItemList = Array<any>()
   constructor(private AngularFirestore: AngularFirestore,private toastr: ToastrService, public CartService:CartService) { this.updateStockItemList()}
   updateStockItemList() {
@@ -70,17 +70,26 @@ export class OrdersService {
       this. setStock(currentUserCartItem);  //// else add in stocklist and then update stock ////
     }
   }
-  
-  addNewStock(product,newStock:number){
-    let stoc:number=product.stock
-    let totalStock= stoc + newStock;
+  reloadStock(product){
+    let productInStockList = this.stockItemList.find((x) => x.productID == product.id);   //// check item added in stockList //
+    if(productInStockList!==undefined){                                                           //// add if not added ///
     this.AngularFirestore.collection('stockItemList').doc(product.id.toString()).set(
       {
         productID:product.id,
-        stock:totalStock
+        stock:product.stock
       }
-    )
+    )}
   }
+  // addNewStock(product,newStock:number){        ////  check  product updated in stockItemList  if not updated then addStock and update  ///
+  //   let stoc:number=product.stock
+  //   let totalStock= stoc + newStock;
+  //   this.AngularFirestore.collection('stockItemList').doc(product.id.toString()).set(
+  //     {
+  //       productID:product.id,
+  //       stock:totalStock
+  //     }
+  //   )
+  // }
   addStock(productInStockList,newStock:number){
     let stoc:number=productInStockList.stock
     let totalStock:number = stoc + newStock;
@@ -95,10 +104,10 @@ export class OrdersService {
     if(productInStockList){
       this.addStock(productInStockList,newStock);
     }
-    else
-    {
-      this.addNewStock(product,newStock)
-    }
+    // else   //// note:- else condition dead because  "allProductsStockUpdate()" here already sync all product
+    // {
+    //   this.addNewStock(product,newStock)
+    // }
     this.toastr.success("Stock Added","Successful")
   }
 }
