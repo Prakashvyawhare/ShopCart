@@ -20,17 +20,20 @@ export class NewUserComponent implements OnInit {
   username = '';
   Password: any = "";
   confPassword: any = ""
+  seller:boolean;
   enterVal: number;
   num1: number;
   num2: number;
   userId: number;
-  signInDine=false;
+  
+  signInDone=false;
   constructor(private captcha: CaptchaService, public UserlistService: UserlistService,private toast:ToastrService) { }
   ngOnInit(): void {
     // this.Customer= this.getdetails.getUaerbyName(this.username)
     this.captcha.refresh();         ////   refresh captcha values  ///
     this.num1 = this.captcha.getNumber()[0];
     this.num2 = this.captcha.getNumber()[1];
+    this.seller=false;
   }
   updateuserid() {    ////  Retrieve last (max) 'userId' from database and increament by 1 for next 'userId'  ////
     let array = this.UserlistService.UserNameList.map((x: User) => x.userId);
@@ -39,13 +42,18 @@ export class NewUserComponent implements OnInit {
   }
   onsubmit(): void {
     this.updateuserid()  ////  'userId' invocation ///    
-    this.UserlistService.addNewUser(new User(this.userId, this.username, this.Password, this.Name, this.surname, this.Address, this.DOB));
+    this.UserlistService.addNewUser(new User(this.userId, this.username, this.Password, this.Name, this.surname, this.Address, this.DOB,this.seller));
     //  this.UserlistService.UserNameList
     this.checkSighin()
+    // console.log(this.UserlistService.UserNameList);
+    
   }
   checkSighin(){
     this.toast.success("Successfully Done","SignUp")
-    return this.signInDine=true;
+    return this.signInDone=true;
 
+  }
+  selectSeller(){
+    this.seller =true;
   }
 }

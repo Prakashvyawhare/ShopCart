@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthSellerGuard } from './auth-seller.guard';
 import { AuthGuard } from './auth.guard';
 import { CartComponent } from './cart/cart.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
@@ -10,6 +11,7 @@ import { ObservableComponent } from './observable/observable.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { PromiseComponent } from './promise/promise.component';
+import { UpdateStockComponent } from './update-stock/update-stock.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 
 const routes: Routes = [
@@ -35,8 +37,11 @@ const routes: Routes = [
     redirectTo:'Products'
     
   },
-
-
+  {
+    path: 'updateStock',
+    component: UpdateStockComponent,
+    canActivate: [AuthSellerGuard]
+  },
   {
     path: 'carts',
     component : CartComponent,

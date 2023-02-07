@@ -1,0 +1,26 @@
+.split{
+    position: relative;
+    width: 50%;
+}
+.container{
+    right: 0;
+    float: right;
+    margin: 10%; 
+     margin-top: 6%;
+    margin-right: 10%;
+    /* height: 40%; */
+     position: fixed;
+    width: 30%;
+    padding: 1%;
+    border-radius: 5px;
+    height: auto;
+    border: 1px;
+    border-color: black; 
+    /* border-style:solid; */
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    z-index: 11; 
+
+}
+.container:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
+  }

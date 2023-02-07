@@ -1,0 +1,28 @@
+<div class="split container ">
+    <div class="form-group">
+      <label for="productID">Product Id</label>
+      <input type="text" name="productID" id="" class="form-control" placeholder="" [(ngModel)]="productID" >
+    </div>
+    <div class="form-group">
+        <label for="stock">Stock</label>
+        <input type="number" name="productID" id="" class="form-control" placeholder="" [(ngModel)]="stock" >
+      </div>
+      <button (click)="uploadStock()">Add</button>
+</div>
+<div>
+    <table class="table table-striped table-inverse table-responsive" style="width: 50%; border: 5px;">
+        <thead class="thead-inverse" style="border-color: rgb(102, 184, 214);">
+            <tr>
+                <th>ProductID</th>
+                <th>Stock</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of this.stockListService.stockItemList; let i=index">
+                    <td>{{data.productID}}</td>
+                    <td>{{data.stock}}</td>
+                </tr>
+            </tbody>
+    </table>
+</div> 
