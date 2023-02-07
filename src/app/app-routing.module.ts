@@ -32,7 +32,8 @@ const routes: Routes = [
   {
     path: 'Observable',
     component: ObservableComponent
-  },{
+  },
+  {
     path: 'carts/Products',
     redirectTo:'Products'
     
@@ -94,7 +95,13 @@ const routes: Routes = [
     component: UserDetailsComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'giftCards', loadChildren: () => import('./gift-cards/gift-cards.module').then(m => m.GiftCardsModule) }
+  { path: 'giftCards', loadChildren: () => import('./gift-cards/gift-cards.module').then(m => m.GiftCardsModule) },
+  {
+    path: "**",
+    redirectTo: 'Products',
+    pathMatch: "full"
+  },
+
 
 ];
 
