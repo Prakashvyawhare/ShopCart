@@ -1,13 +1,13 @@
 <div class="na">
     
     <!-- <button routerLink="Customer">Customer Details </button> -->
-    <button routerLink="UserDetails">user details</button>
-    <button *ngIf="!this.userdetailsservice.LoggedinbyUser()"routerLink="login">login</button>
-    <button  *ngIf="this.userdetailsservice.LoggedinbyUser()" (click)="logout()" >logout</button> 
-    <button routerLink="NewUser">New User </button>
+    <button routerLink="UserDetails" routerLinkActive="active">user details</button>
+    <button *ngIf="!this.userdetailsservice.LoggedinbyUser()"routerLink="login" routerLinkActive="active">login</button>
+    <button  *ngIf="this.userdetailsservice.LoggedinbyUser()" (click)="logout()" routerLinkActive="active">logout</button> 
+    <button routerLink="NewUser" routerLinkActive="active">New User </button>
     <h1  class="title">ShopCart</h1>
     
-    <a *ngIf="this.userdetailsservice.LoggedinbyUser()"  class="fa fa-shopping-cart" routerLink ="carts"> Cart({{this.CartService.currentUserCarts().length}})</a>
+    <a *ngIf="this.userdetailsservice.LoggedinbyUser()"  class="fa fa-shopping-cart" routerLink ="carts" routerLinkActive="active"> Cart({{this.CartService.currentUserCarts().length}})</a>
     <!-- <app-model *ngIf="modeldia.Showdialog"> </app-model>
     <button (click)="modeldia.Showdialog= true">showdialog</button> -->
     <!-- <a routerLink="Customer">Customer Details</a> -->

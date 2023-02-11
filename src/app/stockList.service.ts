@@ -3,22 +3,23 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from './service/cart.service';
 import { cartItem } from './service/cartItem';
+import { OrderListService } from './service/order-list.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class stockListService {
-  stockItemList = Array<any>()
-  constructor(private AngularFirestore: AngularFirestore,private toastr: ToastrService, public CartService:CartService) { this.updateStockItemList()}
+  stockItemList = Array<any>();
+  constructor(private AngularFirestore: AngularFirestore,private toastr: ToastrService, public CartService:CartService, public OrderListService:OrderListService) { this.updateStockItemList()}
   updateStockItemList() {
     this.AngularFirestore.collection('stockItemList').valueChanges().subscribe((data) => {      //// Retrieve stock data from database ///
       this.stockItemList = data
     })
   }
-  setStock(currentUserCartItem: cartItem) {
+  setStock(currentUserCartItem: cartItem) {    //// dead logic because all product already updated in stockItemList ///
     let updatedStock = currentUserCartItem.stock - currentUserCartItem.Qnty;    /// minus selected quantity from stock ////
     if (updatedStock >= 0) {
-     this.updateMyOrderList(currentUserCartItem,updatedStock);
+     this.OrderListService.updateMyOrderList(currentUserCartItem);
      this.CartService.removeProductFromCart(currentUserCartItem.cartItemid);
       this.AngularFirestore.collection('stockItemList').doc(currentUserCartItem.productID.toString()).set({     //// update on database ///
         productID: currentUserCartItem.productID,
@@ -33,7 +34,7 @@ export class stockListService {
   updateStock(productInStockList: cartItem, currentUserCartItem: cartItem) {
     let updatedStock = productInStockList.stock - currentUserCartItem.Qnty;    /// minus selected quantity from stock ////
     if (updatedStock >= 0) {
-      this.updateMyOrderList(currentUserCartItem,updatedStock);
+      this.OrderListService.updateMyOrderList(currentUserCartItem);
       this.CartService.removeProductFromCart(currentUserCartItem.cartItemid)
       this.AngularFirestore.doc('stockItemList/' + productInStockList.productID).update({   //// update on database ///
         stock: updatedStock
@@ -44,22 +45,7 @@ export class stockListService {
       this.toastr.warning("No Sufficient Stock Available " , currentUserCartItem.title)
     }
   }
-  updateMyOrderList(myCartItem:cartItem,stock:number){     //// add item in My orderList ////
-    this.AngularFirestore.collection('myOrders').doc(myCartItem.cartItemid.toString()).set(
-      {
-        cartItemid:myCartItem.cartItemid,
-        userName:myCartItem.userName,
-        productID:myCartItem.productID,
-        title:myCartItem.title,
-        images:myCartItem.images,
-        price:myCartItem.price,
-        Qnty:myCartItem.Qnty,
-        description:myCartItem.description,
-        descount:myCartItem.descount
-        
-      }
-    )
-  }
+ 
   buyNow(currentUserCartItem:cartItem)
   {
     let productInStockList = this.stockItemList.find((x) => x.productID == currentUserCartItem.productID);   //// check item added in stockList //
@@ -109,5 +95,10 @@ export class stockListService {
     //   this.addNewStock(product,newStock)
     // }
     this.toastr.success("Stock Added","Successful")
+  }
+  addStockWhenCancerOrder(product){
+    let productInStockList = this.stockItemList.find((x) => x.productID == product.productID);   //// check item added in stockList //
+    this.addStock(productInStockList,product.Qnty);
+    this.toastr.success("Your Order Cancel","Successful")
   }
 }

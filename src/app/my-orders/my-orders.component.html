@@ -2,8 +2,8 @@
 <input type="search" name="" id="">
 <i class="fa fa-search" aria-hidden="true"></i>
 </div>
-
-<div *ngFor="let item of this.OrderListService.currentUserOrderList()" class="columns">
+<div>
+<div *ngFor="let item of this.OrderListService.currentUserOrderList() let i = index" class="columns">
     <div class="card">
         <tr>
             <td style="width: 30%;">
@@ -24,15 +24,17 @@
                 <!-- <span class="percent"> {{item.descount}}%</span> -->
                 <!-- <p class="DiscountedPrice">Save {{item.price*item.Qnty*item.descount*0.01 |currency}}</p> -->
                 <p class="desc">{{item.description}}</p>
+                <p>{{item.date|date:'shortDate'}}</p>
                 <h6>Quantity : {{item.Qnty}}</h6>
             </td>
             <td style="width: 10%;">
                 <div>
-                    <button class="btn-remove">Remove</button>
+                    <button class="btn-remove" (click)="cancelOredr(i)">Remove</button>
                 </div>
             </td>
         </tr>
     </div>
+</div>
 </div>
 
 <table class="table">
