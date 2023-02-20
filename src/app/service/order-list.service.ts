@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { from } from 'rxjs';
+import { orderItem } from '../Orders';
 import { cartItem } from './cartItem';
 import { UserDetailsService } from './user-details.service';
 
@@ -19,7 +20,7 @@ export class OrderListService {
     {this.myOrderList=data})
   }
   currentUserOrderList(){
-   return this.myOrderList.filter((orderItem:cartItem)=>orderItem.userName==this.UserDetailsService.ThisUser[0])
+   return this.myOrderList.filter((orderItem:orderItem)=>orderItem.userName==this.UserDetailsService.ThisUser[0])
   }
   updateMyOrderList(myCartItem:cartItem){     //// add item in My orderList ////
     this.updateOrderID();
@@ -35,7 +36,7 @@ export class OrderListService {
         description:myCartItem.description,
         descount:myCartItem.descount,
         orderItemID:this.orderItemID,
-        orderDate:this.date
+        orderDate:this.date.valueOf()
         
       }
     )

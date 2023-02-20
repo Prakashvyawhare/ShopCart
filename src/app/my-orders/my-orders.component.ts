@@ -17,6 +17,7 @@ export class MyOrdersComponent implements OnInit {
     ) { }
     customer= this.UserDetailsService.currentUserDetails();
   ngOnInit(): void {
+    console.log(this.myOrders);
     
     this.myOrders=this.OrderListService.currentUserOrderList()
     this.customer= this.UserDetailsService.currentUserDetails();
