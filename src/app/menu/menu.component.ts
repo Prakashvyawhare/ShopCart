@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MyOrdersComponent } from '../my-orders/my-orders.component';
 import { CartService } from '../service/cart.service';
 import { OrderListService } from '../service/order-list.service';
 import { UserDetailsService } from '../service/user-details.service';
@@ -10,7 +11,7 @@ import { UserDetailsService } from '../service/user-details.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(public CartService: CartService, public getUsername: UserDetailsService,public OrderListService: OrderListService) { }
+  constructor(public CartService: CartService, public getUsername: UserDetailsService) { }
 
   ngOnInit(): void {
   }
