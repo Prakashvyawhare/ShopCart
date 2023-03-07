@@ -62,6 +62,7 @@ export class stockListService {
     this.AngularFirestore.collection('stockItemList').doc(product.id.toString()).set(
       {
         productID:product.id,
+        title:product.title,
         stock:product.stock
       }
     )}

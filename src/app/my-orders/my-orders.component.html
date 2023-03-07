@@ -1,9 +1,10 @@
-<div>
-<input type="search" name="" id="">
+<div class="split search">
+    <label for="search">search</label>
+<input  type="search" #search name="" id="">
 <i class="fa fa-search" aria-hidden="true"></i>
 </div>
 <div>
-<div *ngFor="let item of this.OrderListService.currentUserOrderList() let i = index" class="columns">
+<div *ngFor="let item of filteredOrderList let i = index" class="columns">
     <div class="card">
         <tr>
             <td style="width: 30%;">

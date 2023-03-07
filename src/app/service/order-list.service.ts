@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { from } from 'rxjs';
 import { orderItem } from '../Orders';
@@ -14,14 +14,19 @@ export class OrderListService {
    orderItemID:number;
    date=new Date()
 
-  constructor(private AngularFirestore: AngularFirestore, private UserDetailsService: UserDetailsService) {this.RetrieveOrderList() }
+  constructor(private AngularFirestore: AngularFirestore, private UserDetailsService: UserDetailsService) {this.RetrieveOrderList();
+    this.RetrieveOrder() }
   RetrieveOrderList(){
-    this.AngularFirestore.collection('myOrders').valueChanges().subscribe((data)=> 
-    {this.myOrderList=data})
+   return this.AngularFirestore.collection('myOrders')
+    // .valueChanges().subscribe((data)=> 
+    // {this.myOrderList=data})
   }
-  currentUserOrderList(){
-   return this.myOrderList.filter((orderItem:orderItem)=>orderItem.userName==this.UserDetailsService.ThisUser[0])
-  }
+  RetrieveOrder(){
+    return this.AngularFirestore.collection('myOrders')
+     .valueChanges().subscribe((data)=> 
+     {this.myOrderList=data})
+   }
+ 
   updateMyOrderList(myCartItem:cartItem){     //// add item in My orderList ////
     this.updateOrderID();
     this.AngularFirestore.collection('myOrders').doc(this.orderItemID.toString()).set(
@@ -48,6 +53,9 @@ export class OrderListService {
   }
   updateOrderID(){
     let orderIdArr=this.myOrderList.map((x)=>x.orderItemID)
+    if(orderIdArr.length!==0)
     this.orderItemID=Math.max(...orderIdArr)+1;
+    else
+    this.orderItemID=1
   }
 }
