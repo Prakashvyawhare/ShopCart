@@ -1,27 +1,23 @@
 # ShopCart
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.9.
+Hello, I am excited to share my sample project with you! In this project, I have created an e-commerce application using Angular that includes various features to provide users with a seamless shopping experience.
 
-## Development server
+To begin with, I have implemented a user registration and login feature using template-driven forms with all the necessary validations to ensure user data is secure and reliable.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Using Angular's HTTP module, I have fetched products from an external source and displayed them on the application for users to browse and select.
 
-## Code scaffolding
+I have also included a product cart feature that allows users to add items to their cart, review them, and proceed to checkout. Additionally, I have included an order details section where users can track their past and present orders.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+By utilizing Firebase, I have created a secure and scalable database that allows for seamless data management and storage. The Firebase database has been used to store user details such as username, password, and email addresses.
 
-## Build
+Additionally, the Firebase database has been used to store cart details such as product names, quantities, and prices. By storing this data in Firebase, users can quickly and easily retrieve their past shopping history and keep track of their current orders.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+The application also includes a reviews for products feature that enables users to share their experiences with a particular product and help other users make informed purchasing decisions.
 
-## Running unit tests
+To incentivize users to make purchases, I have included a bank offers section and discount feature.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Throughout the development process, I have utilized various Angular features and tools such as routing, form validation, RxJS, Observables, HTTP modules, auth guards, lazy loading, and Firebase.
 
-## Running end-to-end tests
+Lastly, I have created a stock updating feature specific to sellers to enable them to manage their stock levels.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Overall, I am pleased with the outcome of this project, and I believe it provides a robust and user-friendly e-commerce platform.
