@@ -32,6 +32,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { UpdateStockComponent } from './update-stock/update-stock.component';
+import { NavComponent } from './nav/nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +63,7 @@ import { UpdateStockComponent } from './update-stock/update-stock.component';
     LoginCaptchaDirective,
     MyOrdersComponent,
     UpdateStockComponent,
+    NavComponent,
     
   ],
   imports: [
@@ -68,7 +76,13 @@ import { UpdateStockComponent } from './update-stock/update-stock.component';
     AngularFirestoreModule,
     NgbModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
     
   ],
   providers: [],
