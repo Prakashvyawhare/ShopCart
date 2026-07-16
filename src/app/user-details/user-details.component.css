@@ -1,39 +1,131 @@
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    margin: auto;
-    margin-top: 15%;
-    text-align: left;
+/* ===== Theme tokens (same as the rest of the app) ===== */
+:host {
+  --brand-1: #0f766e;   /* teal 700 */
+  --brand-2: #14b8a6;   /* teal 500 */
+  --ink: #1e293b;       /* slate 800 */
+  --muted: #64748b;     /* slate 500 */
+  --surface: #ffffff;
+  --tint: #ecfdf5;      /* accent tint bg */
+  --line: #e2e8f0;
+  --shadow: 0 2px 12px rgba(15, 23, 42, .08);
+  --heading-font: 'Gill Sans', 'Trebuchet MS', 'Segoe UI', sans-serif;
+}
+
+/* ===== Profile card ===== */
+.profile-card {
+  position: relative;
+  max-width: 440px;
+  margin: 48px auto;
+  padding: 28px 26px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-2), var(--brand-1));
+  color: #fff;
+  font-size: 2.2rem;
+  box-shadow: 0 6px 14px rgba(15, 118, 110, .35);
+}
+
+.seller-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--tint);
+  color: var(--brand-1);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+.name {
+  margin: 4px 0 8px;
+  font-family: var(--heading-font);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--ink);
+  text-align: center;
+}
+
+/* ===== Info rows ===== */
+.info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 0;
+}
+
+.info-row + .info-row { border-top: 1px dashed var(--line); }
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+}
+
+.label i { color: var(--brand-1); }
+
+.value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+/* ===== Edit button ===== */
+.btn-edit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--brand-2), var(--brand-1));
+  box-shadow: 0 4px 10px rgba(15, 118, 110, .3);
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform .18s ease;
+}
+
+.btn-edit:hover { transform: translateY(-1px); }
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  .profile-card {
+    margin: 24px 12px;
+    padding: 24px 18px;
   }
-  .card:hover{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
-  }
-  .title {
-    color: grey;
-    font-size: 18px;
-  }
-  
-  button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    outline: 0;
-    color: white;
-    background-color: cadetblue;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-  }
-  
-  a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-  }
-  
-  button:hover, a:hover {
-    opacity: 0.7;
-  }
-  
+}

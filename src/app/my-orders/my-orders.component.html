@@ -1,57 +1,65 @@
-<div class="split search">
-    <label for="search">search</label>
-<input  type="search" #search name="" id="">
-<i class="fa fa-search" aria-hidden="true"></i>
-</div>
-<div>
-<div *ngFor="let item of filteredOrderList let i = index" class="columns">
-    <div class="card">
-        <tr>
-            <td style="width: 30%;">
-                <img [src]="item.images[0]" style="height: 200px; padding-right: 50px;padding-left: 50px; padding-top: 50px; width: auto; overflow: hidden;;">
-                <!-- <button style="margin-left: 70px;" class="btn-plus" (click)="addQuantity(i)" >+</button> -->
-                <!-- <span
-                    style="padding-left: 30px;padding-right: 30px;padding-top: 10px;padding-bottom: 10px; width: 30px; border: 1px;border-style: solid;height: 30px;" >{{item.Qnty}}
-                </span> -->
-                <!-- <button class="btn-plus" (click)="RemoveQuantity(i)" >-</button><br> -->
-            </td>
-            <td style="width: 60%;">
+<!-- Toolbar: title + search -->
+<div class="toolbar">
+    <h2 class="page-title"><i class="fa-solid fa-box-open"></i> My Orders</h2>
 
-                <p class="title">{{item.title}}</p>
-                <!-- below content for descount price -->
-                <span class="DiscountedPrice"> Price : {{item.price*item.Qnty
-                    -item.price*item.descount*0.01*item.Qnty |currency}}</span>
-                <!-- <span class="price">{{item.price*item.Qnty|currency}} </span> -->
-                <!-- <span class="percent"> {{item.descount}}%</span> -->
-                <!-- <p class="DiscountedPrice">Save {{item.price*item.Qnty*item.descount*0.01 |currency}}</p> -->
-                <p class="desc">{{item.description}}</p>
-                <p>date: {{item.orderDate|date}}</p>
-                <h6>Quantity : {{item.Qnty}}</h6>
-            </td>
-            <td style="width: 10%;">
-                <div>
-                    <button class="btn-remove" (click)="cancelOredr(i)">Remove</button>
+    <label class="field search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input #search type="search" placeholder="Search your orders...">
+    </label>
+</div>
+
+<div class="orders-layout">
+
+    <!-- Order list -->
+    <div class="items">
+        <div class="order-item panel" *ngFor="let item of filteredOrderList let i = index">
+            <div class="item-img">
+                <img [src]="item.images[0]" [alt]="item.title">
+            </div>
+
+            <div class="item-info">
+                <h3 class="title">{{item.title}}</h3>
+
+                <div class="price-row">
+                    <span class="Dprice">{{item.price*item.Qnty - item.price*item.descount*0.01*item.Qnty | currency}}</span>
+                    <span class="qty-pill">Qty: {{item.Qnty}}</span>
                 </div>
-            </td>
-        </tr>
-    </div>
-</div>
-</div>
 
-<table class="table">
-    <tr >
-        <th class="title" colspan="2" >My Orders</th>        
-    </tr> <hr>
-    <tr>
-        <td>Name :</td>
-        <td >{{customer.name}} {{customer.surname}}</td>
-    </tr>
-    <tr>
-        <td>Email :</td>
-        <td >{{customer.username}}</td>
-    </tr>
-    <tr>
-        <td>Address:</td>
-        <td >{{customer.Address}}</td>
-    </tr>
-</table>
+                <p class="desc">{{item.description}}</p>
+
+                <p class="order-date">
+                    <i class="fa-regular fa-calendar"></i> Ordered on {{item.orderDate | date}}
+                </p>
+
+                <div class="item-footer">
+                    <button class="btn-remove" (click)="cancelOredr(i)">
+                        <i class="fa-solid fa-ban"></i> Cancel Order
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <p class="notice" *ngIf="!filteredOrderList.length">
+            <i class="fa-solid fa-box-open"></i> No orders found.
+        </p>
+    </div>
+
+    <!-- Customer / delivery details -->
+    <aside class="summary panel">
+        <h4 class="panel-title"><i class="fa-solid fa-truck-fast"></i> Delivery Details</h4>
+
+        <div class="c-row">
+            <span class="c-label"><i class="fa-solid fa-user"></i> Name</span>
+            <span class="c-value">{{customer.name}} {{customer.surname}}</span>
+        </div>
+        <div class="c-row">
+            <span class="c-label"><i class="fa-solid fa-envelope"></i> Email</span>
+            <span class="c-value">{{customer.username}}</span>
+        </div>
+        <div class="c-row">
+            <span class="c-label"><i class="fa-solid fa-location-dot"></i> Address</span>
+            <span class="c-value">{{customer.Address}}</span>
+        </div>
+    </aside>
+
+</div>

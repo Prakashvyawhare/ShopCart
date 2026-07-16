@@ -37,14 +37,8 @@
     
   }
   
-  /* On screens that are less than 700px wide, make the sidebar into a topbar */
-  @media screen and (max-width: 700px) {
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: relative;
-    }
-    .sidebar a {float: left;}
+  /* On screens 768px and below the sidebar becomes a topbar (see menu.component.css) */
+  @media screen and (max-width: 768px) {
     div.content {margin-left: 0;}
   }
   /* Sidebar links */
@@ -86,4 +80,12 @@
   }
   .s{
     margin-top: 100px;
+  }
+
+  /* On mobile the menu bar is in normal flow below the header,
+     so the content no longer needs the 100px header offset */
+  @media screen and (max-width: 768px) {
+    .s {
+      margin-top: 0;
+    }
   }

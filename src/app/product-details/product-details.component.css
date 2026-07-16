@@ -1,105 +1,333 @@
-.img {
-    background-color: #f1f1f1;  
-    left: auto;
-    width: 100%;
-  }
-  
-  .detail {
-    /* position: fixed; */
-    right: 0;
-    width: 100%;
-  }
-  
-  .desc {
-    white-space: wrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: large;
-    max-width: 500px;
-  }
-  .title
-  {
-    white-space: nowrap;
-   overflow: hidden;
-    text-overflow:ellipsis;
-  }
-.rating{   
+/* ===== Theme tokens (same as header/sidebar/products) ===== */
+:host {
+  --brand-1: #0f766e;   /* teal 700 */
+  --brand-2: #14b8a6;   /* teal 500 */
+  --ink: #1e293b;       /* slate 800 */
+  --muted: #64748b;     /* slate 500 */
+  --surface: #ffffff;
+  --tint: #ecfdf5;      /* accent tint bg */
+  --danger: #ef4444;
+  --star: #f59e0b;      /* amber 500 */
+  --line: #e2e8f0;
+  --shadow: 0 2px 12px rgba(15, 23, 42, .08);
+  --heading-font: 'Gill Sans', 'Trebuchet MS', 'Segoe UI', sans-serif;
+}
+
+/* ===== Error image ===== */
+.error-img {
+  display: block;
+  margin: 24px auto;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 14px;
+}
+
+/* ===== Page layout: product | offers+reviews ===== */
+.details-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  padding-bottom: 32px;
+}
+
+.side-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== Panels ===== */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+}
+
+.product-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.slider-wrap { background: #f8fafc; }
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px 20px;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-family: var(--heading-font);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.panel-title i { color: var(--brand-1); }
+
+/* ===== Product details ===== */
+.title {
+  margin: 0;
+  font-family: var(--heading-font);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.Dprice {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--brand-1);
+}
+
+.price {
+  font-size: 1.05rem;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.percent {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--tint);
+  color: var(--brand-1);
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+.desc {
+  margin: 0;
+  font-size: .98rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ===== Quantity stepper ===== */
+.qty-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.qty-label {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.stepper button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  color: var(--brand-1);
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .18s ease;
+}
+
+.stepper button:hover { background: var(--tint); }
+
+.qty-value {
+  min-width: 44px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.actions .btn { flex: 1; }
+
+.btn-soft {
+  background: var(--tint);
+  color: var(--brand-1);
+  border: 1.5px solid var(--brand-2);
+}
+
+.btn-soft:hover {
+  background: var(--brand-1);
+  border-color: var(--brand-1);
+  color: #fff;
+}
+
+.btn-fill {
+  color: #fff;
+  background: linear-gradient(135deg, var(--brand-2), var(--brand-1));
+  box-shadow: 0 4px 10px rgba(15, 118, 110, .3);
+}
+
+.btn-fill:hover { transform: translateY(-1px); }
+
+.btn-review {
+  width: 100%;
+  margin-top: 12px;
+}
+
+/* ===== Bank offers ===== */
+.offer {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.5;
+}
+
+.offer + .offer { border-top: 1px solid var(--line); }
+
+.offer i {
+  color: var(--brand-1);
+  margin-top: 3px;
+}
+
+/* ===== Review form ===== */
+.reviewer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.reviewer i { color: var(--brand-1); }
+
+.rating {
   display: flex;
   justify-content: flex-start;
   gap: 5px;
 }
-h5{
-  color: blue;
-}
-i{
-  color: rgb(213, 213, 213);
+
+.rating i {
+  color: #d1d5db;
+  font-size: 1.1rem;
   cursor: pointer;
+  transition: color .15s ease, transform .15s ease;
 }
-.active{
-  color: orange;
+
+.rating i:hover { transform: scale(1.15); }
+
+.rating i.active { color: var(--star); }
+
+.rating.readonly i {
+  cursor: default;
+  font-size: .95rem;
 }
-.right{
-  right: 0;
-  width: 50%;
-}
-.card button {
-  border: none;
-  outline: 0;
-  padding: 12px;
-  color: white;
-  background-color: cadetblue;
-  text-align: center;
-  cursor: pointer;
+
+.rating.readonly i:hover { transform: none; }
+
+textarea.form-control.comment-box {
   width: 100%;
-  font-size: 18px;
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  font-size: .95rem;
+  color: var(--ink);
+  resize: vertical;
+  transition: border-color .18s ease, box-shadow .18s ease;
 }
 
-.card button:hover {
-  opacity: 0.7;
+textarea.form-control.comment-box:focus {
+  outline: none;
+  border-color: var(--brand-2);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, .18);
 }
-/* .card:hover{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
-} */
 
-/* ////////////////// */
-.cardd{
-  left: 30;
-  width: 30%;
-  position: fixed;
+/* ===== Review list ===== */
+.review-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-size: .98rem;
+  font-weight: 800;
+  color: var(--ink);
 }
-.cardd button {
-  border: none;
-  outline: 0;
-  padding: 12px;
-  color: white;
-  background-color: cadetblue;
-  text-align: center;
+
+.review-user i {
+  color: var(--brand-1);
+  font-size: 1.1rem;
+}
+
+.review-comment {
+  margin: 8px 0 10px;
+  font-size: .92rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1.5px solid var(--danger);
+  border-radius: 8px;
+  color: var(--danger);
+  font-size: .8rem;
+  font-weight: 700;
   cursor: pointer;
-  width: 50%;
-  font-size: 18px;
+  transition: background .18s ease, color .18s ease;
 }
 
-.cardd button:hover {
-  opacity: 0.7;
+.btn-delete:hover {
+  background: var(--danger);
+  color: #fff;
 }
-.cardd:hover{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7);
-}
-.price {
-  color: grey;
-  font-size: 22px;
-  text-decoration:line-through;
-  
-}
-.percent{
-  font-size: 15px;
-  color: rgb(77, 183, 77);
-}
-.Dprice{
-  font-size: 25px;
-  color: rgb(77, 183, 77);
-}
-.split{
-  position: absolute;
 
+/* ===== Responsive: single column ===== */
+@media (max-width: 900px) {
+  .details-page { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .actions { flex-direction: column; }
+  .title { font-size: 1.25rem; }
+  .Dprice { font-size: 1.35rem; }
 }

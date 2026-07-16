@@ -1,10 +1,24 @@
-<div class="sidebar">
-    <a routerLink ="Products" routerLinkActive="active">Products</a>
-    <a class="fa fa-shopping-cart" routerLink ="carts" routerLinkActive="active"> Cart ( {{this.CartService.currentUserCarts().length}} )</a>
-    <a class="fa fa-shopping-cart" routerLink ="Orders" routerLinkActive="active"> Orders</a>
-    <a routerLink="updateStock" routerLinkActive="active">Seller</a>
-    <!-- <a routerLink="Promise">Promise</a>
-    <a routerLink="Observable">Observable</a> -->
-    <a routerLink="giftCards" routerLinkActive="active">giftCards</a>
-    
-</div>
+<nav class="side-nav">
+    <p class="nav-label">Shop</p>
+
+    <a class="side-link" routerLink="Products" routerLinkActive="active">
+        <i class="fa-solid fa-store"></i><span>Products</span>
+    </a>
+
+    <a class="side-link" routerLink="carts" routerLinkActive="active">
+        <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+        <span class="count-badge">{{ CartService.currentUserCarts().length }}</span>
+    </a>
+
+    <a class="side-link" routerLink="Orders" routerLinkActive="active">
+        <i class="fa-solid fa-box-open"></i><span>Orders</span>
+    </a>
+
+    <a class="side-link" routerLink="updateStock" routerLinkActive="active">
+        <i class="fa-solid fa-warehouse"></i><span>Seller</span>
+    </a>
+
+    <a class="side-link" routerLink="giftCards" routerLinkActive="active">
+        <i class="fa-solid fa-gift"></i><span>Gift Cards</span>
+    </a>
+</nav>

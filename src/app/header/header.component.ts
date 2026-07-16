@@ -12,6 +12,7 @@ import { UserDetailsService } from '../service/user-details.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  menuOpen = false;
   constructor( public CartService: CartService,public userdetailsservice: UserDetailsService) { }
   // open() {
 	// 	const modalRef = this.modalService.open(ModelComponent);}
