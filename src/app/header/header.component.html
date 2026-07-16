@@ -1,14 +1,48 @@
-<div class="na">
-    
-    <!-- <button routerLink="Customer">Customer Details </button> -->
-    <button routerLink="UserDetails" routerLinkActive="active">user details</button>
-    <button *ngIf="!this.userdetailsservice.LoggedinbyUser()"routerLink="login" routerLinkActive="active">login</button>
-    <button  *ngIf="this.userdetailsservice.LoggedinbyUser()" (click)="logout()" routerLinkActive="active">logout</button> 
-    <button routerLink="NewUser" routerLinkActive="active">New User </button>
-    <h1  class="title">ShopCart</h1>
-    
-    <a *ngIf="this.userdetailsservice.LoggedinbyUser()"  class="fa fa-shopping-cart" routerLink ="carts" routerLinkActive="active"> Cart({{this.CartService.currentUserCarts().length}})</a>
-    <!-- <app-model *ngIf="modeldia.Showdialog"> </app-model>
-    <button (click)="modeldia.Showdialog= true">showdialog</button> -->
-    <!-- <a routerLink="Customer">Customer Details</a> -->
-</div>
+<header class="app-header">
+  <div class="header-inner">
+
+    <!-- Brand -->
+    <a class="brand" routerLink="Products" (click)="menuOpen = false">
+      <span class="brand-icon"><i class="fa-solid fa-bag-shopping"></i></span>
+      <span class="brand-name">Shop<span class="brand-accent">Cart</span></span>
+    </a>
+
+    <!-- Mobile menu toggle -->
+    <button class="nav-toggle"
+            [class.open]="menuOpen"
+            (click)="menuOpen = !menuOpen"
+            [attr.aria-expanded]="menuOpen"
+            aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="nav" [class.open]="menuOpen" (click)="menuOpen = false">
+
+      <a class="nav-link" routerLink="UserDetails" routerLinkActive="active">
+        <i class="fa-solid fa-user"></i><span>Account</span>
+      </a>
+
+      <a class="nav-link" routerLink="NewUser" routerLinkActive="active">
+        <i class="fa-solid fa-user-plus"></i><span>New User</span>
+      </a>
+
+      <a *ngIf="userdetailsservice.LoggedinbyUser()"
+         class="nav-link cart-link" routerLink="carts" routerLinkActive="active">
+        <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+        <span class="cart-badge">{{ CartService.currentUserCarts().length }}</span>
+      </a>
+
+      <a *ngIf="!userdetailsservice.LoggedinbyUser()"
+         class="nav-link btn btn-login" routerLink="login" routerLinkActive="active">
+        <i class="fa-solid fa-right-to-bracket"></i><span>Login</span>
+      </a>
+
+      <button *ngIf="userdetailsservice.LoggedinbyUser()"
+              class="nav-link btn btn-logout" (click)="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+      </button>
+
+    </nav>
+  </div>
+</header>

@@ -1,12 +1,20 @@
-<div class="container" *ngIf="this.signInDone==false" wid>
-    <div class="center">
-        <div class="title">New User </div>
-        <form class="form " #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onsubmit()" novalidate>
+<div class="auth-wrap" *ngIf="this.signInDone==false">
+    <div class="auth-card">
+
+        <div class="auth-head">
+            <span class="auth-icon"><i class="fa-solid fa-user-plus"></i></span>
+            <h2 class="auth-title">Create Account</h2>
+            <p class="auth-sub">Join ShopCart and start shopping</p>
+        </div>
+
+        <form #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onsubmit()" novalidate>
+
             <!-- Enter Username -->
-            <div class="form-group ">
-                <label for="email">UserName : </label>
-                <input type="email" name="email" appUserValidation class="form-control"
+            <div class="form-group">
+                <label for="email"><i class="fa-solid fa-circle-user"></i> Username</label>
+                <input type="email" name="email" id="email" appUserValidation class="form-control"
                     placeholder="Enter your username" #email="ngModel" required email [(ngModel)]="username" />
+
                 <!-- Validation for Email -->
                 <span class="text-danger"
                     *ngIf="(email.touched || registerForm.submitted)&& email.errors?.['required']">
@@ -19,88 +27,106 @@
                     UserName already exists
                 </span>
             </div>
-            <!-- Name -->
-            <div class="form-group ">
-                <label for="name">Name : </label>
-                <input type="text" name="name" class="form-control" placeholder="Enter your name" required
-                    [(ngModel)]="Name" />
-            </div>
-            <!-- surname -->
-            <div class="form-group ">
-                <label for="surname">Surname: </label>
-                <input type="text" name="surname" class="form-control" placeholder="Enter your surname"
-                    [(ngModel)]="surname" />
-            </div>
-            <!-- Address -->
-            <div class="form-group ">
-                <label for="address">Address : </label>
-                <input type="text" name="address" class="form-control" placeholder="Enter your address"
-                    [(ngModel)]="Address" />
-            </div>
-            <!-- Date of birth -->
-            <div class="form-group ">
-                <label for="DOB">Date of birth : </label>
-                <input type="date" name="DOB" class="form-control" [(ngModel)]="DOB" />
-            </div>
-           
-            <!-- Enter password -->
-            <div class="form-group">
-                <label for="password">password :</label>
-                <input type="password" name="password" #password="ngModel" class="form-control" placeholder="password"
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" required [(ngModel)]="Password">
-                <!-- Validation for password -->
-                <span class="text-danger"
-                    *ngIf="(password.touched || registerForm.submitted) && password.errors?.['required']">Password
-                    required</span>
-                <span class="text-danger"
-                    *ngIf="(password.touched || registerForm.submitted)&& password.errors?.['minlength']"></span>
-                <span class="text-danger"
-                    *ngIf="(password.touched || registerForm.submitted) && password.errors?.['pattern']">Please enter
-                    strong
-                    Password</span>
-                <!-- confirm password  -->
+
+            <!-- Name + Surname -->
+            <div class="form-row">
                 <div class="form-group">
-                    <label for="Cpassword">Confirm password :</label>
-                    <input type="password" name="Cpassword" appDoubliPassword #Cpassword="ngModel" confirm
-                        class="form-control" placeholder="confirm password" required [(ngModel)]="confPassword">
-                    <!-- Validation for confirm  password -->
-                    <span class="text-danger"
-                        *ngIf="(Cpassword.touched || registerForm.submitted) && Cpassword.errors?.['required']">Password
-                        required</span>
-                    <span class="text-danger"
-                        *ngIf="(Cpassword.touched || registerForm.submitted) && Cpassword.errors?.['confirm']">password
-                        not match
-                    </span>
-                    <div class="form-group">
-                        <input type="checkbox" name="s" id="" (change)="selectSeller()">
-                        <label for="seller">Register as a Seller</label>
-                    </div>
-                    <!-- print random number as a  captcha  -->
-                    <div class="form-group">
-                        <div>
-                            <span class="float"> <input type="text" name="captcha" #captcha="ngModel"
-                                    class="form-control" appCaptcha required [(ngModel)]="enterVal"></span> <span>
-                                <h4>{{num1}} + {{num2}} =</h4>
-                            </span>
-                        </div>
-                        <!-- Validation for captcha -->
-                        <span class="text-danger"
-                            *ngIf="(captcha.touched || registerForm.submitted )&& captcha.errors?.['required']">captcha
-                            required
-                        </span><br>
-                        <span class="text-danger" *ngIf="captcha.touched && captcha.errors?.['captcha']">
-                            captcha Envalide
-                        </span>
-                    </div>
-                    <!-- login button -->
-                    <div class="form-group"> <button (click)="onsubmit()" type="submit" class="btn btn-success"> submit
-                        </button></div>
-                    <!-- cancel button -->
-                    <span><button type="cancel" class="btn btn-cancel"> Cancel
-                        </button></span>
-                    <div>if already have an account, <a routerLink="login">Login</a></div>
+                    <label for="name"><i class="fa-solid fa-user"></i> Name</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name"
+                        required [(ngModel)]="Name" />
+                </div>
+                <div class="form-group">
+                    <label for="surname"><i class="fa-solid fa-user"></i> Surname</label>
+                    <input type="text" name="surname" id="surname" class="form-control"
+                        placeholder="Enter your surname" [(ngModel)]="surname" />
                 </div>
             </div>
+
+            <!-- Address -->
+            <div class="form-group">
+                <label for="address"><i class="fa-solid fa-location-dot"></i> Address</label>
+                <input type="text" name="address" id="address" class="form-control" placeholder="Enter your address"
+                    [(ngModel)]="Address" />
+            </div>
+
+            <!-- Date of birth -->
+            <div class="form-group">
+                <label for="DOB"><i class="fa-solid fa-cake-candles"></i> Date of birth</label>
+                <input type="date" name="DOB" id="DOB" class="form-control" [(ngModel)]="DOB" />
+            </div>
+
+            <!-- Enter password -->
+            <div class="form-group">
+                <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
+                <input type="password" name="password" id="password" #password="ngModel" class="form-control"
+                    placeholder="Enter a strong password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8"
+                    required [(ngModel)]="Password">
+
+                <!-- Validation for password -->
+                <span class="text-danger"
+                    *ngIf="(password.touched || registerForm.submitted) && password.errors?.['required']">
+                    Password required
+                </span>
+                <span class="text-danger"
+                    *ngIf="(password.touched || registerForm.submitted) && password.errors?.['pattern']">
+                    Please enter strong Password
+                </span>
+            </div>
+
+            <!-- confirm password -->
+            <div class="form-group">
+                <label for="Cpassword"><i class="fa-solid fa-lock"></i> Confirm password</label>
+                <input type="password" name="Cpassword" id="Cpassword" appDoubliPassword #Cpassword="ngModel" confirm
+                    class="form-control" placeholder="Re-enter your password" required [(ngModel)]="confPassword">
+
+                <!-- Validation for confirm password -->
+                <span class="text-danger"
+                    *ngIf="(Cpassword.touched || registerForm.submitted) && Cpassword.errors?.['required']">
+                    Password required
+                </span>
+                <span class="text-danger"
+                    *ngIf="(Cpassword.touched || registerForm.submitted) && Cpassword.errors?.['confirm']">
+                    password not match
+                </span>
+            </div>
+
+            <!-- Register as seller -->
+            <label class="seller-check" for="seller">
+                <input type="checkbox" name="s" id="seller" (change)="selectSeller()">
+                <span><i class="fa-solid fa-store"></i> Register as a Seller</span>
+            </label>
+
+            <!-- captcha: random number -->
+            <div class="form-group">
+                <label for="captcha"><i class="fa-solid fa-shield-halved"></i> Captcha</label>
+                <div class="captcha-row">
+                    <span class="captcha-q">{{num1}} + {{num2}} =</span>
+                    <input type="text" name="captcha" id="captcha" #captcha="ngModel" class="form-control captcha-input"
+                        appCaptcha required [(ngModel)]="enterVal">
+                </div>
+
+                <!-- Validation for captcha -->
+                <span class="text-danger"
+                    *ngIf="(captcha.touched || registerForm.submitted )&& captcha.errors?.['required']">
+                    captcha required
+                </span>
+                <span class="text-danger" *ngIf="captcha.touched && captcha.errors?.['captcha']">
+                    captcha Envalide
+                </span>
+            </div>
+
+            <!-- actions -->
+            <div class="actions">
+                <button type="button" class="btn btn-ghost" (click)="registerForm.reset()">Cancel</button>
+                <button type="submit" class="btn btn-fill">
+                    <i class="fa-solid fa-user-plus"></i> Sign Up
+                </button>
+            </div>
+
+            <p class="auth-foot">
+                Already have an account? <a routerLink="login">Login</a>
+            </p>
+
         </form>
     </div>
 </div>

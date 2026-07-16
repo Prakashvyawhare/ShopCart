@@ -1,10 +1,32 @@
+<div class="profile-card">
 
-<div class="card">
-  <h4 *ngIf="customer.seller==true" > seller</h4>
-    <!-- <img src="img.jpg" alt="John" style="width:100%"> -->
-    <h5>Name: {{customer.name}} {{customer.surname}}</h5>
-    <p class="title">Date of Birth : {{customer.DOB}}</p>
-    <p>Email : {{customer.username}}</p>
-    <p> Address : {{customer.Address}}</p>
-    <p><button>Edit Details</button></p>
-  </div> 
+    <div class="avatar">
+        <i class="fa-solid fa-user"></i>
+    </div>
+
+    <span class="seller-badge" *ngIf="customer.seller==true">
+        <i class="fa-solid fa-store"></i> Seller
+    </span>
+
+    <h2 class="name">{{customer.name}} {{customer.surname}}</h2>
+
+    <div class="info">
+        <div class="info-row">
+            <span class="label"><i class="fa-solid fa-cake-candles"></i> Date of Birth</span>
+            <span class="value">{{customer.DOB}}</span>
+        </div>
+        <div class="info-row">
+            <span class="label"><i class="fa-solid fa-envelope"></i> Email</span>
+            <span class="value">{{customer.username}}</span>
+        </div>
+        <div class="info-row">
+            <span class="label"><i class="fa-solid fa-location-dot"></i> Address</span>
+            <span class="value">{{customer.Address}}</span>
+        </div>
+    </div>
+
+    <button class="btn-edit">
+        <i class="fa-solid fa-pen"></i> Edit Details
+    </button>
+
+</div>

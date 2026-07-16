@@ -1,15 +1,18 @@
-<div class="container" *ngIf="!this.UserDetailsService.LoggedinbyUser()">
+<div class="auth-wrap" *ngIf="!this.UserDetailsService.LoggedinbyUser()">
+    <div class="auth-card">
 
+        <div class="auth-head">
+            <span class="auth-icon"><i class="fa-solid fa-right-to-bracket"></i></span>
+            <h2 class="auth-title">Login</h2>
+            <p class="auth-sub">Welcome back to ShopCart</p>
+        </div>
 
-    <div class="center">
-        <div class="title">Login </div>
-        <form class="form " #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onlogin()"  novalidate>
+        <form #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && onlogin()" novalidate>
 
             <!-- Enter Username -->
-            <div class="form-group "> 
-                <i class="fa fa-user-circle" aria-hidden="true"></i>
-                <label for="email">UserName : </label>
-                <input type="email" name="email" appOldUserLogin class="form-control"
+            <div class="form-group">
+                <label for="email"><i class="fa-solid fa-circle-user"></i> Username</label>
+                <input type="email" name="email" id="email" appOldUserLogin class="form-control"
                     placeholder="Enter your username" #email="ngModel" required email [(ngModel)]="username" />
 
                 <!-- Validation for Email -->
@@ -17,10 +20,6 @@
                     *ngIf="(email.touched || registerForm.submitted)&& email.errors?.['required']">
                     username required
                 </span>
-
-                <!-- <span class="text-danger" *ngIf="(email.touched || registerForm.submitted)&& email.errors?.['email']">
-                    enter correct email
-                </span> -->
                 <span class="text-danger" *ngIf="(email.touched)&& email.errors?.['olduser']">
                     UserName not exists
                 </span>
@@ -28,67 +27,57 @@
 
             <!-- Enter password -->
             <div class="form-group">
-                
-                <label for="password">password :</label>
-                <input type="password" appExistingpassword name="password"  #password="ngModel" class="form-control" placeholder="password"
+                <label for="password"><i class="fa-solid fa-lock"></i> Password</label>
+                <input type="password" appExistingpassword name="password" id="password" #password="ngModel"
+                    class="form-control" placeholder="Enter your password"
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" required [(ngModel)]="Password">
+
                 <!-- Validation for password -->
                 <span class="text-danger"
-                    *ngIf="(password.touched || registerForm.submitted) && password.errors?.['required']">Password
-                    required</span>
+                    *ngIf="(password.touched || registerForm.submitted) && password.errors?.['required']">
+                    Password required
+                </span>
                 <span class="text-danger"
-                    *ngIf="(password.touched || registerForm.submitted)&& password.errors?.['minlength']"></span>
+                    *ngIf="(password.touched || registerForm.submitted)&& password.errors?.['minlength']">
+                    Password must be at least 8 characters
+                </span>
                 <span class="text-danger"
-                    *ngIf="(password.touched || registerForm.submitted) && password.errors?.['ps']"> wrong password
-                    
-                </span><br>
-
-
-
-                <!-- print random number and operator -->
-                <div class="form-group">
-                    <div>
-                        <span class="float"> <input type="text" name="captcha" #captcha="ngModel" class="form-control"
-                            appCaptcha required [(ngModel)]="enterVal"></span> <span>
-                            <h4>{{num1}} + {{num2}} =</h4>
-                        </span>
-
-
-
-                    </div>
-                    <!-- Validation for captcha -->
-                    <span class="text-danger"
-                        *ngIf="(captcha.touched || registerForm.submitted )&& captcha.errors?.['required']">captcha
-                        required
-
-                    </span>
-
-                    <span class="text-danger" *ngIf="captcha.touched && captcha.errors?.['captcha']">
-                        captcha Envalide
-                    </span>
-                </div>
-                <br><br>
-                <!-- cancel button -->
-                <div class="form-group"> <button style="float: right;" type="cancel" class="btn btn-cancel" > Cancel
-                    </button></div>
-
-                <!-- login button -->
-                <div class="form-group"> <button style="float: right;" type="submit" class="btn btn-success" > Login
-                    </button>
-                </div>
-                <div> <a routerLink="NewUser">New User?</a></div>
-
-
-
-
-
-
-
-
-
-
+                    *ngIf="(password.touched || registerForm.submitted) && password.errors?.['ps']">
+                    wrong password
+                </span>
             </div>
+
+            <!-- captcha: random number and operator -->
+            <div class="form-group">
+                <label for="captcha"><i class="fa-solid fa-shield-halved"></i> Captcha</label>
+                <div class="captcha-row">
+                    <span class="captcha-q">{{num1}} + {{num2}} =</span>
+                    <input type="text" name="captcha" id="captcha" #captcha="ngModel" class="form-control captcha-input"
+                        appCaptcha required [(ngModel)]="enterVal">
+                </div>
+
+                <!-- Validation for captcha -->
+                <span class="text-danger"
+                    *ngIf="(captcha.touched || registerForm.submitted )&& captcha.errors?.['required']">
+                    captcha required
+                </span>
+                <span class="text-danger" *ngIf="captcha.touched && captcha.errors?.['captcha']">
+                    captcha Envalide
+                </span>
+            </div>
+
+            <!-- actions -->
+            <div class="actions">
+                <button type="button" class="btn btn-ghost" (click)="registerForm.reset()">Cancel</button>
+                <button type="submit" class="btn btn-fill">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
+                </button>
+            </div>
+
+            <p class="auth-foot">
+                New to ShopCart? <a routerLink="NewUser">Create an account</a>
+            </p>
+
         </form>
     </div>
-
 </div>

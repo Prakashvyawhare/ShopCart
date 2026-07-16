@@ -1,66 +1,94 @@
-<!-- error img when page not found -->
-<img [src]="result" style="width:50%; position: fixed;
-display:flex; z-index: 53; align-items: center;">
-<!-- <p>{{result}}</p> -->
-<div class="split cardd">
-    <!-- slider image  -->
-    <div style="width: 100%;  object-fit: scale-down; " class="img">
-        <ng-image-slider [images]="silderImages" [infinite]="false" [autoSlide]="1"
-            [imageSize]="{width: '100%', height : '400'}" slideImage="1"></ng-image-slider>
-    </div>
-    <div class="detail">
-        <h1 class="title">{{product.title}}</h1>
-        <h2 class="Dprice">{{product.price-product.price*product.discountPercentage*0.01 |currency}}</h2>
-        <h2 class="price">{{product.price|currency}}</h2>
-        <h2 class="percent">{{product.discountPercentage}}% Descount</h2>
-        <p class="desc">{{product.description}}</p>
-        <p> Quantity: {{productQuantity}}</p>
-        <button style="left: 0px; width: 50%;" (click)="plusCount()">+</button><span>
-            <button style="right:0px;" (click)="minusCount()">-</button></span>
-        <button style="width: 100%;" (click)="addtocart()">Add to <i class="fa fa-cart-plus"
-                aria-hidden="true"></i></button>
-        <button style="width: 100%;" (click)="buyNow()">Buy Now</button>
-    </div>
-</div>
-<div class="split right">
-    <div class="card">
-        <h4>Bank Offers</h4>
-        <div *ngFor="let bank of bankOfferService.offers let i=index">
-            <i class="fa fa-bookmark" aria-hidden="true"></i>
-            <span>{{bank.offerDescription}}</span>
-        </div>
-    </div>
-    <hr>
-    <!-- review edit -->
-    <div class="card">
-        <h5>Reviews :</h5>
+<!-- error img when product not found -->
+<img *ngIf="result" [src]="result" class="error-img" alt="Product not found">
 
-        <label for="name">
-            <i class="fas fa-user-edit"></i> {{reviewer.userName}} </label>
-        <div class="rating">
-            <!-- five star rating pattern  -->
-            <ng-container *ngFor="let i of fiveStars">
-                <i class="fa-solid fa-star" (click)="updaterating(i)" [ngClass]="{'active':i<=rate}"></i>
-            </ng-container>
+<div class="details-page">
+
+    <!-- Product panel -->
+    <section class="panel product-panel">
+        <div class="slider-wrap">
+            <ng-image-slider [images]="silderImages" [infinite]="false" [autoSlide]="1"
+                [imageSize]="{width: '100%', height : '400'}" slideImage="1"></ng-image-slider>
         </div>
-        <div class="form-group">
-            <label for="comment">Comments :</label>
-            <textarea class="form-control" name="comment" rows="3" [(ngModel)]="reviewer.comment"></textarea>
+
+        <div class="detail">
+            <h1 class="title">{{product.title}}</h1>
+
+            <div class="price-row">
+                <span class="Dprice">{{product.price - product.price * product.discountPercentage * 0.01 | currency}}</span>
+                <span class="price">{{product.price | currency}}</span>
+                <span class="percent">-{{product.discountPercentage}}%</span>
+            </div>
+
+            <p class="desc">{{product.description}}</p>
+
+            <div class="qty-row">
+                <span class="qty-label">Quantity</span>
+                <div class="stepper">
+                    <button type="button" (click)="minusCount()" aria-label="Decrease quantity">&minus;</button>
+                    <span class="qty-value">{{productQuantity}}</span>
+                    <button type="button" (click)="plusCount()" aria-label="Increase quantity">+</button>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-soft" (click)="addtocart()">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                </button>
+                <button class="btn btn-fill" (click)="buyNow()">
+                    <i class="fa-solid fa-bolt"></i> Buy Now
+                </button>
+            </div>
         </div>
-        <button (click)="AddReview()">add review</button>
-    </div>
-    <!-- show review -->
-    <div *ngFor="let review of reviewService.getReviewbyproductId(this.productID) let i = index" class="card">
-        <h6><i class="fa fa-user-circle"></i>
-            {{review.userName}} </h6>
-        <div class="rating">
-            <ng-container *ngFor="let i of fiveStars">
-                <i class="fa-solid fa-star" [ngClass]="{'active':i<=review.rating}"></i>
-            </ng-container>
+    </section>
+
+    <!-- Offers + reviews -->
+    <aside class="side-col">
+
+        <div class="panel">
+            <h4 class="panel-title"><i class="fa-solid fa-tags"></i> Bank Offers</h4>
+            <div class="offer" *ngFor="let bank of bankOfferService.offers let i=index">
+                <i class="fa-solid fa-bookmark"></i>
+                <span>{{bank.offerDescription}}</span>
+            </div>
         </div>
-        <p>Comment : {{review.comment}}</p>
-        <button *ngIf="review.userName==this.GetUserName.ThisUser[0]" class="delete-btn"
-            (click)="deleteReview(i)">delete
-            review</button>
-    </div>
+
+        <!-- review edit -->
+        <div class="panel">
+            <h5 class="panel-title"><i class="fa-solid fa-pen-to-square"></i> Write a Review</h5>
+
+            <label class="reviewer" for="comment">
+                <i class="fa-solid fa-user-pen"></i> {{reviewer.userName}}
+            </label>
+
+            <div class="rating">
+                <!-- five star rating pattern -->
+                <ng-container *ngFor="let i of fiveStars">
+                    <i class="fa-solid fa-star" (click)="updaterating(i)" [ngClass]="{'active': i <= rate}"></i>
+                </ng-container>
+            </div>
+
+            <textarea class="form-control comment-box" name="comment" id="comment" rows="3"
+                placeholder="Share your experience with this product..." [(ngModel)]="reviewer.comment"></textarea>
+
+            <button class="btn btn-fill btn-review" (click)="AddReview()">
+                <i class="fa-solid fa-paper-plane"></i> Add Review
+            </button>
+        </div>
+
+        <!-- show review -->
+        <div class="panel review"
+            *ngFor="let review of reviewService.getReviewbyproductId(this.productID) let i = index">
+            <h6 class="review-user"><i class="fa-solid fa-circle-user"></i> {{review.userName}}</h6>
+            <div class="rating readonly">
+                <ng-container *ngFor="let i of fiveStars">
+                    <i class="fa-solid fa-star" [ngClass]="{'active': i <= review.rating}"></i>
+                </ng-container>
+            </div>
+            <p class="review-comment">{{review.comment}}</p>
+            <button *ngIf="review.userName==this.GetUserName.ThisUser[0]" class="btn-delete" (click)="deleteReview(i)">
+                <i class="fa-solid fa-trash-can"></i> Delete Review
+            </button>
+        </div>
+
+    </aside>
 </div>

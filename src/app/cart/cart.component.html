@@ -1,74 +1,90 @@
-<div *ngIf="cartService.currentUserCarts().length==0" class="center">
-    <img [src]="emptyCart">
-    <h1>Your cart is empty!</h1>
-    <a routerLink="Products">Buy something</a>
+<!-- Empty cart -->
+<div *ngIf="cartService.currentUserCarts().length==0" class="empty panel">
+    <img [src]="emptyCart" alt="Empty cart">
+    <h2>Your cart is empty!</h2>
+    <a class="btn btn-fill" routerLink="Products"><i class="fa-solid fa-store"></i> Buy something</a>
 </div>
-<div  *ngIf="cartService.currentUserCarts().length!==0">
-<div *ngFor="let item of this.cartService.currentUserCarts(); let i = index" class="columns">
-    <div class="card">
-        <tr>
-            <td style="width: 30%;">
-                <img [src]="item.images[0]" style="height: 200px; padding: 50px; width: 300px; overflow: hidden;;"> 
-                <button style="margin-left: 70px;" class="btn-plus" (click)="addQuantity(i)" >+</button>
-                <span
-                    style="padding-left: 30px;padding-right: 30px;padding-top: 10px;padding-bottom: 10px; width: 30px; border: 1px;border-style: solid;height: 30px;" >{{item.Qnty}}</span>
-                <button class="btn-plus" (click)="RemoveQuantity(i)" >-</button><br>
-            </td>
-            <td style="width: 60%;">
 
-                <h1 class="title">{{item.title}}</h1>
-                <!-- below content for descount price -->
-                <span class="DiscountedPrice"> Price : {{item.price*item.Qnty
-                    -item.price*item.descount*0.01*item.Qnty |currency}}</span>
-                <span class="price">{{item.price*item.Qnty|currency}} </span>
-                <span class="percent"> {{item.descount}}%</span>
-                <p class="DiscountedPrice">Save {{item.price*item.Qnty*item.descount*0.01 |currency}}</p>
-                <p class="desc">{{item.description}}</p>
-            </td>
-            <td style="width: 10%;">
-                <div>
-                    <button (click)="RemoveProduct(i)" class="btn-remove">Remove</button>
+<div *ngIf="cartService.currentUserCarts().length!==0" class="cart-page">
+
+    <!-- Cart items -->
+    <div class="items">
+        <div class="cart-item panel" *ngFor="let item of this.cartService.currentUserCarts(); let i = index">
+            <div class="item-img">
+                <img [src]="item.images[0]" [alt]="item.title">
+            </div>
+
+            <div class="item-info">
+                <h3 class="title">{{item.title}}</h3>
+
+                <div class="price-row">
+                    <span class="Dprice">{{item.price*item.Qnty - item.price*item.descount*0.01*item.Qnty | currency}}</span>
+                    <span class="price">{{item.price*item.Qnty | currency}}</span>
+                    <span class="percent">-{{item.descount}}%</span>
                 </div>
-            </td>
-        </tr>
+
+                <p class="save">You save {{item.price*item.Qnty*item.descount*0.01 | currency}}</p>
+                <p class="desc">{{item.description}}</p>
+
+                <div class="item-footer">
+                    <div class="stepper">
+                        <button type="button" (click)="RemoveQuantity(i)" aria-label="Decrease quantity">&minus;</button>
+                        <span class="qty-value">{{item.Qnty}}</span>
+                        <button type="button" (click)="addQuantity(i)" aria-label="Increase quantity">+</button>
+                    </div>
+
+                    <button class="btn-remove" (click)="RemoveProduct(i)">
+                        <i class="fa-solid fa-trash-can"></i> Remove
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-<!-- table for showing price details, total price, discount and bank discount -->
-<table class="table">
-    <tr >
-        <th class="title" colspan="2" >Price Details</th>        
-    </tr> <hr>
-    <tr>
-        <td>Price </td>
-        <td  class="price">{{updateprice()[0]|currency}}</td>
-    </tr>
-    <tr>
-        <td>Discount</td>
-        <td class="percent">-{{updateprice()[1]|currency}}</td>
-    </tr>
-    <tr>
-        <td>Bank Offer</td>
-        <td class="percent">-{{updateprice()[4]|currency}}</td>
-    </tr>
-    <tr>
-        <td>Delivery Charges</td>
-        <td *ngIf="updateprice()[3]!==0" class="percent">+{{updateprice()[3]|currency}}</td>
-        <td *ngIf="updateprice()[3]==0" class="DiscountedPrice">FREE</td>
-    </tr>    
-    <tr>
-        <td>Total Amount</td>
-        <td class="DiscountedPrice">{{updateprice()[2]|currency}}</td>
-    </tr>
-    <button class="buybtn" (click)="placedOrder()">Place Order</button>
-</table>
-<!-- -----------select payment option for selection of bankoffer -->
-<div class="payment" >
-    <h4>Select Payment Option </h4>
-<span *ngFor="let bank of getbankoffer.offers let i=index">
-    
-    <button class="button" (click)="selectBank(i)"> {{bank.bankName}}</button>
-</span>
+    <!-- Price summary + payment -->
+    <aside class="summary">
 
-</div>
+        <div class="panel">
+            <h4 class="panel-title"><i class="fa-solid fa-receipt"></i> Price Details</h4>
+
+            <div class="p-row">
+                <span>Price</span>
+                <span class="v-ink">{{updateprice()[0] | currency}}</span>
+            </div>
+            <div class="p-row">
+                <span>Discount</span>
+                <span class="v-good">-{{updateprice()[1] | currency}}</span>
+            </div>
+            <div class="p-row">
+                <span>Bank Offer</span>
+                <span class="v-good">-{{updateprice()[4] | currency}}</span>
+            </div>
+            <div class="p-row">
+                <span>Delivery Charges</span>
+                <span *ngIf="updateprice()[3]!==0" class="v-ink">+{{updateprice()[3] | currency}}</span>
+                <span *ngIf="updateprice()[3]==0" class="v-good">FREE</span>
+            </div>
+
+            <div class="p-row total">
+                <span>Total Amount</span>
+                <span>{{updateprice()[2] | currency}}</span>
+            </div>
+
+            <button class="btn btn-fill btn-order" (click)="placedOrder()">
+                <i class="fa-solid fa-bag-shopping"></i> Place Order
+            </button>
+        </div>
+
+        <!-- select payment option for selection of bankoffer -->
+        <div class="panel">
+            <h4 class="panel-title"><i class="fa-solid fa-credit-card"></i> Select Payment Option</h4>
+            <div class="banks">
+                <button *ngFor="let bank of getbankoffer.offers let i=index" class="bank-chip"
+                    [class.selected]="selectBankid===i" (click)="selectBank(i)">
+                    {{bank.bankName}}
+                </button>
+            </div>
+        </div>
+
+    </aside>
 </div>

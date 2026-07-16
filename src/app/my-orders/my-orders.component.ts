@@ -44,7 +44,7 @@ export class MyOrdersComponent implements OnInit {
     // this.myOrders=this.OrderListService.currentUserOrderList()
   }
   cancelOredr(i){
-    let orderItem=this.myOrders[i];
+    let orderItem=this.filteredOrderList[i];   //// the list rendered on screen, so the index always matches ////
       this.OrderListService.deleteItemFromOrder(orderItem.orderItemID);
       this.stockListService.addStockWhenCancerOrder(orderItem);
   }
