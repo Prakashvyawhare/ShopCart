@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14b8a6"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+  <!-- handle: arc rising above the bag mouth -->
+  <path d="M26 27V23a6 6 0 0 1 12 0v4" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- body: trapezoid inset by 3, re-inflated by a round-joined stroke = 3px corner radius -->
+  <polygon points="22.54,26 41.46,26 44.46,44 19.54,44" fill="#fff" stroke="#fff" stroke-width="6"
+    stroke-linejoin="round"/>
+</svg>
